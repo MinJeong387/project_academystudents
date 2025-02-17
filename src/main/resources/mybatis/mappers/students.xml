@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="himedia.phonebook.mappers.StudentsMapper">
+	
+	<select id="selectAll" 
+		resultType="studentsVo">
+	SELECT * FROM students ORDER BY no DESC
+	</select>
+	
+	<select id="selectOne"
+		parameterType="int"
+		resultType="studentsVo">
+	SELECT * FROM students WHERE no=#{no}
+	</select>
+	
+	<!--  insert id="insert" parameterType="phonebookVo">
+	INSERT INTO students (name, hp, tel)
+	VALUES(#{name}, #{hp}, #{tel})
+	</insert>
+	
+	<update id="update" parameterType="phonebookVo">
+	UPDATE phonebook SET
+	name=#{name}, hp=#{hp}, tel=#{tel}
+	WHERE id=#{id}
+	</update -->
+
+	<delete id="delete" parameterType="int">
+	DELETE FROM students WHERE no=#{no}
+	</delete>
+</mapper>
