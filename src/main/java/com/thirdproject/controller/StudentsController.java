@@ -66,7 +66,7 @@ public class StudentsController {
 		boolean success = studentsServiceImpl.updateStudents(studentsVo);
 
 		if (success) {
-			return "redirect:/";
+			return "redirect:/students";
 		} else {
 			return "redirect:/modify/" + studentsVo.getNo();
 		}

@@ -26,7 +26,7 @@ public class StudentsDaoImpl implements StudentsDao {
 	@Override
 	public int update(StudentsVo studentsVo) {
 		try {
-			return studentsMapper.insert(studentsVo);
+			return studentsMapper.update(studentsVo);
 		} catch (Exception e) {
 			throw new StudentsDaoException("전화번호 입력 중 예외 발생", e, studentsVo);
 		}
