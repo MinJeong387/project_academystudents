@@ -12,32 +12,31 @@ import com.thirdproject.repository.vo.StudentsVo;
 public class StudentsServiceImpl implements StudentsService {
 
 	@Autowired
-	private StudentsDao phonebookDaoImpl;
-	
+	private StudentsDao studentsDaoImpl;
+
 	@Override
-	public boolean insertPhonebook(StudentsVo phonebookVo) {
-		return 
-			1 == phonebookDaoImpl.insert(phonebookVo);
+	public boolean insertStudents(StudentsVo studentsVo) {
+		return 1 == studentsDaoImpl.insert(studentsVo);
 	}
 
 	@Override
-	public boolean updatePhonebook(StudentsVo phonebookVo) {
-		return 1 == phonebookDaoImpl.update(phonebookVo);
+	public boolean updateStudents(StudentsVo studentsVo) {
+		return 1 == studentsDaoImpl.update(studentsVo);
 	}
 
 	@Override
-	public boolean deletePhonebook(Integer id) {
-		return 1 == phonebookDaoImpl.delete(id);
+	public boolean deleteStudents(Integer no) {
+		return 1 == studentsDaoImpl.delete(no);
 	}
 
 	@Override
-	public StudentsVo selectPhonebook(Integer id) {
-		return phonebookDaoImpl.selectOne(id);
+	public StudentsVo selectStudents(Integer no) {
+		return studentsDaoImpl.selectOne(no);
 	}
 
 	@Override
-	public List<StudentsVo> selectPhonebookList() {
-		return phonebookDaoImpl.selectAll();
+	public List<StudentsVo> selectStudentsList() {
+		return studentsDaoImpl.selectAll();
 	}
 
 }

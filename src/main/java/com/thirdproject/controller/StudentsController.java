@@ -17,71 +17,64 @@ import com.thirdproject.service.StudentsService;
 
 @Controller
 public class StudentsController {
-	private static final Logger logger = 
-			LoggerFactory.getLogger(StudentsController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(StudentsController.class);
+
 	@Autowired
-	private StudentsService phonebookServiceImpl;
-	
+	private StudentsService studentsServiceImpl;
+
 	@GetMapping("/")
 	public String list(Model model) {
-		List<StudentsVo> list = 
-				phonebookServiceImpl.selectPhonebookList();
+		List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
 		logger.debug("PHONEBOOK LIST:" + list);
 		model.addAttribute("list", list);
 		return "phonebook/list";
 	}
-	
-	//	게시물 작성 폼
+
+	// 게시물 작성 폼
 	@GetMapping("/write")
 	public String writeForm() {
 		return "phonebook/writeForm";
 	}
-	
+
 	@PostMapping("/write")
-	public String writeAction(
-			@ModelAttribute StudentsVo phonebookVo) {
+	public String writeAction(@ModelAttribute StudentsVo phonebookVo) {
 		logger.debug("PHONEBOOK WRITE:" + phonebookVo);
-		boolean success = phonebookServiceImpl.insertPhonebook(phonebookVo);
-		
+		boolean success = studentsServiceImpl.insertStudents(phonebookVo);
+
 		if (success) {
 			return "redirect:/";
 		} else {
 			return "redirect:/write";
 		}
 	}
-	
-	//	게시물 수정 폼
+
+	// 게시물 수정 폼
 	@GetMapping("/modify/{id}")
-	public String modifyForm(
-			@PathVariable("id") Integer id,
-			Model model) {
-		//	기존 게시물 가져오기
-		StudentsVo phonebookVo = 
-				phonebookServiceImpl.selectPhonebook(id);
+	public String modifyForm(@PathVariable("id") Integer id, Model model) {
+		// 기존 게시물 가져오기
+		StudentsVo phonebookVo = studentsServiceImpl.selectStudents(id);
 		model.addAttribute("vo", phonebookVo);
 		return "phonebook/modifyForm";
 	}
-	
-	//	게시물 수정
+
+	// 게시물 수정
 	@PostMapping("/modify")
-	public String modifyAction(
-			@ModelAttribute StudentsVo phonebookVo) {
+	public String modifyAction(@ModelAttribute StudentsVo phonebookVo) {
 		logger.debug("PHONEBOOK MODIFY:" + phonebookVo);
-		boolean success = phonebookServiceImpl.updatePhonebook(phonebookVo);
-		
+		boolean success = studentsServiceImpl.updateStudents(phonebookVo);
+
 		if (success) {
 			return "redirect:/";
 		} else {
 			return "redirect:/modify/" + phonebookVo.getId();
 		}
 	}
-	
-	//	게시물 삭제
-	@GetMapping("/delete/{id}")
-	public String deleteAction(@PathVariable("id") Integer id) {
-		logger.debug("PHONEBOOK DELETE:" + id);
-		phonebookServiceImpl.deletePhonebook(id);
+
+	// 게시물 삭제
+	@GetMapping("/delete/{no}")
+	public String deleteAction(@PathVariable("no") Integer no) {
+		logger.debug("STUDENTS DELETE:" + no);
+		studentsServiceImpl.deleteStudents(no);
 		return "redirect:/";
 	}
 }

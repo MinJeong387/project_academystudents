@@ -3,7 +3,6 @@ package com.thirdproject.mappers;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 import com.thirdproject.repository.vo.StudentsVo;
 
@@ -14,17 +13,17 @@ public interface StudentsMapper {
 	List<StudentsVo> selectAll();
 
 //	<insert id="insert" parameterType="phonebookVo">
-	int insert(StudentsVo phonebookVo);
+	int insert(StudentsVo studentsVo);
 	
 //	<select id="selectOne"
 //			parameterType="int"
 //			resultType="phonebookVo">
 //	@Select("SELECT * FROM phonebook WHERE id=#{id}")
-	StudentsVo selectOne(Integer id);
+	StudentsVo selectOne(Integer no);
 	
 //	<update id="update" parameterType="phonebookVo">
-	int update(StudentsVo phonebookVo);
+	int update(StudentsVo studentsVo);
 	
 //	<delete id="delete" parameterType="int">
-	int delete(Integer id);
+	int delete(Integer no);
 }

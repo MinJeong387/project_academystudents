@@ -5,9 +5,9 @@ import java.util.List;
 import com.thirdproject.repository.vo.StudentsVo;
 
 public interface StudentsService {
-	public boolean insertPhonebook(StudentsVo phonebookVo);
-	public boolean updatePhonebook(StudentsVo phonebookVo);
-	public boolean deletePhonebook(Integer id);
-	public StudentsVo selectPhonebook(Integer id);
-	public List<StudentsVo> selectPhonebookList();
+	public boolean insertStudents(StudentsVo studentsVo);
+	public boolean updateStudents(StudentsVo studentsVo);
+	public boolean deleteStudents(Integer no);
+	public StudentsVo selectStudents(Integer no);
+	public List<StudentsVo> selectStudentsList();
 }

@@ -18,9 +18,9 @@ import lombok.ToString;
 @Setter				//	Setters
 @ToString			//	toString
 public class StudentsVo {
-	private Integer id;
+	private Integer no;
 	private String name;
-	private String hp;
-	private String tel;
+//	private String hp;
+//	private String tel;
 
 }

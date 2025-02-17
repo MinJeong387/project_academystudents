@@ -12,51 +12,44 @@ import com.thirdproject.repository.vo.StudentsVo;
 @Repository
 public class StudentsDaoImpl implements StudentsDao {
 	@Autowired
-	private StudentsMapper phonebookMapper;
-	
+	private StudentsMapper studentsMapper;
+
 	@Override
-	public int insert(StudentsVo phonebookVo) {
+	public int insert(StudentsVo studentsVo) {
 		try {
-			return phonebookMapper.insert(phonebookVo);
+			return studentsMapper.insert(studentsVo);
 		} catch (Exception e) {
-			throw new StudentsDaoException("전화번호 입력 중 예외 발생", 
-											e, 
-											phonebookVo );
+			throw new StudentsDaoException("전화번호 입력 중 예외 발생", e, studentsVo);
 		}
 	}
 
 	@Override
-	public int update(StudentsVo phonebookVo) {
+	public int update(StudentsVo studentsVo) {
 		try {
-			return phonebookMapper.update(phonebookVo);
+			return studentsMapper.insert(studentsVo);
 		} catch (Exception e) {
-			throw new StudentsDaoException("전화번호 수정 중 예외 발생",
-											e,
-											phonebookVo);
+			throw new StudentsDaoException("전화번호 입력 중 예외 발생", e, studentsVo);
 		}
 	}
 
 	@Override
-	public int delete(Integer id) {
+	public int delete(Integer no) {
 		try {
-			return phonebookMapper.delete(id);
+			return studentsMapper.delete(no);
 		} catch (Exception e) {
-			throw new StudentsDaoException(
-					"전화번호 삭제 중 오류 발생: " +id, e);
+			throw new StudentsDaoException("전화번호 삭제 중 오류 발생: " + no, e);
 		}
 	}
 
 	@Override
-	public StudentsVo selectOne(Integer id) {
-		StudentsVo phonebookVo = 
-				phonebookMapper.selectOne(id);
+	public StudentsVo selectOne(Integer no) {
+		StudentsVo phonebookVo = studentsMapper.selectOne(no);
 		return phonebookVo;
 	}
 
 	@Override
 	public List<StudentsVo> selectAll() {
-		List<StudentsVo> list = 
-				phonebookMapper.selectAll();
+		List<StudentsVo> list = studentsMapper.selectAll();
 		return list;
 	}
 
