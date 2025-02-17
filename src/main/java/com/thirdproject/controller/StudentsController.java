@@ -25,21 +25,21 @@ public class StudentsController {
 	@GetMapping("/")
 	public String list(Model model) {
 		List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
-		logger.debug("PHONEBOOK LIST:" + list);
+		logger.debug("STUDENTS LIST:" + list);
 		model.addAttribute("list", list);
-		return "phonebook/list";
+		return "students/list";
 	}
 
 	// 게시물 작성 폼
 	@GetMapping("/write")
 	public String writeForm() {
-		return "phonebook/writeForm";
+		return "students/writeForm";
 	}
 
 	@PostMapping("/write")
-	public String writeAction(@ModelAttribute StudentsVo phonebookVo) {
-		logger.debug("PHONEBOOK WRITE:" + phonebookVo);
-		boolean success = studentsServiceImpl.insertStudents(phonebookVo);
+	public String writeAction(@ModelAttribute StudentsVo studentsVo) {
+		logger.debug("STUDENTS WRITE:" + studentsVo);
+		boolean success = studentsServiceImpl.insertStudents(studentsVo);
 
 		if (success) {
 			return "redirect:/";
@@ -49,24 +49,24 @@ public class StudentsController {
 	}
 
 	// 게시물 수정 폼
-	@GetMapping("/modify/{id}")
+	@GetMapping("/modify/{no}")
 	public String modifyForm(@PathVariable("id") Integer id, Model model) {
 		// 기존 게시물 가져오기
-		StudentsVo phonebookVo = studentsServiceImpl.selectStudents(id);
-		model.addAttribute("vo", phonebookVo);
-		return "phonebook/modifyForm";
+		StudentsVo studentsVo = studentsServiceImpl.selectStudents(id);
+		model.addAttribute("vo", studentsVo);
+		return "students/modifyForm";
 	}
 
 	// 게시물 수정
 	@PostMapping("/modify")
-	public String modifyAction(@ModelAttribute StudentsVo phonebookVo) {
-		logger.debug("PHONEBOOK MODIFY:" + phonebookVo);
-		boolean success = studentsServiceImpl.updateStudents(phonebookVo);
+	public String modifyAction(@ModelAttribute StudentsVo studentsVo) {
+		logger.debug("STUDENTS MODIFY:" + studentsVo);
+		boolean success = studentsServiceImpl.updateStudents(studentsVo);
 
 		if (success) {
 			return "redirect:/";
 		} else {
-			return "redirect:/modify/" + phonebookVo.getId();
+			return "redirect:/modify/" + studentsVo.getNo();
 		}
 	}
 

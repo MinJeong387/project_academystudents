@@ -9,4 +9,15 @@ import lombok.Setter;
 @Setter
 public class StudentsDaoException extends RuntimeException {
 
+	private StudentsVo studentsVo = null;
+
+	public StudentsDaoException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public StudentsDaoException(String message, Throwable cause, StudentsVo vo) {
+		super(message, cause);
+		this.studentsVo = vo;
+	}
+
 }
