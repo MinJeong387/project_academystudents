@@ -6,7 +6,7 @@
 	<!-- VO 객체의 별칭 등록 -->
 	<typeAliases>
 		<typeAlias alias="studentsVo"
-			type="himedia.phonebook.repository.vo.StudentsVo" />
+			type="com.thirdproject.repository.vo.StudentsVo" />
 	</typeAliases>
 
 	<!-- Mapper 등록 -->

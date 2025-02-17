@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"
-	prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -21,21 +20,21 @@
 	</p>
 
 	<form action="<c:url value="/modify" />" method="POST">
-		<input type="hidden" name="id" value="${vo.id }" />
+		<input type="hidden" name="no" value="${vo.no}" />
 		
 		<div>
 			<label>이름(name)</label>
-			<input type="text" name="name" value="${vo.name }">
+			<input type="text" name="name" value="${vo.name}">
 		</div>
 
 		<div>
-			<label>핸드폰(hp)</label>
-			<input type="text" name="hp" value="${vo.hp }">
+			<label>본인핸드폰</label>
+			<input type="text" name="studentCellphone" value="${vo.studentCellphone}">
 		</div>
 
 		<div>
-			<label>회사(company)</label>
-			<input type="text" name="tel" value="${vo.tel }">
+			<label>부모님핸드폰</label>
+			<input type="text" name="parentCellphone" value="${vo.parentCellphone}">
 		</div>
 
 		<button type="submit">등록</button>

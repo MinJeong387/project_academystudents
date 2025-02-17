@@ -11,18 +11,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.thirdproject.repository.vo.StudentsVo;
 import com.thirdproject.service.StudentsService;
 
 @Controller
+@RequestMapping("/students")
 public class StudentsController {
 	private static final Logger logger = LoggerFactory.getLogger(StudentsController.class);
 
 	@Autowired
 	private StudentsService studentsServiceImpl;
 
-	@GetMapping("/")
+	@GetMapping("/list")
 	public String list(Model model) {
 		List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
 		logger.debug("STUDENTS LIST:" + list);
@@ -50,9 +52,9 @@ public class StudentsController {
 
 	// 게시물 수정 폼
 	@GetMapping("/modify/{no}")
-	public String modifyForm(@PathVariable("id") Integer id, Model model) {
+	public String modifyForm(@PathVariable("no") Integer no, Model model) {
 		// 기존 게시물 가져오기
-		StudentsVo studentsVo = studentsServiceImpl.selectStudents(id);
+		StudentsVo studentsVo = studentsServiceImpl.selectStudents(no);
 		model.addAttribute("vo", studentsVo);
 		return "students/modifyForm";
 	}
