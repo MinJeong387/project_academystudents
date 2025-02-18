@@ -18,7 +18,16 @@
 
 	<select id="selectOne" parameterType="int"
 		resultType="studentsVo">
-		SELECT * FROM students WHERE no=#{no}
+		SELECT no,
+		name,
+		school_name AS schoolName, 
+		school_grade AS schoolGrade,
+		birthdate,
+		gender,
+		student_cellphone AS studentCellphone,
+		parent_cellphone AS parentCellphone,
+		comments 
+		FROM students WHERE no=#{no}
 	</select>
 
 	<insert id="insert" parameterType="studentsVo">

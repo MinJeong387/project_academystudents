@@ -6,7 +6,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전체학생 리스트</title>
 <!--link rel="stylesheet" 
 		href="<c:url value="/assets/css/phonebook.css" />" /-->
 </head>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>학생정보 등록</title>
 <!-- link rel="stylesheet" 
 		href="<c:url value="/assets/css/phonebook.css" />" /-->
 </head>

@@ -5,7 +5,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>학생 정보수정</title>
 	<!-- link rel="stylesheet" 
 		href="<c:url value="/assets/css/phonebook.css" />" /-->	
 </head>

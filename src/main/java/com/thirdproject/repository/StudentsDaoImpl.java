@@ -43,8 +43,8 @@ public class StudentsDaoImpl implements StudentsDao {
 
 	@Override
 	public StudentsVo selectOne(Integer no) {
-		StudentsVo phonebookVo = studentsMapper.selectOne(no);
-		return phonebookVo;
+		StudentsVo studentsVo = studentsMapper.selectOne(no);
+		return studentsVo;
 	}
 
 	@Override
