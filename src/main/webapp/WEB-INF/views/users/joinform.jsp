@@ -59,14 +59,14 @@
 					<br />
 					
 
-					<input id="check-email" type="button"
+					<!-- input id="check-email" type="button"
 						data-target="<c:url value="/users/checkEmail" />" value="id 중복 체크">
 					<br />
 					<form:errors path="email" cssClass="error" />
 					<input type="hidden" name="emailCheck" value="n">
-					<br />
+					<br / -->
 					
-					<br />
+
 					
 					<input type="submit" value="전송">
 
