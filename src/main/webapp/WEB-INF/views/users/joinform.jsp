@@ -16,14 +16,14 @@
 </head>
 
 <body>
-	<!-- div id="container">
+	< div id="container">
 		<c:import url="/WEB-INF/views/includes/header.jsp">
 			<c:param name="param1" value="value1" />
 			<c:param name="param1" value="value2" />
 		</c:import>
 		<c:import url="/WEB-INF/views/includes/navigation.jsp" />
 		<div id="wrapper">
-			<div id="content" -->
+			<div id="content" >
 
 
 				<h1>회원 가입</h1>
