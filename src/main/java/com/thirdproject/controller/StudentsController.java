@@ -46,7 +46,7 @@ public class StudentsController {
 		if (success) {
 			return "redirect:/students/list";
 		} else {
-			return "redirect:/write";
+			return "redirect:/students/write";
 		}
 	}
 

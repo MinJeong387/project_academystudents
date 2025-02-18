@@ -46,16 +46,16 @@
 			</tr>
 
 			<tr>
-				<td><a href="<c:url value="/modify/${vo.no}" />">[수정]</a></td>
-				<td><a href="<c:url value="/delete/${vo.no}" />">[삭제]</a></td>
+				<td><a href="<c:url value="/students/modify/${vo.no}" />">[수정]</a></td>
+				<td><a href="<c:url value="/students/delete/${vo.no}" />">[삭제]</a></td>
 			</tr>
 
 		</table>
 	</c:forEach>
 	<br>
 
-	<a href="<c:url value="/modify" />">학생정보 수정</a>
-	<a href="<c:url value="/delete" />">학생정보 삭제</a>
+	<!-- a href="<c:url value="/modify" />">학생정보 수정</a>
+	<a href="<c:url value="/delete" />">학생정보 삭제</a -->
 	<a href="<c:url value="/students/write" />">추가학생 등록</a>
 
 </body>

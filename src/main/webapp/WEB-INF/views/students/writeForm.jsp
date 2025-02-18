@@ -18,7 +18,7 @@
 		학생 정보를 등록하려면<br> 아래 항목을 기입하고 "등록" 버튼을 클릭하세요
 	</p>
 
-	<form action="<c:url value="/write" />" method="POST">
+	<form action="<c:url value="/students/write" />" method="POST">
 		<div>
 			<label>이름</label> 
 			<input type="text" name="name">
