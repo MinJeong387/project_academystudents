@@ -44,7 +44,7 @@ public class StudentsController {
 		boolean success = studentsServiceImpl.insertStudents(studentsVo);
 
 		if (success) {
-			return "redirect:/";
+			return "redirect:/students/list";
 		} else {
 			return "redirect:/write";
 		}
@@ -66,7 +66,7 @@ public class StudentsController {
 		boolean success = studentsServiceImpl.updateStudents(studentsVo);
 
 		if (success) {
-			return "redirect:/students";
+			return "redirect:/students/list";
 		} else {
 			return "redirect:/modify/" + studentsVo.getNo();
 		}
@@ -77,6 +77,6 @@ public class StudentsController {
 	public String deleteAction(@PathVariable("no") Integer no) {
 		logger.debug("STUDENTS DELETE:" + no);
 		studentsServiceImpl.deleteStudents(no);
-		return "redirect:/";
+		return "redirect:/students/list";
 	}
 }
