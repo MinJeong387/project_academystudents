@@ -68,7 +68,7 @@ public class StudentsController {
 		if (success) {
 			return "redirect:/students/list";
 		} else {
-			return "redirect:/modify/" + studentsVo.getNo();
+			return "redirect:/students/modify/" + studentsVo.getNo();
 		}
 	}
 

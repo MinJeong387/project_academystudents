@@ -6,14 +6,14 @@
 	<select id="selectAll" resultType="studentsVo">
 		SELECT no,
 		name,
-		school_name AS
-		schoolName, school_grade AS schoolGrade,
+		school_name AS schoolName, 
+		school_grade AS schoolGrade,
 		birthdate,
 		gender,
 		student_cellphone AS studentCellphone,
-		parent_cellphone AS
-		parentCellphone,
-		comments FROM students ORDER BY no DESC
+		parent_cellphone AS parentCellphone,
+		comments 
+		FROM students ORDER BY no DESC
 	</select>
 
 	<select id="selectOne" parameterType="int"
@@ -23,28 +23,21 @@
 
 	<insert id="insert" parameterType="studentsVo">
 		INSERT INTO students
-		(name,
-		school_name, school_grade, birthdate, gender,
-		student_cellphone,
-		parent_cellphone, comments)
-		VALUES(#{name},
-		#{schoolName},
-		${schoolGrade}, #{birthdate}, #{gender},
-		#{studentCellphone},
-		#{parentCellphone}, #{comments})
+		(name, school_name, school_grade, birthdate, gender, student_cellphone, parent_cellphone, comments)
+		VALUES(#{name}, #{schoolName}, ${schoolGrade}, #{birthdate}, #{gender}, #{studentCellphone}, #{parentCellphone}, #{comments})
 	</insert>
 
-	<update id="update" parameterType="studentsVo"> UPDATE students SET
-		name=#{name}, school_name=#{schoolName}, school_grade=#{schoolGrade},
-		birthdate=#{birthdate}, gender=#{gender},
-		student_cellphone=#{studentCellphone},
-		parent_cellphone=#{parentCellphone}, comments=#{comments} WHERE
-		no=#{no}
+	<update id="update" parameterType="studentsVo"> 
+		UPDATE students 
+		SET	name=#{name}, school_name=#{schoolName}, school_grade=#{schoolGrade},
+		birthdate=#{birthdate}, gender=#{gender}, student_cellphone=#{studentCellphone},
+		parent_cellphone=#{parentCellphone}, comments=#{comments} 
+		WHERE no=#{no}
 	</update>
 
 
 	<delete id="delete" parameterType="int">
-		DELETE FROM students WHERE
-		no=#{no}
+		DELETE FROM students 
+		WHERE no=#{no}
 	</delete>
 </mapper>

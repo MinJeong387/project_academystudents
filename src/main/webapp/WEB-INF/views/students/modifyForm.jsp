@@ -11,24 +11,15 @@
 </head>
 
 <body>
-
 	<h1>학생정보</h1>
-
 	<h2>수정폼</h2>
-
 	<p>
 		학생정보를 수정하려면<br>
 		아래 항목을 기입하고 "수정" 버튼을 클릭하세요
 	</p>
-
-	<form action="<c:url value="/modify" />" 
-		method="POST">
+	<form action="<c:url value="/students/modify" />" method="POST">
+	
 		<input type="hidden" name="no" value="${vo.no}" />
-		
-		
-		
-		
-		
 		
 		<div>
 			<label>이름</label> 
@@ -55,7 +46,6 @@
 			<input type="text" name="gender" value="${vo.gender}">
 		</div>
 		
-
 		<div>
 			<label>학생연락처</label> 
 			<input type="text" name="studentCellphone" value="${vo.studentCellphone}">
@@ -71,19 +61,7 @@
 			<input type="text" name="comments" value="${vo.comments}">
 		</div>
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-
 		<button type="submit">수정</button>
-
-
 
 	</form>
 
