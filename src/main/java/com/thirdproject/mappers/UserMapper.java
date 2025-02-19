@@ -10,11 +10,14 @@ import com.thirdproject.repository.vo.UserVo;
 public interface UserMapper {
 	// <insert id="insert" parameterType="userVo">
 	int insert(UserVo vo);
-	
-	// <select id="selectUserByEmailAndPassword" parameterType="map" resultType="userVo">
+
+	// <select id="selectUserById" parameterType="string" resultType="userVo">
+	UserVo selectUserById(String id);
+
+	// <select id="selectUserByCellPhone" parameterType="string" resultType="userVo">
+	UserVo selectUserByCellPhone(String cellPhone);
+
+	// <select id="selectUserByIdAndPw" parameterType="map" resultType="userVo">
 	UserVo selectUserByIdAndPw(Map<String, String> map);
-	
-	// <select id="selectUserByEmail" parameterType="string" resultType="userVo">
-	UserVo selectUserById(String email);
 
 }

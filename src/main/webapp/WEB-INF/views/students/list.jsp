@@ -14,11 +14,10 @@
 <body>
 
 	<h1>학생부</h1>
+		<li><a href="<c:url value="/users/logout" />">로그아웃</a></li>
 
 	<h2>리스트</h2>
-
 	<p>등록된 학생들 리스트입니다.</p>
-
 
 	<c:forEach items="${list}" var="vo">
 

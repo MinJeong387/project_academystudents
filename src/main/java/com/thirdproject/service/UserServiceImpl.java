@@ -20,12 +20,17 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public UserVo getUser(String id, String pw) {
-		return userDaoImpl.selectUser(id, pw);
+		return userDaoImpl.selectUserByIdAndPw(id, pw);
 	}
 
 	@Override
 	public UserVo getUser(String id) {
-		return userDaoImpl.selectUser(id);
+		return userDaoImpl.selectUserById(id);
+	}
+	
+	@Override
+	public UserVo getUserByCellPhone(String cellPhone) {
+		return userDaoImpl.selectUserByCellPhone(cellPhone);
 	}
 
 	@Override

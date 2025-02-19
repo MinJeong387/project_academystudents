@@ -1,9 +1,6 @@
 package com.thirdproject.repository.vo;
 
-import org.hibernate.validator.constraints.Length;
-
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,14 +17,12 @@ public class UserVo {
 	private String id;
 
 	@NotEmpty
-	@Length(min = 4, max = 20)
 	private String pw;
 
 	@NotEmpty
-	@Length(min = 2, max = 8)
 	private String name;
 
-	@NotNull
+	@NotEmpty
 	private String cellPhone;
 
 }

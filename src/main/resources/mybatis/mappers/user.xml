@@ -23,4 +23,11 @@
 		id=#{id}
 	</select>
 	
+	<select id="selectUserByCellPhone" parameterType="string" resultType="userVo">
+		SELECT id, pw, name, cell_phone AS cellPhone
+		FROM users
+		WHERE
+		cell_phone=#{cellPhone}
+	</select>
+	
 </mapper>

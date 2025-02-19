@@ -21,8 +21,7 @@
 		
 		<div id="wrapper">
 			<div id="content">
-				<form id="login-form" name="loginform" method="POST"
-					action="<c:url value="/users/login" />">
+				<form id="login-form" name="loginform" method="POST" action="<c:url value="/users/login" />">
 
 					<label class="block-label" for="id">아이디</label> 
 					<input id="id" name="id" type="text" value=""> 
@@ -32,10 +31,13 @@
 					<input name="pw" type="password" value="">
 					<br/>
 					
-					<input type="submit" value="로그인">
+					<c:if test="${not empty loginError}">
+    					<p style="color: red;">${loginError}</p>
+					</c:if>
+	
 					
-					<br/>
-					<br/>
+					<input type="submit" value="로그인">
+					<br/><br/>
 					
 					<c:import url="/WEB-INF/views/includes/header.jsp">
 						<c:param name="param1" value="value1" />
@@ -48,5 +50,10 @@
 
 		<c:import url="/WEB-INF/views/includes/footer.jsp" />
 	</div>
+	
+	
+  
+	
+	
 </body>
 </html>

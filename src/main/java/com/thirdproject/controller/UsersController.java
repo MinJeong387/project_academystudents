@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 @RequestMapping("/users")
 public class UsersController {
 	private static final Logger logger = LoggerFactory.getLogger(UsersController.class);
-	
+
 	@Autowired
 	UserService userServiceImpl;
 
@@ -44,23 +44,38 @@ public class UsersController {
 	}
 
 	@PostMapping("/join")
-	public String joinAction(@ModelAttribute @Valid UserVo userVo, BindingResult result, // 검증 결과
-			Model model) {
+	public String joinAction(@ModelAttribute @Valid UserVo userVo, BindingResult result, Model model) {
 		logger.debug("회원 가입 액션");
 		logger.debug("회원 가입 정보:" + userVo);
 
+		// 모든 필드 입력 검증 (가장 먼저 수행)
+		if (userVo.getId().isEmpty() || userVo.getPw().isEmpty() || userVo.getName().isEmpty()
+				|| userVo.getCellPhone().isEmpty()) {
+			model.addAttribute("emptyFieldsError", "모든 필드를 채워주세요.");
+			return "users/joinform";
+		}
+
 		if (result.hasErrors()) {
-			// 검증이 실패했다면
 			List<ObjectError> list = result.getAllErrors();
 			for (ObjectError e : list) {
 				logger.error("검증 에러:" + e);
 			}
-			// 에러 정보를 모델에 실어서 전송
 			model.addAllAttributes(result.getModel());
 			return "users/joinform";
-
 		}
-		
+
+		// 중복 검증
+		if (userServiceImpl.getUser(userVo.getId()) != null) {
+			model.addAttribute("idError", "중복된 아이디입니다.");
+			return "users/joinform";
+		}
+
+		// 연락처 중복 검증
+		if (userServiceImpl.getUserByCellPhone(userVo.getCellPhone()) != null) {
+			model.addAttribute("cellPhoneError", "중복된 연락처입니다.");
+			return "users/joinform";
+		}
+
 		boolean success = userServiceImpl.join(userVo);
 
 		if (!success) {
@@ -79,21 +94,27 @@ public class UsersController {
 
 	@PostMapping("/login")
 	public String loginAction(@RequestParam(value = "id", required = false) String id,
-			@RequestParam(value = "pw", required = false) String pw, HttpSession session) {
-		if (id.length() == 0 || pw.length() == 0) {
-			System.err.println("id 혹은 pw가 전송되지 않음");
-			return "redirect:/users/login";
+			@RequestParam(value = "pw", required = false) String pw, HttpSession session, Model model) {
+		if (id == null || id.isEmpty() || pw == null || pw.isEmpty()) {
+			model.addAttribute("loginError", "아이디 또는 비밀번호를 입력해주세요.");
+			return "users/loginform";
 		}
 
 		UserVo authUser = userServiceImpl.getUser(id, pw);
 
 		if (authUser != null) {
-			// 세션에 사용자 정보 추가
 			session.setAttribute("authUser", authUser);
-			return "redirect:/";
+			return "redirect:/students/list";
 		} else {
-			return "redirect:/users/login";
+			model.addAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			return "users/loginform";
 		}
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate(); // 세션 무효화
+		return "redirect:/users/login"; // 홈페이지로 리다이렉트
 	}
 
 	@ResponseBody

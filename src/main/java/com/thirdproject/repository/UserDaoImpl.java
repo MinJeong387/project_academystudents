@@ -19,12 +19,13 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public int insert(UserVo vo) {
+
 		int count = 0;
 
 		try {
 			count = userMapper.insert(vo);
 		} catch (Exception e) {
-			throw new UserDaoException("회원 가입중 오류", vo);
+			throw new UserDaoException("회원가입중 오류", vo);
 		}
 //		try {
 //			return sqlSession.insert("user.insert", vo);
@@ -34,18 +35,27 @@ public class UserDaoImpl implements UserDao {
 		return count;
 	}
 
-	// 중복 체크용
+	// 아이디 중복 체크용
 	@Override
-	public UserVo selectUser(String id) {
+	public UserVo selectUserById(String id) {
 //		UserVo vo = 
 //				sqlSession.selectOne("user.selectUserByEmail", email);
 		UserVo vo = userMapper.selectUserById(id);
 		return vo;
 	}
 
+	// 연락처 중복 체크용
+	@Override
+	public UserVo selectUserByCellPhone(String cellPhone) {
+//			UserVo vo = 
+//					sqlSession.selectOne("user.selectUserByEmail", email);
+		UserVo vo = userMapper.selectUserByCellPhone(cellPhone);
+		return vo;
+	}
+
 	// 로그인용
 	@Override
-	public UserVo selectUser(String id, String pw) {
+	public UserVo selectUserByIdAndPw(String id, String pw) {
 //		Map<String, String> userMap 
 //			= new HashMap<>();
 //		userMap.put("email", email);
@@ -58,10 +68,9 @@ public class UserDaoImpl implements UserDao {
 		Map<String, String> userMap = new HashMap<>();
 		userMap.put("id", id);
 		userMap.put("pw", pw);
-		
+
 		UserVo vo = userMapper.selectUserByIdAndPw(userMap);
-		
+
 		return vo;
 	}
-
 }
