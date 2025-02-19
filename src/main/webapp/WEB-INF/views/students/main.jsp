@@ -4,49 +4,103 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>최고다! 컴퓨터학원</title>
-	<!-- link rel="stylesheet" 
-		href="<c:url value="/assets/css/phonebook.css" />" /-->	
+    <meta charset="UTF-8">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <style>
+        .custom-navbar {
+            background-color: #1D809F;
+            width: 250px;
+        }
+
+        .nav-link {
+            color: white;
+            font-weight: bold;
+        }
+
+        .nav-link:hover {
+            background-color: #E6B41B;
+            color: black;
+            font-weight: bold;
+        }
+
+        .nav-link.active-custom {
+            background-color: #E6B41B;
+            color: black !important;
+        }
+
+        .user-info {
+            color: white;
+            font-weight: bold;
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
-<body>
+<body class="d-flex">
+    <nav class="nav flex-column custom-navbar fixed-start vh-100 p-3">
+        <a class="user-info">${sessionScope.authUser.name }님, 안녕하세요^^</a>
+        <br />
+        <li class="nav-item">
+            <a class="nav-link rounded mb-2" href="<c:url value="/users/logout" />" id="logout">로그아웃</a>
+        </li>
+        <br /><br />
+        <li class="nav-item">
+            <a class="nav-link rounded mb-2" href="#" id="studentListLink">학생 리스트</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded mb-2" href="#" id="attendance">출석부</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded mb-2" href="#" id="counselingLog">상담일지</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded mb-2" href="#" id="classLog">수업일지</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded mb-2" href="#" id="sendMessage">문자발송</a>
+        </li>
+    </nav>
 
-	<h1>최고다! 컴퓨터학원</h1>
+    <div class="flex-grow-1 p-3" id="contentArea">
+       
 
+        <div id="studentListContent" style="display: none;">
+            <%@ include file="list.jsp" %>
+        </div>
+    </div>
 
-	<p>
-		회원정보를 입력해주세요.
-	</p>
+    <script>
+        document.getElementById('studentListLink').addEventListener('click', function (event) {
+            event.preventDefault();
 
-	<form action="<c:url value="/modify" />" method="POST">
-		<input type="hidden" name="no" value="${vo.no}" />
-		
-		<div>
-			<label>이름(name)</label>
-			<input type="text" name="name" value="${vo.name}">
-		</div>
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active-custom');
+            });
 
-		<div>
-			<label>본인핸드폰</label>
-			<input type="text" name="studentCellphone" value="${vo.studentCellphone}">
-		</div>
+            this.classList.add('active-custom');
 
-		<div>
-			<label>부모님핸드폰</label>
-			<input type="text" name="parentCellphone" value="${vo.parentCellphone}">
-		</div>
+            document.getElementById('studentListContent').style.display = 'block';
+        });
 
-		<button type="submit">등록</button>
+        document.querySelectorAll('.nav-link:not(#studentListLink)').forEach(link => {
+            link.addEventListener('click', function (event) {
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active-custom');
+                });
 
+                this.classList.add('active-custom');
 
-
-	</form>
-
-	<br>
-	<br>
-	<a href="<c:url value="/" />">리스트페이지로 이동</a>
-
+                document.getElementById('studentListContent').style.display = 'none';
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -24,6 +24,11 @@ public class StudentsController {
 	@Autowired
 	private StudentsService studentsServiceImpl;
 
+	@GetMapping({ "/", "" })
+	public String mainPage() {
+		return "students/main";
+	}
+
 	@GetMapping("/list")
 	public String list(Model model) {
 		List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
