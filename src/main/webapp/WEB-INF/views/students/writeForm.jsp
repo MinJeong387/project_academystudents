@@ -15,9 +15,10 @@
 </head>
 
 <body class="d-flex">
-    <jsp:include page="main.jsp" />
-
-    <div class="flex-grow-1 p-3">
+    <div class="col-md-3">
+        <jsp:include page="main.jsp" />
+    </div>
+    <div class="col-md-9 p-3">
         <h1 class="mb-4">학생 정보 등록</h1>
 
         <form id="writeForm" action="/students/write" method="POST" class="row g-3">
