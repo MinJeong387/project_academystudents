@@ -4,7 +4,7 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous">
@@ -16,46 +16,58 @@
 
 <body class="d-flex">
     <jsp:include page="main.jsp" />
-    
+
     <div class="flex-grow-1 p-3">
-       <h1>학생 정보 수정</h1><br/>
-    <form id="modifyForm" action="/students/modify" method="POST">
-        <input type="hidden" name="no" value="${vo.no}" />
-        <div>
-            <label>이름</label>
-            <input type="text" name="name" value="${vo.name}">
-        </div>
-        <div>
-            <label>학교명</label>
-            <input type="text" name="schoolName" value="${vo.schoolName}">
-        </div>
-        <div>
-            <label>학년</label>
-            <input type="number" name="schoolGrade" value="${vo.schoolGrade}">
-        </div>
-        <div>
-            <label>생년월일(YYYY-MM-DD)</label>
-            <input type="text" name="birthdate" value="${vo.birthdate}">
-        </div>
-        <div>
-            <label>성별(남/여)</label>
-            <input type="text" name="gender" value="${vo.gender}">
-        </div>
-        <div>
-            <label>학생 연락처</label>
-            <input type="text" name="studentCellphone" value="${vo.studentCellphone}">
-        </div>
-        <div>
-            <label>부모님 연락처</label>
-            <input type="text" name="parentCellphone" value="${vo.parentCellphone}">
-        </div>
-        <div>
-            <label>특이사항</label>
-            <input type="text" name="comments" value="${vo.comments}">
-        </div>
-        <button type="submit">수정</button>
-    </form>
+        <h1 class="mb-4">학생 정보 수정</h1>
+
+        <form id="modifyForm" action="/students/modify" method="POST" class="row g-3">
+            <input type="hidden" name="no" value="${vo.no}" />
+
+            <div class="col-md-6">
+                <label for="name" class="form-label">이름</label>
+                <input type="text" class="form-control" id="name" name="name" value="${vo.name}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="schoolName" class="form-label">학교명</label>
+                <input type="text" class="form-control" id="schoolName" name="schoolName" value="${vo.schoolName}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="schoolGrade" class="form-label">학년</label>
+                <input type="number" class="form-control" id="schoolGrade" name="schoolGrade" value="${vo.schoolGrade}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="birthdate" class="form-label">생년월일(YYYY-MM-DD)</label>
+                <input type="text" class="form-control" id="birthdate" name="birthdate" value="${vo.birthdate}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="gender" class="form-label">성별(남/여)</label>
+                <input type="text" class="form-control" id="gender" name="gender" value="${vo.gender}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="studentCellphone" class="form-label">학생 연락처</label>
+                <input type="text" class="form-control" id="studentCellphone" name="studentCellphone" value="${vo.studentCellphone}">
+            </div>
+
+            <div class="col-md-6">
+                <label for="parentCellphone" class="form-label">부모님 연락처</label>
+                <input type="text" class="form-control" id="parentCellphone" name="parentCellphone" value="${vo.parentCellphone}">
+            </div>
+
+            <div class="col-md-12">
+                <label for="comments" class="form-label">특이사항</label>
+                <input type="text" class="form-control" id="comments" name="comments" value="${vo.comments}">
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">수정</button>
+            </div>
+        </form>
     </div>
-    
 </body>
+
 </html>
