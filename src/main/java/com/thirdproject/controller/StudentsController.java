@@ -45,14 +45,14 @@ public class StudentsController {
     }
 
     @PostMapping("/write")
-    public ResponseEntity<?> writeAction(@ModelAttribute StudentsVo studentsVo) {
+    public String writeAction(@ModelAttribute StudentsVo studentsVo) {
         logger.debug("STUDENTS WRITE:" + studentsVo);
         boolean success = studentsServiceImpl.insertStudents(studentsVo);
 
         if (success) {
-            return ResponseEntity.ok().build(); // 성공 시 200 OK 반환
+            return "redirect:/students/list"; 
         } else {
-            return ResponseEntity.badRequest().build(); // 실패 시 400 Bad Request 반환
+            return "redirect:/students/write"; 
         }
     }
 
@@ -61,7 +61,7 @@ public class StudentsController {
     public String modifyForm(@PathVariable("no") Integer no, Model model) {
         StudentsVo studentsVo = studentsServiceImpl.selectStudents(no);
         model.addAttribute("vo", studentsVo);
-        return "students/modifyForm"; // main.jsp를 포함하는 새로운 jsp 파일 반환
+        return "students/modifyForm"; 
     }
 
     // 게시물 수정
