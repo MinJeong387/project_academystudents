@@ -104,7 +104,7 @@ public class UsersController {
 
 		if (authUser != null) {
 			session.setAttribute("authUser", authUser);
-			return "redirect:/students";
+			return "redirect:/students/";
 		} else {
 			model.addAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			return "users/loginform";

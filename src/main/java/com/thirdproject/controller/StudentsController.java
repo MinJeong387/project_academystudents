@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,69 +20,68 @@ import com.thirdproject.service.StudentsService;
 @Controller
 @RequestMapping("/students")
 public class StudentsController {
-	private static final Logger logger = LoggerFactory.getLogger(StudentsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(StudentsController.class);
 
-	@Autowired
-	private StudentsService studentsServiceImpl;
+    @Autowired
+    private StudentsService studentsServiceImpl;
 
-	@GetMapping({ "/", "" })
-	public String mainPage() {
-		return "students/main";
-	}
+    @GetMapping({"/", ""})
+    public String mainPage() {
+        return "students/main";
+    }
 
-	@GetMapping("/list")
-	public String list(Model model) {
-		List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
-		logger.debug("STUDENTS LIST:" + list);
-		model.addAttribute("list", list);
-		return "students/list";
-	}
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
+        logger.debug("STUDENTS LIST:" + list);
+        model.addAttribute("list", list);
+        return "students/list";
+    }
 
-	// 게시물 작성 폼
-	@GetMapping("/write")
-	public String writeForm() {
-		return "students/writeForm";
-	}
+    // 게시물 작성 폼
+    @GetMapping("/write")
+    public String writeForm() {
+        return "students/writeForm";
+    }
 
-	@PostMapping("/write")
-	public String writeAction(@ModelAttribute StudentsVo studentsVo) {
-		logger.debug("STUDENTS WRITE:" + studentsVo);
-		boolean success = studentsServiceImpl.insertStudents(studentsVo);
+    @PostMapping("/write")
+    public ResponseEntity<?> writeAction(@ModelAttribute StudentsVo studentsVo) {
+        logger.debug("STUDENTS WRITE:" + studentsVo);
+        boolean success = studentsServiceImpl.insertStudents(studentsVo);
 
-		if (success) {
-			return "redirect:/students/list";
-		} else {
-			return "redirect:/students/write";
-		}
-	}
+        if (success) {
+            return ResponseEntity.ok().build(); // 성공 시 200 OK 반환
+        } else {
+            return ResponseEntity.badRequest().build(); // 실패 시 400 Bad Request 반환
+        }
+    }
 
-	// 게시물 수정 폼
-	@GetMapping("/modify/{no}")
-	public String modifyForm(@PathVariable("no") Integer no, Model model) {
-		// 기존 게시물 가져오기
-		StudentsVo studentsVo = studentsServiceImpl.selectStudents(no);
-		model.addAttribute("vo", studentsVo);
-		return "students/modifyForm";
-	}
+    // 게시물 수정 폼
+    @GetMapping("/modify/{no}")
+    public String modifyForm(@PathVariable("no") Integer no, Model model) {
+        StudentsVo studentsVo = studentsServiceImpl.selectStudents(no);
+        model.addAttribute("vo", studentsVo);
+        return "students/modifyForm"; // main.jsp를 포함하는 새로운 jsp 파일 반환
+    }
 
-	// 게시물 수정
-	@PostMapping("/modify")
-	public String modifyAction(@ModelAttribute StudentsVo studentsVo) {
-		logger.debug("STUDENTS MODIFY:" + studentsVo);
-		boolean success = studentsServiceImpl.updateStudents(studentsVo);
+    // 게시물 수정
+    @PostMapping("/modify")
+    public String modifyAction(@ModelAttribute StudentsVo studentsVo) {
+        logger.debug("STUDENTS MODIFY:" + studentsVo);
+        boolean success = studentsServiceImpl.updateStudents(studentsVo);
 
-		if (success) {
-			return "redirect:/students/list";
-		} else {
-			return "redirect:/students/modify/" + studentsVo.getNo();
-		}
-	}
+        if (success) {
+            return "redirect:/students/list"; // 수정 성공 시 학생 목록 화면으로 리다이렉트
+        } else {
+            return "redirect:/students/modify/" + studentsVo.getNo(); // 수정 실패 시 수정 폼 화면으로 리다이렉트
+        }
+    }
 
-	// 게시물 삭제
-	@GetMapping("/delete/{no}")
-	public String deleteAction(@PathVariable("no") Integer no) {
-		logger.debug("STUDENTS DELETE:" + no);
-		studentsServiceImpl.deleteStudents(no);
-		return "redirect:/students/list";
-	}
+    // 게시물 삭제
+    @GetMapping("/delete/{no}")
+    public String deleteAction(@PathVariable("no") Integer no) {
+        logger.debug("STUDENTS DELETE:" + no);
+        studentsServiceImpl.deleteStudents(no);
+        return "redirect:/students/list";
+    }
 }

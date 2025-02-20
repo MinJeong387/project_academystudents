@@ -52,7 +52,7 @@
         </li>
         <br /><br />
         <li class="nav-item">
-            <a class="nav-link rounded mb-2" href="#" id="studentListLink">학생 리스트</a>
+            <a class="nav-link rounded mb-2" href="/students/list" id="studentListLink">학생 리스트</a>
         </li>
         <li class="nav-item">
             <a class="nav-link rounded mb-2" href="#" id="attendance">출석부</a>
@@ -68,25 +68,15 @@
         </li>
     </nav>
 
-    <div class="flex-grow-1 p-3" id="contentArea">
-       
-
-        <div id="studentListContent" style="display: none;">
-            <%@ include file="list.jsp" %>
-        </div>
-    </div>
+    
 
     <script>
         document.getElementById('studentListLink').addEventListener('click', function (event) {
-            event.preventDefault();
-
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.classList.remove('active-custom');
             });
 
             this.classList.add('active-custom');
-
-            document.getElementById('studentListContent').style.display = 'block';
         });
 
         document.querySelectorAll('.nav-link:not(#studentListLink)').forEach(link => {
@@ -96,8 +86,6 @@
                 });
 
                 this.classList.add('active-custom');
-
-                document.getElementById('studentListContent').style.display = 'none';
             });
         });
     </script>
