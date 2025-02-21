@@ -39,4 +39,5 @@ public class CounselingLogServiceImpl implements CounselingLogService {
         return counselingLogDaoImpl.selectAll();
     }
 
+    
 }

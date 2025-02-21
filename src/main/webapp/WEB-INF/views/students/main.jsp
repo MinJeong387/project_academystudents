@@ -61,7 +61,7 @@
             <a class="nav-link rounded mb-2" href="<c:url value="/counseling/list" />" id="counselingLog">상담일지</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link rounded mb-2" href="#" id="classLog">수업일지</a>
+            <a class="nav-link rounded mb-2" href="<c:url value="/lesson/list" />" id="lessonlog">수업일지</a>
         </li>
         <li class="nav-item">
             <a class="nav-link rounded mb-2" href="#" id="sendMessage">문자발송</a>

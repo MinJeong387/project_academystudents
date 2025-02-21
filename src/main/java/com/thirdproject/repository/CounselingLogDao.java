@@ -10,4 +10,6 @@ public interface CounselingLogDao {
     public int delete(Integer no);
     public CounselingLogVo selectOne(Integer no);
     public List<CounselingLogVo> selectAll();
+    
+    
 }

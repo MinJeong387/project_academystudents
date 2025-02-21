@@ -5,6 +5,7 @@
 <configuration>
 	<!-- VO 객체의 별칭 등록 -->
 	<typeAliases>
+		<typeAlias type="com.thirdproject.repository.vo.LessonLogVo" alias="lessonLogVo"/>
 		<typeAlias type="com.thirdproject.repository.vo.CounselingLogVo" alias="counselingLogVo"/>
     	<typeAlias type="com.thirdproject.repository.vo.StudentsVo" alias="studentsVo"/>
     	<typeAlias type="com.thirdproject.repository.vo.UserVo" alias="userVo"/>
@@ -12,6 +13,7 @@
 
 	<!-- Mapper 등록 -->
 	<mappers>
+		<mapper resource="mybatis/mappers/lesson.xml" />
 		<mapper resource="mybatis/mappers/counseling.xml" />
 		<mapper resource="mybatis/mappers/students.xml" />
 		<mapper resource="mybatis/mappers/user.xml" />

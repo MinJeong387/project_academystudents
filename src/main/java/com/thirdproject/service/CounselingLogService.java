@@ -10,4 +10,6 @@ public interface CounselingLogService {
     public boolean deleteCounselingLog(Integer no);
     public CounselingLogVo selectCounselingLog(Integer no);
     public List<CounselingLogVo> selectCounselingLogList();
+    
+    
 }

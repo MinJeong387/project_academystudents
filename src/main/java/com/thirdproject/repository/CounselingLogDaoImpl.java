@@ -52,4 +52,6 @@ public class CounselingLogDaoImpl implements CounselingLogDao {
         List<CounselingLogVo> list = counselingLogMapper.selectAll();
         return list;
     }
+    
+    
 }

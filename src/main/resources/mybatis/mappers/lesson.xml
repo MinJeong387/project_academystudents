@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thirdproject.mappers.LessonLogMapper">
+
+    <select id="selectAll" resultType="lessonLogVo">
+        SELECT ll.no,
+            ll.user_no AS uno,
+            ll.lesson_date AS date,
+            ll.lesson_contents AS contents,
+            u.name AS studentName  FROM lesson_log ll
+        JOIN users u ON ll.user_no = u.no  ORDER BY ll.lesson_date DESC
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="lessonLogVo">
+        SELECT ll.no,
+            ll.user_no AS uno,
+            ll.lesson_date AS date,
+            ll.lesson_contents AS contents,
+            u.name AS studentName  FROM lesson_log ll
+        JOIN users u ON ll.user_no = u.no  WHERE ll.no = #{no}
+    </select>
+
+    <insert id="insert" parameterType="lessonLogVo">
+        INSERT INTO lesson_log (user_no, lesson_date, lesson_contents)
+        VALUES (#{uno}, #{date}, #{contents})
+    </insert>
+
+    <update id="update" parameterType="lessonLogVo">
+        UPDATE lesson_log
+        SET lesson_date = #{date},
+            lesson_contents = #{contents}
+        WHERE no = #{no}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM lesson_log
+        WHERE no = #{no}
+    </delete>
+
+</mapper>
