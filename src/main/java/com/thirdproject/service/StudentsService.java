@@ -10,4 +10,5 @@ public interface StudentsService {
 	public boolean deleteStudents(Integer no);
 	public StudentsVo selectStudents(Integer no);
 	public List<StudentsVo> selectStudentsList();
+	
 }

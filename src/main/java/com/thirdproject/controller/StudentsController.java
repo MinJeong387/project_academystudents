@@ -5,7 +5,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thirdproject.repository.vo.StudentsVo;
 import com.thirdproject.service.StudentsService;
@@ -38,7 +38,7 @@ public class StudentsController {
         return "students/list";
     }
 
-    // 게시물 작성 폼
+    // 리스트 작성 폼
     @GetMapping("/write")
     public String writeForm() {
         return "students/writeForm";
@@ -56,7 +56,7 @@ public class StudentsController {
         }
     }
 
-    // 게시물 수정 폼
+    // 리스트 수정 폼
     @GetMapping("/modify/{no}")
     public String modifyForm(@PathVariable("no") Integer no, Model model) {
         StudentsVo studentsVo = studentsServiceImpl.selectStudents(no);
@@ -64,7 +64,7 @@ public class StudentsController {
         return "students/modifyForm"; 
     }
 
-    // 게시물 수정
+    // 리스트 수정
     @PostMapping("/modify")
     public String modifyAction(@ModelAttribute StudentsVo studentsVo) {
         logger.debug("STUDENTS MODIFY:" + studentsVo);
@@ -77,11 +77,14 @@ public class StudentsController {
         }
     }
 
-    // 게시물 삭제
+    // 리스트 삭제
     @GetMapping("/delete/{no}")
     public String deleteAction(@PathVariable("no") Integer no) {
         logger.debug("STUDENTS DELETE:" + no);
         studentsServiceImpl.deleteStudents(no);
         return "redirect:/students/list";
     }
+    
+   
+    
 }

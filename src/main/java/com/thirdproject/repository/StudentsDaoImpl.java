@@ -52,5 +52,6 @@ public class StudentsDaoImpl implements StudentsDao {
 		List<StudentsVo> list = studentsMapper.selectAll();
 		return list;
 	}
+	
 
 }

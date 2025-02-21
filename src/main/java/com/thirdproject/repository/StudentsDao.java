@@ -10,4 +10,5 @@ public interface StudentsDao {
 	public int delete(Integer no);
 	public StudentsVo selectOne(Integer no);
 	public List<StudentsVo> selectAll();
+	
 } 

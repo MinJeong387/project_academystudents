@@ -27,4 +27,5 @@ public interface StudentsMapper {
 	
 //	<delete id="delete" parameterType="int">
 	int delete(Integer no);
+	
 }

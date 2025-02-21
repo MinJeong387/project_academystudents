@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thirdproject.mappers.CounselingLogMapper">
+
+    <select id="selectAll" resultType="counselingLogVo">
+        SELECT cl.no,
+            cl.student_no AS sno,
+            cl.counseling_date AS date,
+            cl.counseling_contents AS contents,
+            s.name AS studentName
+        FROM counseling_log cl
+        JOIN students s ON cl.student_no = s.no
+        ORDER BY cl.counseling_date DESC
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="counselingLogVo">
+        SELECT cl.no,
+            cl.student_no AS sno,
+            cl.counseling_date AS date,
+            cl.counseling_contents AS contents,
+            s.name AS studentName
+        FROM counseling_log cl
+        JOIN students s ON cl.student_no = s.no
+        WHERE cl.no = #{no} </select>
+
+    <insert id="insert" parameterType="counselingLogVo">
+        INSERT INTO counseling_log (student_no, counseling_date, counseling_contents)
+        VALUES (#{sno}, #{date}, #{contents})
+    </insert>
+
+    <update id="update" parameterType="counselingLogVo">
+        UPDATE counseling_log
+        SET counseling_date = #{date},
+            counseling_contents = #{contents}
+        WHERE no = #{no}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM counseling_log
+        WHERE no = #{no}
+    </delete>
+
+</mapper>
