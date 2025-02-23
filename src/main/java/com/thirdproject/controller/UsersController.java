@@ -104,7 +104,7 @@ public class UsersController {
 
     @PostMapping("/login")
     public String loginAction(@RequestParam(value = "id", required = false) String id,
-            @RequestParam(value = "pw", required = false) String pw, HttpSession session, Model model) {
+                              @RequestParam(value = "pw", required = false) String pw, HttpSession session, Model model) {
         if (id == null || id.isEmpty() || pw == null || pw.isEmpty()) {
             model.addAttribute("loginError", "아이디 또는 비밀번호를 입력해주세요.");
             return "users/loginform";
@@ -113,7 +113,11 @@ public class UsersController {
         UserVo authUser = userServiceImpl.getUser(id, pw);
 
         if (authUser != null) {
+        	System.out.println("authUser: " + authUser); // 디버깅 출력
+            System.out.println("authUser.getNo(): " + authUser.getNo()); // 디버깅 출력
             session.setAttribute("authUser", authUser);
+            session.setAttribute("userNo", authUser.getNo()); // userNo 속성 저장
+            System.out.println("UserNo in session: " + session.getAttribute("userNo")); // 디버깅 출력
             return "redirect:/students/";
         } else {
             model.addAttribute("loginError", "아이디 또는 비밀번호가 일치하지 않습니다.");

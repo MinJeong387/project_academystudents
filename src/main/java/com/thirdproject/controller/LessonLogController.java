@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thirdproject.repository.vo.LessonLogVo;
+import com.thirdproject.repository.vo.UserVo;
 import com.thirdproject.service.LessonLogService;
 
 @Controller
@@ -30,10 +32,19 @@ public class LessonLogController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<LessonLogVo> list = lessonLogServiceImpl.selectLessonLogList();
+    public String list(@RequestParam(value = "userNo", required = false) Integer userNo, Model model) {
+        List<LessonLogVo> list;
+        if (userNo != null) {
+            list = lessonLogServiceImpl.selectLessonLogListByUser(userNo);
+        } else {
+            list = lessonLogServiceImpl.selectLessonLogList();
+        }
         logger.debug("LESSONLOG LIST:" + list);
         model.addAttribute("list", list);
+
+        List<UserVo> userList = lessonLogServiceImpl.getAllUsers();
+        model.addAttribute("userList", userList);
+
         return "lesson/loglist";
     }
 

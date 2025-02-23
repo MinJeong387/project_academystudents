@@ -28,6 +28,9 @@ public class UserServiceImpl implements UserService {
 		return userDaoImpl.selectUserById(id);
 	}
 	
+
+	
+	
 	@Override
 	public UserVo getUserByCellPhone(String cellPhone) {
 		return userDaoImpl.selectUserByCellPhone(cellPhone);

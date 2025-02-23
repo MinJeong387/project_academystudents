@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.thirdproject.repository.LessonLogDao;
 import com.thirdproject.repository.vo.LessonLogVo;
+import com.thirdproject.repository.vo.UserVo;
 
 @Service
 public class LessonLogServiceImpl implements LessonLogService {
@@ -37,5 +38,20 @@ public class LessonLogServiceImpl implements LessonLogService {
     @Override
     public List<LessonLogVo> selectLessonLogList() {
         return lessonLogDaoImpl.selectAll();
+    }
+    
+    @Override
+    public List<LessonLogVo> selectLessonLogListByUser(Integer userNo) {
+        return lessonLogDaoImpl.selectByUser(userNo);
+    }
+
+    @Override
+    public List<Integer> getAllUserNos() {
+        return lessonLogDaoImpl.selectAllUserNos();
+    }
+    
+    @Override
+    public List<UserVo> getAllUsers() {
+        return lessonLogDaoImpl.selectAllUsers();
     }
 }

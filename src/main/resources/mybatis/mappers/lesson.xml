@@ -3,39 +3,75 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thirdproject.mappers.LessonLogMapper">
 
-    <select id="selectAll" resultType="lessonLogVo">
+	<select id="selectAll" resultType="lessonLogVo">
         SELECT ll.no,
-            ll.user_no AS uno,
-            ll.lesson_date AS date,
-            ll.lesson_contents AS contents,
-            u.name AS studentName  FROM lesson_log ll
-        JOIN users u ON ll.user_no = u.no  ORDER BY ll.lesson_date DESC
+               ll.user_no AS uno,
+               ll.lesson_date AS date,
+               ll.lesson_contents AS contents,
+               u.name AS studentName,
+               u2.name AS userName
+        FROM lesson_log ll
+        JOIN users u ON ll.user_no = u.no
+        JOIN users u2 ON ll.user_no = u2.no
+        ORDER BY ll.lesson_date DESC
     </select>
 
     <select id="selectOne" parameterType="int" resultType="lessonLogVo">
         SELECT ll.no,
-            ll.user_no AS uno,
-            ll.lesson_date AS date,
-            ll.lesson_contents AS contents,
-            u.name AS studentName  FROM lesson_log ll
-        JOIN users u ON ll.user_no = u.no  WHERE ll.no = #{no}
+               ll.user_no AS uno,
+               ll.lesson_date AS date,
+               ll.lesson_contents AS contents,
+               u.name AS studentName,
+               u2.name AS userName
+        FROM lesson_log ll
+        JOIN users u ON ll.user_no = u.no
+        JOIN users u2 ON ll.user_no = u2.no
+        WHERE ll.no = #{no}
     </select>
 
-    <insert id="insert" parameterType="lessonLogVo">
-        INSERT INTO lesson_log (user_no, lesson_date, lesson_contents)
-        VALUES (#{uno}, #{date}, #{contents})
-    </insert>
+	<insert id="insert" parameterType="lessonLogVo">
+		INSERT INTO lesson_log (user_no, lesson_date, lesson_contents)
+		VALUES (#{uno}, #{date}, #{contents})
+	</insert>
 
-    <update id="update" parameterType="lessonLogVo">
-        UPDATE lesson_log
-        SET lesson_date = #{date},
-            lesson_contents = #{contents}
-        WHERE no = #{no}
-    </update>
+	<update id="update" parameterType="lessonLogVo">
+		UPDATE lesson_log
+		SET lesson_date = #{date},
+		lesson_contents = #{contents}
+		WHERE no = #{no}
+	</update>
 
-    <delete id="delete" parameterType="int">
-        DELETE FROM lesson_log
-        WHERE no = #{no}
-    </delete>
+	<delete id="delete" parameterType="int">
+		DELETE FROM lesson_log
+		WHERE no = #{no}
+	</delete>
+
+	<select id="selectByUser" parameterType="int" resultType="lessonLogVo">
+        SELECT ll.no,
+               ll.user_no AS uno,
+               ll.lesson_date AS date,
+               ll.lesson_contents AS contents,
+               u.name AS studentName,
+               u2.name AS userName
+        FROM lesson_log ll
+        JOIN users u ON ll.user_no = u.no
+        JOIN users u2 ON ll.user_no = u2.no
+        WHERE ll.user_no = #{userNo}
+        ORDER BY ll.lesson_date DESC
+    </select>
+
+    <select id="selectAllUserNos" resultType="int">
+        SELECT no
+        FROM users
+        ORDER BY no ASC
+    </select>
+
+    <select id="selectAllUsers" resultType="UserVo">
+        SELECT no, name
+        FROM users
+        ORDER BY no ASC
+    </select>
+	
+	
 
 </mapper>

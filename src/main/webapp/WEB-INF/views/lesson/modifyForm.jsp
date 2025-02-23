@@ -30,7 +30,7 @@
 
             <div class="col-md-6">
                 <label for="uno" class="form-label">선생님 번호</label>
-                <input type="number" class="form-control" id="uno" name="uno" value="${vo.uno}">
+                <input type="number" class="form-control" id="uno" name="uno" value="${vo.uno}" readonly>
             </div>
 
             <div class="col-md-6">

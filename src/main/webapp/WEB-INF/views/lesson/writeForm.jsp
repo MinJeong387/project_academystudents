@@ -42,17 +42,35 @@
             </div>
         </form>
     </div>
-    <script>
-        // 수업 날짜 필드에 오늘 날짜 기본값 설정
-        window.onload = function() {
-            let today = new Date();
-            let year = today.getFullYear();
-            let month = String(today.getMonth() + 1).padStart(2, '0');
-            let day = String(today.getDate()).padStart(2, '0');
-            let formattedDate = year + '-' + month + '-' + day;
-            document.getElementById('date').value = formattedDate;
-        };
-    </script>
+    
+   <script>
+    // 수업 날짜 필드에 오늘 날짜 기본값 설정
+    window.onload = function() {
+        console.log("window.onload executed");
+
+        let today = new Date();
+        let year = today.getFullYear();
+        let month = String(today.getMonth() + 1).padStart(2, '0');
+        let day = String(today.getDate()).padStart(2, '0');
+        let formattedDate = year + '-' + month + '-' + day;
+        document.getElementById('date').value = formattedDate;
+
+        // 세션에서 사용자 번호 가져오기
+        let userNo = ${sessionScope.userNo != null ? sessionScope.userNo : 'null'}; // 세션 속성 존재 여부 확인
+
+        console.log("userNo: " + userNo);
+        console.log("uno element: " + document.getElementById('uno'));
+
+        // 사용자 번호가 존재하면 선생님 번호 필드에 입력
+        if (userNo !== 'null') {
+            document.getElementById('uno').value = parseInt(userNo); // 타입 변환
+        }
+    };
+</script>
+
+<%-- 세션 속성 확인 --%>
+${sessionScope.userNo}
+
 </body>
 
 </html>

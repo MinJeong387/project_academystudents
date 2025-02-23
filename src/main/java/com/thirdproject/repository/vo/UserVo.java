@@ -24,5 +24,12 @@ public class UserVo {
 
 	@NotEmpty
 	private String cellPhone;
+	
+	@Override
+    public String toString() {
+        String result = no + " - " + name;
+        System.out.println("UserVo.toString(): " + result); // 디버깅 출력
+        return result;
+    }
 
 }

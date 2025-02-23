@@ -15,4 +15,7 @@ public class LessonLogVo {
     private Date date; // lesson_date
     private String contents; // lesson_contents
     private String studentName; // 학생 이름 추가
+    private String userName; // 선생님 이름 추가
+    
+    
 }

@@ -8,10 +8,33 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
         crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
     <title>수업일지 목록</title>
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            display: none;
+        }
+
+        .dropdown-menu a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 
 <body class="d-flex">
@@ -20,46 +43,70 @@
     <div class="flex-grow-1 p-3">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mt-4 mb-0">수업일지 목록</h1>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="studentDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    선생님 번호 선택
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="studentDropdown">
-                    <c:forEach items="${studentNumbers}" var="number">
-                        <li><a class="dropdown-item" href="<c:url value="/lesson/list?studentNo=${number}" />">${number}</a></li>
-                    </c:forEach>
-                </ul>
-            </div>
+          <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="studentDropdown" onclick="toggleDropdown()">
+        선생님 번호 선택
+    </button>
+    <ul class="dropdown-menu" id="dropdownMenu">
+        <c:forEach items="${userList}" var="user">
+            <li><a class="dropdown-item" href="<c:url value="/lesson/list?userNo=${user.no}" />">${user.no} - ${user.name}</a></li>
+        </c:forEach>
+    </ul>
+</div>
+            <p>User List Size: ${userList.size()}</p>
         </div>
         <p class="mb-4">등록된 수업일지 목록입니다. (최신순)</p>
-        <table class="table table-bordered table-striped table-hover mb-4">
-            <thead>
-                <tr>
-                    <th>순서</th>
-                    <th>선생님 번호</th>
-                    <th>수업 날짜</th>
-                    <th>수업 내용</th>
-                    <th>관리</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${list}" var="vo">
-                    <tr>
-                        <td>${vo.no}</td>
-                        <td>${vo.uno}</td>
 
-                        <td>${vo.date}</td>
-                        <td>${vo.contents}</td>
-                        <td>
-                            <a href="<c:url value="/lesson/modify/${vo.no}" />" class="btn btn-primary btn-sm">수정</a>
-                            <a href="<c:url value="/lesson/delete/${vo.no}" />" class="btn btn-danger btn-sm">삭제</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+        <table class="table table-bordered table-striped table-hover mb-4">
+    <thead>
+        <tr>
+            <th>순서</th>
+            <th>선생님 번호-이름</th>
+            <th>수업 날짜</th>
+            <th>수업 내용</th>
+            <th>관리</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach items="${list}" var="vo">
+            <tr>
+                <td>${vo.no}</td>
+                <td>${vo.uno}-${vo.userName}</td>
+                <td>${vo.date}</td>
+                <td>${vo.contents}</td>
+                <td>
+                    <a href="<c:url value="/lesson/modify/${vo.no}" />" class="btn btn-primary btn-sm">수정</a>
+                    <a href="<c:url value="/lesson/delete/${vo.no}" />" class="btn btn-danger btn-sm">삭제</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>
         <a href="<c:url value="/lesson/write" />" class="btn btn-success">수업일지 등록</a>
     </div>
+
+    <script>
+        function toggleDropdown() {
+            var dropdownMenu = document.getElementById("dropdownMenu");
+            if (dropdownMenu.style.display === "none") {
+                dropdownMenu.style.display = "block";
+            } else {
+                dropdownMenu.style.display = "none";
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === "block") {
+                        openDropdown.style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 
 </html>

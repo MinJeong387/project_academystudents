@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.thirdproject.exceptions.LessonLogDaoException;
 import com.thirdproject.mappers.LessonLogMapper;
 import com.thirdproject.repository.vo.LessonLogVo;
+import com.thirdproject.repository.vo.UserVo;
 
 @Repository
 public class LessonLogDaoImpl implements LessonLogDao {
@@ -51,5 +52,20 @@ public class LessonLogDaoImpl implements LessonLogDao {
     public List<LessonLogVo> selectAll() {
         List<LessonLogVo> list = lessonLogMapper.selectAll();
         return list;
+    }
+    
+    @Override
+    public List<LessonLogVo> selectByUser(Integer userNo) {
+        return lessonLogMapper.selectByUser(userNo);
+    }
+
+    @Override
+    public List<Integer> selectAllUserNos() {
+        return lessonLogMapper.selectAllUserNos();
+    }
+    
+    @Override
+    public List<UserVo> selectAllUsers() {
+        return lessonLogMapper.selectAllUsers();
     }
 }
