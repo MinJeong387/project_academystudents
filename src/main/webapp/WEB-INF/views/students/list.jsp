@@ -31,6 +31,7 @@
                             <th>학생연락처</th>
                             <th>부모님연락처</th>
                             <th>특이사항</th>
+                            <th>담당선생님 번호</th>
                             <th>관리</th>
                         </tr>
                     </thead>
@@ -45,6 +46,8 @@
                                 <td>${vo.studentCellphone}</td>
                                 <td>${vo.parentCellphone}</td>
                                 <td>${vo.comments}</td>
+                                <td>${vo.teacherNo}</td>
+                                
                                 <td>
                                     <a href="<c:url value="/students/modify/${vo.no}" />" class="btn btn-primary btn-sm">수정</a>
                                     <a href="<c:url value="/students/delete/${vo.no}" />" class="btn btn-danger btn-sm">삭제</a>

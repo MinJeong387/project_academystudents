@@ -59,9 +59,14 @@
                 <input type="text" class="form-control" id="parentCellphone" name="parentCellphone" value="${vo.parentCellphone}">
             </div>
 
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <label for="comments" class="form-label">특이사항</label>
                 <input type="text" class="form-control" id="comments" name="comments" value="${vo.comments}">
+            </div>
+            
+            <div class="col-md-6">
+                <label for="teacherNo" class="form-label">담당선생님 번호</label>
+                <input type="text" class="form-control" id="teacherNo" name="teacherNo" value="${vo.teacherNo}">
             </div>
 
             <div class="col-12">

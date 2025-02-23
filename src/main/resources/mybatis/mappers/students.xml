@@ -12,7 +12,7 @@
 		gender,
 		student_cellphone AS studentCellphone,
 		parent_cellphone AS parentCellphone,
-		comments 
+		comments, teacher_no AS teacherNo
 		FROM students ORDER BY no DESC
 	</select>
 
@@ -26,21 +26,21 @@
 		gender,
 		student_cellphone AS studentCellphone,
 		parent_cellphone AS parentCellphone,
-		comments 
+		comments, teacher_no AS teacherNo
 		FROM students WHERE no=#{no}
 	</select>
 
 	<insert id="insert" parameterType="studentsVo">
 		INSERT INTO students
-		(name, school_name, school_grade, birthdate, gender, student_cellphone, parent_cellphone, comments)
-		VALUES(#{name}, #{schoolName}, ${schoolGrade}, #{birthdate}, #{gender}, #{studentCellphone}, #{parentCellphone}, #{comments})
+		(name, school_name, school_grade, birthdate, gender, student_cellphone, parent_cellphone, comments, teacher_no)
+		VALUES(#{name}, #{schoolName}, ${schoolGrade}, #{birthdate}, #{gender}, #{studentCellphone}, #{parentCellphone}, #{comments}, #{teacherNo})
 	</insert>
 
 	<update id="update" parameterType="studentsVo"> 
 		UPDATE students 
 		SET	name=#{name}, school_name=#{schoolName}, school_grade=#{schoolGrade},
 		birthdate=#{birthdate}, gender=#{gender}, student_cellphone=#{studentCellphone},
-		parent_cellphone=#{parentCellphone}, comments=#{comments} 
+		parent_cellphone=#{parentCellphone}, comments=#{comments}, teacher_no=#{teacherNo}
 		WHERE no=#{no}
 	</update>
 
