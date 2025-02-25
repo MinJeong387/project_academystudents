@@ -12,31 +12,31 @@ import com.thirdproject.repository.vo.UserVo;
 @Repository
 public class AttendanceDaoImpl implements AttendanceDao {
 
-    @Autowired
-    private AttendanceMapper attendanceMapper;
+	@Autowired
+	private AttendanceMapper attendanceMapper;
 
-    @Override
-    public List<AttendanceVo> selectAllAttendances() {
-        return attendanceMapper.selectAllAttendances();
-    }
+	@Override
+	public List<AttendanceVo> selectAllAttendances() {
+		return attendanceMapper.selectAllAttendances();
+	}
 
-    @Override
-    public List<AttendanceVo> selectAttendancesByTeacher(Integer teacherNo) {
-        return attendanceMapper.selectAttendancesByTeacher(teacherNo);
-    }
+	@Override
+	public List<AttendanceVo> selectAttendancesByTeacher(Integer teacherNo) {
+		return attendanceMapper.selectAttendancesByTeacher(teacherNo);
+	}
 
-    @Override
-    public List<UserVo> selectAllTeachers() {
-        return attendanceMapper.selectAllTeachers();
-    }
-    
-    @Override
-    public void insertAttendance(AttendanceVo attendanceVo) {
-        attendanceMapper.insertAttendance(attendanceVo);
-    }
-    
-    @Override
-    public void updateAttendance(AttendanceVo attendanceVo) {
-        attendanceMapper.updateAttendance(attendanceVo);
-    }
+	@Override
+	public List<UserVo> selectAllTeachers() {
+		return attendanceMapper.selectAllTeachers();
+	}
+
+	@Override
+	public void insertAttendance(AttendanceVo attendanceVo) {
+		attendanceMapper.insertAttendance(attendanceVo);
+	}
+
+	@Override
+	public void updateAttendance(AttendanceVo attendanceVo) {
+		attendanceMapper.updateAttendance(attendanceVo);
+	}
 }

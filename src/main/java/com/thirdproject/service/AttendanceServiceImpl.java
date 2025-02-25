@@ -37,7 +37,7 @@ public class AttendanceServiceImpl implements AttendanceService {
     
     @Override
     public void updateAttendance(AttendanceVo attendanceVo) {
-    	System.out.println("updateAttendance: " + attendanceVo); // 추가
+    	
         attendanceDao.updateAttendance(attendanceVo);
     }
 }

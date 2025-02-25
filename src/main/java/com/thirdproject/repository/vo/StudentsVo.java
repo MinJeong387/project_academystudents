@@ -18,4 +18,7 @@ public class StudentsVo {
 	private String parentCellphone;
 	private String comments;
 	private String teacherNo;
+	
+	private String teacherName; // 선생님 이름 필드 추가	
+	
 }

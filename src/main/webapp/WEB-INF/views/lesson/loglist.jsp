@@ -43,45 +43,45 @@
     <div class="flex-grow-1 p-3">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mt-4 mb-0">수업일지 목록</h1>
-          <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="studentDropdown" onclick="toggleDropdown()">
-        선생님 번호 선택
-    </button>
-    <ul class="dropdown-menu" id="dropdownMenu">
-        <c:forEach items="${userList}" var="user">
-            <li><a class="dropdown-item" href="<c:url value="/lesson/list?userNo=${user.no}" />">${user.no} - ${user.name}</a></li>
-        </c:forEach>
-    </ul>
-</div>
-           
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="studentDropdown" onclick="toggleDropdown()">
+                    선생님 번호 선택
+                </button>
+                <ul class="dropdown-menu" id="dropdownMenu">
+                    <c:forEach items="${userList}" var="user">
+                        <li><a class="dropdown-item" href="<c:url value="/lesson/list?userNo=${user.no}" />">${user.no} - ${user.name}</a></li>
+                    </c:forEach>
+                </ul>
+            </div>
+
         </div>
         <p class="mb-4">등록된 수업일지 목록입니다. (최신순)</p>
 
         <table class="table table-bordered table-striped table-hover mb-4">
-    <thead>
-        <tr>
-            <th>순서</th>
-            <th>선생님 번호- 이름</th>
-            <th>수업 날짜</th>
-            <th>수업 내용</th>
-            <th>관리</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach items="${list}" var="vo">
-            <tr>
-                <td>${vo.no}</td>
-                <td>${vo.uno}- ${vo.userName}</td>
-                <td>${vo.date}</td>
-                <td>${vo.contents}</td>
-                <td>
-                    <a href="<c:url value="/lesson/modify/${vo.no}" />" class="btn btn-primary btn-sm">수정</a>
-                    <a href="<c:url value="/lesson/delete/${vo.no}" />" class="btn btn-danger btn-sm">삭제</a>
-                </td>
-            </tr>
-        </c:forEach>
-    </tbody>
-</table>
+            <thead>
+                <tr>
+                    <th>순서</th>
+                    <th>선생님 번호- 이름</th>
+                    <th>수업 날짜</th>
+                    <th>수업 내용</th>
+                    <th>관리</th>
+                </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${list}" var="vo">
+                    <tr>
+                        <td>${vo.no}</td>
+                        <td>${vo.uno}- ${vo.userName}</td>
+                        <td>${vo.date}</td>
+                        <td>${vo.contents}</td>
+                        <td>
+                            <a href="<c:url value="/lesson/modify/${vo.no}" />" class="btn btn-primary btn-sm">수정</a>
+                            <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete(${vo.no})">삭제</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
         <a href="<c:url value="/lesson/write" />" class="btn btn-success">수업일지 등록</a>
     </div>
 
@@ -104,6 +104,12 @@
                         openDropdown.style.display = "none";
                     }
                 }
+            }
+        }
+
+        function confirmDelete(lessonNo) {
+            if (confirm("정말 삭제하시겠습니까?")) {
+                window.location.href = "/lesson/delete/" + lessonNo;
             }
         }
     </script>

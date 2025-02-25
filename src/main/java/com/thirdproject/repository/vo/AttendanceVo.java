@@ -16,4 +16,6 @@ public class AttendanceVo {
     private String teacherName;
     private String attendanceStatus;
     private Date attendanceDate;
+    
+    
 }

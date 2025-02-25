@@ -24,6 +24,11 @@
         <form id="modifyForm" action="/students/modify" method="POST" class="row g-3">
             <input type="hidden" name="no" value="${vo.no}" />
 
+			<div class="col-md-6">
+                <label for="no" class="form-label">번호</label>
+                <input type="number" class="form-control" id="num" name="num" value="${vo.no}" readonly>
+            </div>
+            
             <div class="col-md-6">
                 <label for="name" class="form-label">이름</label>
                 <input type="text" class="form-control" id="name" name="name" value="${vo.name}">

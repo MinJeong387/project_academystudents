@@ -1,54 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.thirdproject.mappers.StudentsMapper">
 
-	<select id="selectAll" resultType="studentsVo">
-		SELECT no,
-		name,
-		school_name AS schoolName, 
-		school_grade AS schoolGrade,
-		birthdate,
-		gender,
-		student_cellphone AS studentCellphone,
-		parent_cellphone AS parentCellphone,
-		comments, teacher_no AS teacherNo
-		FROM students ORDER BY no DESC
-	</select>
+    <select id="selectAll" resultType="studentsVo">
+        SELECT s.no,
+               s.name,
+               s.school_name AS schoolName,
+               s.school_grade AS schoolGrade,
+               s.birthdate,
+               s.gender,
+               s.student_cellphone AS studentCellphone,
+               s.parent_cellphone AS parentCellphone,
+               s.comments,
+               s.teacher_no AS teacherNo,
+               u.name AS teacherName FROM students s
+        LEFT JOIN users u ON s.teacher_no = u.no
+        ORDER BY s.no DESC
+    </select>
 
-	<select id="selectOne" parameterType="int"
-		resultType="studentsVo">
-		SELECT no,
-		name,
-		school_name AS schoolName, 
-		school_grade AS schoolGrade,
-		birthdate,
-		gender,
-		student_cellphone AS studentCellphone,
-		parent_cellphone AS parentCellphone,
-		comments, teacher_no AS teacherNo
-		FROM students WHERE no=#{no}
-	</select>
+    <select id="selectOne" parameterType="int"
+            resultType="studentsVo">
+        SELECT s.no,
+               s.name,
+               s.school_name AS schoolName,
+               s.school_grade AS schoolGrade,
+               s.birthdate,
+               s.gender,
+               s.student_cellphone AS studentCellphone,
+               s.parent_cellphone AS parentCellphone,
+               s.comments,
+               s.teacher_no AS teacherNo,
+               u.name AS teacherName FROM students s
+        LEFT JOIN users u ON s.teacher_no = u.no
+        WHERE s.no = #{no}
+    </select>
 
-	<insert id="insert" parameterType="studentsVo">
-		INSERT INTO students
-		(name, school_name, school_grade, birthdate, gender, student_cellphone, parent_cellphone, comments, teacher_no)
-		VALUES(#{name}, #{schoolName}, ${schoolGrade}, #{birthdate}, #{gender}, #{studentCellphone}, #{parentCellphone}, #{comments}, #{teacherNo})
-	</insert>
+    <insert id="insert" parameterType="studentsVo">
+        INSERT INTO students
+        (name, school_name, school_grade, birthdate, gender, student_cellphone, parent_cellphone, comments, teacher_no)
+        VALUES (#{name}, #{schoolName}, ${schoolGrade}, #{birthdate}, #{gender}, #{studentCellphone}, #{parentCellphone},
+                #{comments}, #{teacherNo})
+    </insert>
 
-	<update id="update" parameterType="studentsVo"> 
-		UPDATE students 
-		SET	name=#{name}, school_name=#{schoolName}, school_grade=#{schoolGrade},
-		birthdate=#{birthdate}, gender=#{gender}, student_cellphone=#{studentCellphone},
-		parent_cellphone=#{parentCellphone}, comments=#{comments}, teacher_no=#{teacherNo}
-		WHERE no=#{no}
-	</update>
+    <update id="update" parameterType="studentsVo">
+        UPDATE students
+        SET name=#{name},
+            school_name=#{schoolName},
+            school_grade=#{schoolGrade},
+            birthdate=#{birthdate},
+            gender=#{gender},
+            student_cellphone=#{studentCellphone},
+            parent_cellphone=#{parentCellphone},
+            comments=#{comments},
+            teacher_no=#{teacherNo}
+        WHERE no=#{no}
+    </update>
 
+    <delete id="delete" parameterType="int">
+        DELETE FROM students
+        WHERE no=#{no}
+    </delete>
 
-	<delete id="delete" parameterType="int">
-		DELETE FROM students 
-		WHERE no=#{no}
-	</delete>
-	
-	
 </mapper>

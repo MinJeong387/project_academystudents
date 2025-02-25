@@ -74,7 +74,7 @@
                         <td>${vo.contents}</td>
                         <td>
                             <a href="<c:url value="/counseling/modify/${vo.no}" />" class="btn btn-primary btn-sm">수정</a>
-                            <a href="<c:url value="/counseling/delete/${vo.no}" />" class="btn btn-danger btn-sm">삭제</a>
+                            <a href="#" class="btn btn-danger btn-sm" onclick="confirmDelete(${vo.no})">삭제</a>
                         </td>
                     </tr>
                 </c:forEach>
@@ -102,6 +102,12 @@
                         openDropdown.style.display = "none";
                     }
                 }
+            }
+        }
+
+        function confirmDelete(counselingNo) {
+            if (confirm("정말 삭제하시겠습니까?")) {
+                window.location.href = "/counseling/delete/" + counselingNo;
             }
         }
     </script>
