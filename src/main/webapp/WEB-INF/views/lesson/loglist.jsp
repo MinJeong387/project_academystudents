@@ -61,7 +61,7 @@
     <thead>
         <tr>
             <th>순서</th>
-            <th>선생님 번호-이름</th>
+            <th>선생님 번호- 이름</th>
             <th>수업 날짜</th>
             <th>수업 내용</th>
             <th>관리</th>
@@ -71,7 +71,7 @@
         <c:forEach items="${list}" var="vo">
             <tr>
                 <td>${vo.no}</td>
-                <td>${vo.uno}-${vo.userName}</td>
+                <td>${vo.uno}- ${vo.userName}</td>
                 <td>${vo.date}</td>
                 <td>${vo.contents}</td>
                 <td>

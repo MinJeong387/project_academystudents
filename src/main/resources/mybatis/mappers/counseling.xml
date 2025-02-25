@@ -41,6 +41,31 @@
         WHERE no = #{no}
     </delete>
     
+    <select id="selectByStudent" parameterType="int" resultType="counselingLogVo">
+        SELECT cl.no,
+            cl.student_no AS sno,
+            cl.counseling_date AS date,
+            cl.counseling_contents AS contents,
+            s.name AS studentName
+        FROM counseling_log cl
+        JOIN students s ON cl.student_no = s.no
+        WHERE cl.student_no = #{studentNo}
+        ORDER BY cl.counseling_date DESC
+    </select>
+
+    <select id="selectAllStudents" resultType="studentsVo">
+        SELECT no, name
+        FROM students
+        ORDER BY no ASC
+    </select>
+    
+    <select id="selectStudentsByName" parameterType="string" resultType="studentsVo">
+        SELECT no, name
+        FROM students
+        WHERE name LIKE CONCAT('%', #{studentName}, '%')
+        ORDER BY no ASC
+    </select>
+    
     
 
 </mapper>

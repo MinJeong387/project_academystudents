@@ -23,12 +23,15 @@
 
         <form id="writeForm" action="/counseling/write" method="POST" class="row g-3">
             <div class="col-md-6">
-                <label for="sno" class="form-label">학생 번호</label>
-                <input type="number" class="form-control" id="sno" name="sno" required>
+                <label for="studentName" class="form-label">학생 이름</label>
+                <input type="text" class="form-control" id="studentName" name="studentName" oninput="getStudentNumbers()">
             </div>
             <div class="col-md-6">
-                <label for="studentName" class="form-label">학생 이름</label>
-                <input type="text" class="form-control" id="studentName" name="studentName" required>
+                <label for="sno" class="form-label">학생 번호</label>
+                <input type="number" class="form-control" id="sno" name="sno" readonly>
+                <select class="form-select" id="snoDropdown" style="display: none;" onchange="selectStudentNumber()">
+                    <option value="">학생 번호 선택</option>
+                </select>
             </div>
             <div class="col-md-6">
                 <label for="date" class="form-label">상담 날짜 (YYYY-MM-DD)</label>
@@ -55,6 +58,44 @@
             let formattedDate = year + '-' + month + '-' + day;
             document.getElementById('date').value = formattedDate;
         };
+
+        function getStudentNumbers() {
+            let studentName = document.getElementById('studentName').value;
+            if (studentName) {
+                fetch('/counseling/getStudentNumbersByName?studentName=' + studentName)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length === 1) {
+                            // 학생 번호가 하나인 경우
+                            document.getElementById('sno').value = data[0].no;
+                            document.getElementById('snoDropdown').style.display = 'none';
+                        } else if (data.length > 1) {
+                            // 학생 번호가 여러 개인 경우
+                            let dropdown = document.getElementById('snoDropdown');
+                            dropdown.innerHTML = '<option value="">학생 번호 선택</option>';
+                            data.forEach(student => {
+                                let option = document.createElement('option');
+                                option.value = student.no;
+                                option.text = student.no + ' - ' + student.name;
+                                dropdown.appendChild(option);
+                            });
+                            dropdown.style.display = 'block';
+                        } else {
+                            // 학생 번호가 없는 경우
+                            document.getElementById('sno').value = '';
+                            document.getElementById('snoDropdown').style.display = 'none';
+                        }
+                    });
+            } else {
+                document.getElementById('sno').value = '';
+                document.getElementById('snoDropdown').style.display = 'none';
+            }
+        }
+
+        function selectStudentNumber() {
+            document.getElementById('sno').value = document.getElementById('snoDropdown').value;
+            document.getElementById('snoDropdown').style.display = 'none';
+        }
     </script>
 </body>
 

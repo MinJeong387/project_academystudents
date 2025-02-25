@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.thirdproject.repository.CounselingLogDao;
 import com.thirdproject.repository.vo.CounselingLogVo;
+import com.thirdproject.repository.vo.StudentsVo;
 
 @Service
 public class CounselingLogServiceImpl implements CounselingLogService {
@@ -38,6 +39,20 @@ public class CounselingLogServiceImpl implements CounselingLogService {
     public List<CounselingLogVo> selectCounselingLogList() {
         return counselingLogDaoImpl.selectAll();
     }
+    
+    @Override
+    public List<CounselingLogVo> selectCounselingLogListByStudent(Integer studentNo) {
+        return counselingLogDaoImpl.selectByStudent(studentNo);
+    }
 
+    @Override
+    public List<StudentsVo> getAllStudents() {
+        return counselingLogDaoImpl.selectAllStudents();
+    }
+
+    @Override
+    public List<StudentsVo> getStudentNumbersByName(String studentName) {
+        return counselingLogDaoImpl.selectStudentsByName(studentName);
+    }
     
 }

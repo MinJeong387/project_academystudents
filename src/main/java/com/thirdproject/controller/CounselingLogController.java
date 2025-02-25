@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thirdproject.repository.vo.CounselingLogVo;
+import com.thirdproject.repository.vo.StudentsVo;
 import com.thirdproject.service.CounselingLogService;
 
 @Controller
@@ -30,10 +33,19 @@ public class CounselingLogController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<CounselingLogVo> list = counselingLogServiceImpl.selectCounselingLogList();
+    public String list(@RequestParam(value = "studentNo", required = false) Integer studentNo, Model model) {
+        List<CounselingLogVo> list;
+        if (studentNo != null) {
+            list = counselingLogServiceImpl.selectCounselingLogListByStudent(studentNo);
+        } else {
+            list = counselingLogServiceImpl.selectCounselingLogList();
+        }
         logger.debug("COUNSELINGLOG LIST:" + list);
         model.addAttribute("list", list);
+
+        List<StudentsVo> studentList = counselingLogServiceImpl.getAllStudents();
+        model.addAttribute("studentList", studentList);
+
         return "counseling/loglist";
     }
 
@@ -82,4 +94,11 @@ public class CounselingLogController {
         counselingLogServiceImpl.deleteCounselingLog(no);
         return "redirect:/counseling/list";
     }
+    
+    @GetMapping("/getStudentNumbersByName")
+    @ResponseBody
+    public List<StudentsVo> getStudentNumbersByName(@RequestParam("studentName") String studentName) {
+        return counselingLogServiceImpl.getStudentNumbersByName(studentName);
+    }
+    
 }

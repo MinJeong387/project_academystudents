@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.thirdproject.exceptions.CounselingLogDaoException;
 import com.thirdproject.mappers.CounselingLogMapper;
 import com.thirdproject.repository.vo.CounselingLogVo;
+import com.thirdproject.repository.vo.StudentsVo;
 
 @Repository
 public class CounselingLogDaoImpl implements CounselingLogDao {
@@ -51,6 +52,21 @@ public class CounselingLogDaoImpl implements CounselingLogDao {
     public List<CounselingLogVo> selectAll() {
         List<CounselingLogVo> list = counselingLogMapper.selectAll();
         return list;
+    }
+    
+    @Override
+    public List<CounselingLogVo> selectByStudent(Integer studentNo) {
+        return counselingLogMapper.selectByStudent(studentNo);
+    }
+
+    @Override
+    public List<StudentsVo> selectAllStudents() {
+        return counselingLogMapper.selectAllStudents();
+    }
+    
+    @Override
+    public List<StudentsVo> selectStudentsByName(String studentName) {
+        return counselingLogMapper.selectStudentsByName(studentName);
     }
     
     
