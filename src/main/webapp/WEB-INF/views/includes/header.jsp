@@ -72,7 +72,7 @@
             <c:choose>
                 <c:when test="${empty authUser}">
                     <li><a href="<c:url value="/users/join" />" class="btn-custom">회원가입</a></li>
-                    <li><a href="<c:url value="/users/login" />" class="login-button">로그인(나중에 비밀번호 찾기로 변경할까 고민중)</a></li>
+                    <li><a href="<c:url value="/users/login" />" class="login-button">아이디/비밀번호 찾기</a></li>
                 </c:when>
                 <c:otherwise>
                     <li>${sessionScope.authUser.name}님, 안녕하세요^^</li>

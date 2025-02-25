@@ -1,5 +1,6 @@
 package com.thirdproject.mappers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -20,4 +21,5 @@ public interface UserMapper {
 	// <select id="selectUserByIdAndPw" parameterType="map" resultType="userVo">
 	UserVo selectUserByIdAndPw(Map<String, String> map);
 
+	List<UserVo> selectAll();
 }

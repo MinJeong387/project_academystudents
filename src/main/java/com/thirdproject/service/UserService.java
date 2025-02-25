@@ -1,5 +1,7 @@
 package com.thirdproject.service;
 
+import java.util.List;
+
 import com.thirdproject.repository.vo.UserVo;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,5 +13,5 @@ public interface UserService {
 	public UserVo getUserByCellPhone(String cellPhone);
 	
 	public boolean isAuthenticated(HttpServletRequest request);
-	
+	List<UserVo> selectUserList();
 }

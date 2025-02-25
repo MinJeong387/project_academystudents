@@ -63,8 +63,12 @@
             </div>
             
             <div class="col-md-6">
-                <label for="teacherNo" class="form-label">담당선생님 번호</label>
-                <input type="text" class="form-control" id="teacherNo" name="teacherNo">
+                <label for="teacherNo" class="form-label">담당선생님</label>
+                <select class="form-select" id="teacherNo" name="teacherNo">
+                    <c:forEach items="${users}" var="user">
+                        <option value="${user.no}">${user.no} - ${user.name}</option>
+                    </c:forEach>
+                </select>
             </div>
             
 

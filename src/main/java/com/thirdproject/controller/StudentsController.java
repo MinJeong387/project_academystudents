@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thirdproject.repository.vo.StudentsVo;
+import com.thirdproject.repository.vo.UserVo;
 import com.thirdproject.service.StudentsService;
+import com.thirdproject.service.UserService;
 
 @Controller
 @RequestMapping("/students")
@@ -24,6 +25,9 @@ public class StudentsController {
 
     @Autowired
     private StudentsService studentsServiceImpl;
+    
+    @Autowired
+    private UserService userServiceImpl; // UserService 주입
 
     @GetMapping({"/", ""})
     public String mainPage() {
@@ -40,7 +44,9 @@ public class StudentsController {
 
     // 리스트 작성 폼
     @GetMapping("/write")
-    public String writeForm() {
+    public String writeForm(Model model) {
+        List<UserVo> users = userServiceImpl.selectUserList();
+        model.addAttribute("users", users);
         return "students/writeForm";
     }
 
@@ -61,7 +67,11 @@ public class StudentsController {
     public String modifyForm(@PathVariable("no") Integer no, Model model) {
         StudentsVo studentsVo = studentsServiceImpl.selectStudents(no);
         model.addAttribute("vo", studentsVo);
-        return "students/modifyForm"; 
+
+        List<UserVo> users = userServiceImpl.selectUserList(); // users 목록 조회
+        model.addAttribute("users", users); // users 목록 모델에 추가
+
+        return "students/modifyForm";
     }
 
     // 리스트 수정

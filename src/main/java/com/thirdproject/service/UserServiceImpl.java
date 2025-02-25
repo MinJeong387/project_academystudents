@@ -1,5 +1,7 @@
 package com.thirdproject.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,8 @@ import com.thirdproject.repository.vo.UserVo;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
+
 @Service
 public class UserServiceImpl implements UserService {
 	@Autowired
@@ -28,9 +32,6 @@ public class UserServiceImpl implements UserService {
 		return userDaoImpl.selectUserById(id);
 	}
 	
-
-	
-	
 	@Override
 	public UserVo getUserByCellPhone(String cellPhone) {
 		return userDaoImpl.selectUserByCellPhone(cellPhone);
@@ -48,5 +49,12 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+	
+	
+	
+	@Override
+    public List<UserVo> selectUserList() {
+        return userDaoImpl.selectAll();
+    }
 
 }

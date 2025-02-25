@@ -30,4 +30,9 @@
 		cell_phone=#{cellPhone}
 	</select>
 	
+	<select id="selectAll" resultType="com.thirdproject.repository.vo.UserVo">
+        SELECT no, name
+        FROM users
+        ORDER BY no ASC
+    </select>
 </mapper>
