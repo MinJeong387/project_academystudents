@@ -27,6 +27,7 @@
         JOIN users u ON ll.user_no = u.no
         JOIN users u2 ON ll.user_no = u2.no
         WHERE ll.no = #{no}
+        
     </select>
 
 	<insert id="insert" parameterType="lessonLogVo">

@@ -53,7 +53,7 @@
         </c:forEach>
     </ul>
 </div>
-            <p>User List Size: ${userList.size()}</p>
+           
         </div>
         <p class="mb-4">등록된 수업일지 목록입니다. (최신순)</p>
 

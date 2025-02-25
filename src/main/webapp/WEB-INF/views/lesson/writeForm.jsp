@@ -24,7 +24,7 @@
         <form id="writeForm" action="/lesson/write" method="POST" class="row g-3">
             <div class="col-md-6">
                 <label for="uno" class="form-label">선생님 번호</label>
-                <input type="number" class="form-control" id="uno" name="uno" required>
+                <input type="number" class="form-control" id="uno" name="uno" required readonly>
             </div>
 
             <div class="col-md-6">

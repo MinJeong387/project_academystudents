@@ -10,7 +10,7 @@
 	</insert>
 
 	<select id="selectUserByIdAndPw" parameterType="map" resultType="userVo">
-		SELECT id, pw, name, cell_phone AS cellPhone
+		SELECT no, id, pw, name, cell_phone AS cellPhone
 		FROM users
 		WHERE
 		id=#{id} AND pw=#{pw}
