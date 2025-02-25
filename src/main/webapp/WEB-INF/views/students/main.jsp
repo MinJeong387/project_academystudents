@@ -52,19 +52,16 @@
         </li>
         <br /><br />
         <li class="nav-item">
-            <a class="nav-link rounded mb-2" href="/students/list" id="studentListLink">학생 리스트</a>
+            <a class="nav-link rounded mb-2" href="<c:url value="/students/list" />" id="studentListLink">학생 리스트</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link rounded mb-2" href="#" id="attendance">출석부</a>
+            <a class="nav-link rounded mb-2" href="<c:url value="/attendance/list" />" id="attendance">출석부</a>
         </li>
         <li class="nav-item">
             <a class="nav-link rounded mb-2" href="<c:url value="/counseling/list" />" id="counselingLog">상담일지</a>
         </li>
         <li class="nav-item">
             <a class="nav-link rounded mb-2" href="<c:url value="/lesson/list" />" id="lessonlog">수업일지</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link rounded mb-2" href="#" id="sendMessage">문자발송</a>
         </li>
     </nav>
 

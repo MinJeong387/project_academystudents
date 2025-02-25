@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.thirdproject.mappers.AttendanceMapper">
+
+    <select id="selectAllAttendances" resultType="attendanceVo">
+    SELECT s.no AS studentNo, s.name AS studentName,
+           u.no AS teacherNo, u.name AS teacherName,
+           a.attendance_date, a.attendance_status
+    FROM students s
+    JOIN users u ON s.teacher_no = u.no
+    LEFT JOIN attendance a ON s.no = a.student_no
+    ORDER BY s.no ASC
+	</select>
+
+    <select id="selectAttendancesByTeacher" parameterType="int" resultType="attendanceVo">
+        SELECT s.no AS studentNo,
+               s.name AS studentName,
+               u.no AS teacherNo,
+               u.name AS teacherName
+        FROM students s
+        JOIN users u ON s.teacher_no = u.no
+        WHERE s.teacher_no = #{teacherNo}
+        ORDER BY s.no ASC
+    </select>
+
+    <select id="selectAllTeachers" resultType="userVo">
+        SELECT no, name
+        FROM users
+        ORDER BY no ASC
+    </select>
+    
+    <insert id="insertAttendance" parameterType="attendanceVo">
+   		INSERT INTO attendance (student_no, attendance_date, attendance_status)
+  		VALUES (#{studentNo}, #{attendanceDate}, #{attendanceStatus})
+	</insert>
+
+	<update id="updateAttendance" parameterType="attendanceVo">
+        UPDATE attendance
+        SET attendance_status = #{attendanceStatus}
+        WHERE student_no = #{studentNo} AND attendance_date = #{attendanceDate}
+    </update>
+    
+</mapper>
