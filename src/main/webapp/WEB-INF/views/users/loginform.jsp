@@ -68,11 +68,11 @@
                     <div class="mb-3">
                         <br /><br />
                         <label for="id" class="form-label">아이디</label>
-                        <input type="text" class="form-control" id="id" name="id" value="">
+                        <input type="text" class="form-control" id="id" name="id" value="${param.id}">
                     </div>
                     <div class="mb-3">
                         <label for="pw" class="form-label">패스워드</label>
-                        <input type="password" class="form-control" id="pw" name="pw">
+                        <input type="password" class="form-control" id="pw" name="pw" value="${param.pw}">
                     </div>
                     <c:if test="${not empty loginError}">
                         <p class="text-danger text-center">${loginError}</p>

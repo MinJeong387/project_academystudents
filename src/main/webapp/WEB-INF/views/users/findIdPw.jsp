@@ -70,6 +70,7 @@
                 </form>
                 <c:if test="${not empty findError}">
                     <p class="text-danger text-center">${findError}</p>
+                    <a href="<c:url value="/users/" />" class="btn btn-custom">로그인하러 가기</a>
                 </c:if>
                 <c:if test="${not empty foundUser}">
                     <p class="text-success text-center">아이디: ${foundUser.id}, 비밀번호: ${foundUser.pw.substring(0, 1)}${'*'.repeat(foundUser.pw.length() - 1)}</p>

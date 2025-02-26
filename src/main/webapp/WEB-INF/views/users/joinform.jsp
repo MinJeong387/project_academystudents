@@ -57,6 +57,8 @@ body {
     border-color: #1D809F;
     width: 200px;
     margin-top: 20px;
+    color: white; /* 텍스트 색상 추가 */
+    font-weight: bold; /* 폰트 굵기 추가 */
 }
 
 .btn-primary:hover {
@@ -128,8 +130,10 @@ body {
                     </c:if>
                     <br />
                     <div class="text-center">
-                        <input type="submit" value="회원가입" class="btn btn-primary">
+                        <input type="submit" value="회원가입" class="btn btn-primary" style="margin-right: 10px;">
+						<a href="<c:url value="/users/" />" class="btn btn-primary" style="margin-left: 10px;">로그인하러 가기</a>
                     </div>
+                    
                 </form:form>
             </div> </div>
     </div>
