@@ -1,5 +1,6 @@
 package com.thirdproject.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,11 @@ public class AttendanceServiceImpl implements AttendanceService {
     
     @Override
     public void updateAttendance(AttendanceVo attendanceVo) {
-    	
         attendanceDao.updateAttendance(attendanceVo);
+    }	
+    
+    @Override
+    public AttendanceVo getAttendance(Integer studentNo, Date attendanceDate) {
+        return attendanceDao.selectAttendance(studentNo, attendanceDate);
     }
 }

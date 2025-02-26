@@ -68,14 +68,10 @@ public class AttendanceController {
         attendanceVo.setAttendanceDate(sqlDate);
         attendanceVo.setAttendanceStatus(attendanceStatus);
 
-        // 출석 정보가 이미 존재하는지 확인
-        List<AttendanceVo> existingAttendances = attendanceService.getAllAttendances();
-        System.out.println("existingAttendances: " + existingAttendances);
-        
-        boolean isExisting = existingAttendances.stream()
-                .anyMatch(a -> a.getStudentNo().equals(studentNo) && sqlDate != null && a.getAttendanceDate() != null && a.getAttendanceDate().getTime() == sqlDate.getTime());
+     // 출석 정보가 이미 존재하는지 확인
+        AttendanceVo existingAttendance = attendanceService.getAttendance(studentNo, sqlDate);
 
-        if (isExisting) {
+        if (existingAttendance != null) {
             attendanceService.updateAttendance(attendanceVo);
         } else {
             attendanceService.saveAttendance(attendanceVo);

@@ -4,14 +4,16 @@
 <mapper namespace="com.thirdproject.mappers.AttendanceMapper">
 
     <select id="selectAllAttendances" resultType="attendanceVo">
-    SELECT s.no AS studentNo, s.name AS studentName,
-           u.no AS teacherNo, u.name AS teacherName,
-           a.attendance_date, a.attendance_status
-    FROM students s
-    JOIN users u ON s.teacher_no = u.no
-    LEFT JOIN attendance a ON s.no = a.student_no
-    ORDER BY s.no ASC
-	</select>
+        SELECT DISTINCT s.no AS studentNo,
+               s.name AS studentName,
+               u.no AS teacherNo,
+               u.name AS teacherName,
+               s.school_name AS schoolName,
+               s.school_grade AS schoolGrade
+        FROM students s
+        JOIN users u ON s.teacher_no = u.no
+        ORDER BY s.no ASC
+    </select>
 
     <select id="selectAttendancesByTeacher" parameterType="int" resultType="attendanceVo">
         SELECT s.no AS studentNo,
@@ -40,5 +42,13 @@
         SET attendance_status = #{attendanceStatus}
         WHERE student_no = #{studentNo} AND attendance_date = #{attendanceDate}
     </update>
+    
+    <select id="selectAttendance" resultType="attendanceVo">
+    	SELECT student_no AS studentNo,
+           attendance_date AS attendanceDate,
+           attendance_status AS attendanceStatus
+    	FROM attendance
+    	WHERE student_no = #{studentNo} AND attendance_date = #{attendanceDate}
+	</select>
     
 </mapper>

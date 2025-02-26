@@ -1,6 +1,7 @@
 // AttendanceService.java
 package com.thirdproject.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.thirdproject.repository.vo.AttendanceVo;
@@ -13,4 +14,6 @@ public interface AttendanceService {
     
     void saveAttendance(AttendanceVo attendanceVo);    
     void updateAttendance(AttendanceVo attendanceVo);
+    
+    AttendanceVo getAttendance(Integer studentNo, Date attendanceDate);
 }

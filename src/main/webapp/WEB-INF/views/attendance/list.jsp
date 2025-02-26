@@ -39,15 +39,29 @@
             background-color: lightgreen !important;
             color: darkgreen !important; /* 글자색 변경 */
         }
+
+        .top-right-dropdown {
+            position: absolute;
+            top: 50px;
+            right: 10px;
+            display: flex; /* flexbox 사용 */
+            align-items: center; /* 수직 가운데 정렬 */
+        }
+
+        .calendar-container {
+            margin-right: 10px; /* 달력 오른쪽 여백 조절 */
+        }
     </style>
 </head>
 
 <body class="d-flex">
     <jsp:include page="../students/main.jsp" />
 
-    <div class="flex-grow-1 p-3">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="mt-4 mb-0">출석 관리</h1>
+    <div class="flex-grow-1 p-3" style="position: relative;">
+        <div class="top-right-dropdown">
+            <div class="calendar-container">
+                <input type="date" id="attendanceDate">
+            </div>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="teacherDropdown"
                     onclick="toggleDropdown()">
@@ -61,7 +75,9 @@
                     </c:forEach>
                 </ul>
             </div>
-            <input type="date" id="attendanceDate">
+        </div>
+        <div class="mb-4">
+            <h1 class="mt-4 mb-0">출석 관리</h1>
         </div>
         <table class="table table-bordered table-striped table-hover">
             <thead>

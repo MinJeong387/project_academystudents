@@ -17,5 +17,7 @@ public class AttendanceVo {
     private String attendanceStatus;
     private Date attendanceDate;
     
+    private String schoolName; // 학교 이름 추가
+    private Integer schoolGrade; // 학년 추가
     
 }

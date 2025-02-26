@@ -1,5 +1,6 @@
 package com.thirdproject.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.thirdproject.repository.vo.AttendanceVo;
@@ -12,4 +13,6 @@ public interface AttendanceDao {
     
     void insertAttendance(AttendanceVo attendanceVo);
     void updateAttendance(AttendanceVo attendanceVo);
+    
+    AttendanceVo selectAttendance(Integer studentNo, Date attendanceDate);
 }

@@ -1,5 +1,6 @@
 package com.thirdproject.mappers;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -15,4 +16,6 @@ public interface AttendanceMapper {
     
     void insertAttendance(AttendanceVo attendanceVo);
     void updateAttendance(AttendanceVo attendanceVo);
+    
+    AttendanceVo selectAttendance(Integer studentNo, Date attendanceDate);
 }

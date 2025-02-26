@@ -1,5 +1,6 @@
 package com.thirdproject.repository;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +14,12 @@ import com.thirdproject.repository.vo.UserVo;
 public class AttendanceDaoImpl implements AttendanceDao {
 
 	@Autowired
-	private AttendanceMapper attendanceMapper;
+    private AttendanceMapper attendanceMapper;
 
-	@Override
-	public List<AttendanceVo> selectAllAttendances() {
-		return attendanceMapper.selectAllAttendances();
-	}
+    @Override
+    public List<AttendanceVo> selectAllAttendances() {
+        return attendanceMapper.selectAllAttendances();
+    }
 
 	@Override
 	public List<AttendanceVo> selectAttendancesByTeacher(Integer teacherNo) {
@@ -39,4 +40,9 @@ public class AttendanceDaoImpl implements AttendanceDao {
 	public void updateAttendance(AttendanceVo attendanceVo) {
 		attendanceMapper.updateAttendance(attendanceVo);
 	}
+	
+	@Override
+    public AttendanceVo selectAttendance(Integer studentNo, Date attendanceDate) {
+        return attendanceMapper.selectAttendance(studentNo, attendanceDate);
+    }
 }
