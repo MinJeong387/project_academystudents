@@ -48,8 +48,8 @@
     </div>
 
     <div class="flex-grow-1 p-3 list-container">
-        <h1 class="mt-4 mb-4">학생 리스트</h1>
-        <p class="mb-4">등록된 학생들 리스트입니다.</p>
+        <h1 class="mt-4 mb-4">전체 학생 리스트</h1>
+        <p class="mb-4">등록된 전체 학생들 리스트입니다.</p>
         <table class="table table-bordered table-striped table-hover mb-4">
             <thead>
                 <tr>
