@@ -45,7 +45,7 @@
             <h1 class="mt-4 mb-0">수업일지 목록</h1>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="studentDropdown" onclick="toggleDropdown()">
-                    선생님 번호 선택
+                    강사 번호 선택
                 </button>
                 <ul class="dropdown-menu" id="dropdownMenu">
                     <c:forEach items="${userList}" var="user">
@@ -61,7 +61,7 @@
             <thead>
                 <tr>
                     <th>순서</th>
-                    <th>선생님 번호- 이름</th>
+                    <th>강사명</th>
                     <th>수업 날짜</th>
                     <th>수업 내용</th>
                     <th>관리</th>
@@ -71,7 +71,7 @@
                 <c:forEach items="${list}" var="vo">
                     <tr>
                         <td>${vo.no}</td>
-                        <td>${vo.uno}- ${vo.userName}</td>
+                        <td>${vo.uno} - ${vo.userName}</td>
                         <td>${vo.date}</td>
                         <td>${vo.contents}</td>
                         <td>

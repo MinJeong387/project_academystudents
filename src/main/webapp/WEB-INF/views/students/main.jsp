@@ -52,6 +52,9 @@
         </li>
         <br /><br />
         <li class="nav-item">
+            <a class="nav-link rounded mb-2" href="<c:url value="/students/" />" id="firstpage">홈</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link rounded mb-2" href="<c:url value="/students/list" />" id="studentListLink">학생 리스트</a>
         </li>
         <li class="nav-item">

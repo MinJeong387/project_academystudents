@@ -75,7 +75,7 @@
                     <button type="submit" class="btn btn-custom">로그인</button>
                 </form>
                 <a href="<c:url value="/users/join" />" class="btn btn-custom">회원가입</a>
-                <p class="text-center mt-3">(나중에 비밀번호 찾기로 변경할까 고민중)</p>
+                <p class="text-center mt-3">아이디/비밀번호 찾기</p>
             </div>
         </div>
     </div>

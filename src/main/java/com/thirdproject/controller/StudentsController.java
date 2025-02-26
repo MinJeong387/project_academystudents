@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.thirdproject.repository.vo.CounselingLogVo;
 import com.thirdproject.repository.vo.StudentsVo;
 import com.thirdproject.repository.vo.UserVo;
+import com.thirdproject.service.CounselingLogService;
 import com.thirdproject.service.StudentsService;
 import com.thirdproject.service.UserService;
 
@@ -28,10 +30,31 @@ public class StudentsController {
     
     @Autowired
     private UserService userServiceImpl; // UserService 주입
+    
+    @Autowired
+    private CounselingLogService counselingLogServiceImpl; // CounselingLogService 주입
 
     @GetMapping({"/", ""})
-    public String mainPage() {
-        return "students/main";
+    public String mainPage(Model model) {
+    	// 최근 등록 학생 3명 조회
+    	List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
+        if (list.size() > 3) {
+            list = list.subList(0, 3); // 최근 3개의 데이터만 선택
+        }
+        model.addAttribute("list", list);
+        
+        // 최근 등록 상담 로그 3개 조회
+        List<CounselingLogVo> list2 = counselingLogServiceImpl.selectCounselingLogList();
+        if (list2.size() > 3) {
+            list2 = list2.subList(0, 3); // 최근 3개의 데이터만 선택
+        }
+        model.addAttribute("list2", list2);
+        
+        // 등록된 사용자 정보 조회
+        List<UserVo> list3 = userServiceImpl.selectUserList();
+        model.addAttribute("list3", list3);       
+    	
+        return "students/firstPage";
     }
 
     @GetMapping("/list")

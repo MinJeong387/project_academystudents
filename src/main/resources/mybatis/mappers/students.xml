@@ -61,5 +61,23 @@
         DELETE FROM students
         WHERE no=#{no}
     </delete>
+    
+    <select id="selectRecentStudents" parameterType="int" resultType="studentsVo">
+        SELECT s.no,
+               s.name,
+               s.school_name AS schoolName,
+               s.school_grade AS schoolGrade,
+               s.birthdate,
+               s.gender,
+               s.student_cellphone AS studentCellphone,
+               s.parent_cellphone AS parentCellphone,
+               s.comments,
+               s.teacher_no AS teacherNo,
+               u.name AS teacherName
+        FROM students s
+        LEFT JOIN users u ON s.teacher_no = u.no
+        ORDER BY s.no DESC
+        LIMIT 3
+    </select>
 
 </mapper>

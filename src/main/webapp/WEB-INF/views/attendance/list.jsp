@@ -68,7 +68,7 @@
                 <tr>
                     <th>학생 번호</th>
                     <th>학생 이름</th>
-                    <th>담당 선생님 번호- 이름</th>
+                    <th>담당선생님</th>
                     <th>출석</th>
                     <th>결석</th>
                     <th>지각</th>
@@ -81,7 +81,7 @@
                     <tr>
                         <td>${vo.studentNo}</td>
                         <td>${vo.studentName}</td>
-                        <td>${vo.teacherNo}- ${vo.teacherName}</td>
+                        <td>${vo.teacherNo} - ${vo.teacherName}</td>
                         <td><button class="btn btn-success btn-sm attendance-btn" data-status="출석"
                                 onclick="saveAttendance(${vo.studentNo}, '출석', this)">출석</button></td>
                         <td><button class="btn btn-danger btn-sm attendance-btn" data-status="결석"

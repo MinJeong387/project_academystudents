@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -12,18 +12,39 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <title>학생 리스트</title>
+    <style>
+        table {
+            width: calc(100% - 250px);
+            table-layout: auto;
+        }
+        th, td {
+            white-space: nowrap;
+        }
+        th:nth-child(1),
+        th:nth-child(4),
+        th:nth-child(8) {
+            min-width: 80px;
+        }
+        .comments-cell {
+            width: 100%;
+            word-wrap: break-word;
+            white-space: normal;
+        }
+    </style>
 </head>
 
 <body class="d-flex">
-    <jsp:include page="main.jsp" />
+    <div style="width: 250px; flex-shrink: 0;">
+        <jsp:include page="main.jsp" />
+    </div>
 
-    <div class="flex-grow-1 p-3">
+    <div style="flex-grow: 1; padding: 20px;">
         <h1 class="mt-4 mb-4">학생 리스트</h1>
         <p class="mb-4">등록된 학생들 리스트입니다.</p>
         <table class="table table-bordered table-striped table-hover mb-4">
             <thead>
                 <tr>
-                	<th>번호</th>
+                    <th>번호</th>
                     <th>이름</th>
                     <th>학교명</th>
                     <th>학년</th>
@@ -39,7 +60,7 @@
             <tbody>
                 <c:forEach items="${list}" var="vo">
                     <tr>
-                    	<td>${vo.no}</td>
+                        <td>${vo.no}</td>
                         <td>${vo.name}</td>
                         <td>${vo.schoolName}</td>
                         <td>${vo.schoolGrade}</td>
@@ -47,7 +68,7 @@
                         <td>${vo.gender}</td>
                         <td>${vo.studentCellphone}</td>
                         <td>${vo.parentCellphone}</td>
-                        <td>${vo.comments}</td>
+                        <td class="comments-cell">${vo.comments}</td>
                         <td>${vo.teacherNo} - ${vo.teacherName}</td>
 
                         <td>
@@ -60,18 +81,6 @@
         </table>
         <a href="<c:url value="/students/write" />" class="btn btn-success">추가 학생 등록</a>
     </div>
-    </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        function confirmDelete(studentNo) {
-            if (confirm("정말 삭제하시겠습니까?")) {
-                window.location.href = "/students/delete/" + studentNo;
-            }
-        }
-    </script>
 </body>
 
 </html>

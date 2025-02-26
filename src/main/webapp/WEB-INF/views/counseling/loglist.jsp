@@ -59,7 +59,7 @@
             <thead>
                 <tr>
                     <th>순서</th>
-                    <th>학생 번호- 이름</th>
+                    <th>학생명</th>
                     <th>상담 날짜</th>
                     <th>상담 내용</th>
                     <th>관리</th>
@@ -69,7 +69,7 @@
                 <c:forEach items="${list}" var="vo">
                     <tr>
                         <td>${vo.no}</td>
-                        <td>${vo.sno}- ${vo.studentName}</td>
+                        <td>${vo.sno} - ${vo.studentName}</td>
                         <td>${vo.date}</td>
                         <td>${vo.contents}</td>
                         <td>
