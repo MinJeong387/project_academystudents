@@ -131,8 +131,8 @@
                 </tbody>
             </table>
             <br/>
-            <p style="color: red;">전체 학생 수 : ${totalStudents}명</p>
-            <p style="color: red;">전체 선생님 수 : ${totalTeachers}명</p>
+            <p style="color: red;" ><strong>전체 학생 수 : ${totalStudents}명</strong></p>
+            <p style="color: red;"><strong>전체 선생님 수 : ${totalTeachers}명</strong></p>
         </div>
     </div>
 </body>
