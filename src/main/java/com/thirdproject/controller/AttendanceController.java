@@ -87,6 +87,7 @@ public class AttendanceController {
     public String personalAttendance(@RequestParam("studentNo") Integer studentNo, Model model) {
         List<AttendanceVo> attendanceList = attendanceService.getAttendanceDetails(studentNo);
         model.addAttribute("attendanceList", attendanceList);
-        return "attendance/personalAttendance"; 
+        model.addAttribute("studentNo", studentNo); // 학생 번호 추가
+        return "attendance/personalAttendance";
     }
 }
