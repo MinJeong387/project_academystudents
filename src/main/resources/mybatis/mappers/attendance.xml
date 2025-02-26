@@ -50,5 +50,12 @@
     	FROM attendance
     	WHERE student_no = #{studentNo} AND attendance_date = #{attendanceDate}
 	</select>
+	
+	<select id="selectAttendanceDetails" parameterType="int" resultType="attendanceVo">
+    	SELECT attendance_date AS attendanceDate, attendance_status AS attendanceStatus
+    	FROM attendance
+    	WHERE student_no = #{studentNo}
+    	ORDER BY attendance_date DESC
+	</select>
     
 </mapper>

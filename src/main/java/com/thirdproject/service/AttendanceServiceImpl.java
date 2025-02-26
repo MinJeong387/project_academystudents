@@ -45,4 +45,10 @@ public class AttendanceServiceImpl implements AttendanceService {
     public AttendanceVo getAttendance(Integer studentNo, Date attendanceDate) {
         return attendanceDao.selectAttendance(studentNo, attendanceDate);
     }
+    
+    @Override
+    public List<AttendanceVo> getAttendanceDetails(Integer studentNo) {
+        return attendanceDao.selectAttendanceDetails(studentNo);
+    }
+    
 }

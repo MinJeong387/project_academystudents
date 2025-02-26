@@ -13,9 +13,9 @@ public interface AttendanceMapper {
     List<AttendanceVo> selectAllAttendances();
     List<AttendanceVo> selectAttendancesByTeacher(Integer teacherNo);
     List<UserVo> selectAllTeachers();
-    
     void insertAttendance(AttendanceVo attendanceVo);
     void updateAttendance(AttendanceVo attendanceVo);
-    
     AttendanceVo selectAttendance(Integer studentNo, Date attendanceDate);
+    
+    List<AttendanceVo> selectAttendanceDetails(Integer studentNo);
 }

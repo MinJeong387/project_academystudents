@@ -45,4 +45,9 @@ public class AttendanceDaoImpl implements AttendanceDao {
     public AttendanceVo selectAttendance(Integer studentNo, Date attendanceDate) {
         return attendanceMapper.selectAttendance(studentNo, attendanceDate);
     }
+	
+	@Override
+	public List<AttendanceVo> selectAttendanceDetails(Integer studentNo) {
+	    return attendanceMapper.selectAttendanceDetails(studentNo);
+	}
 }

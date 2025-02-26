@@ -37,19 +37,19 @@
 
         .selected {
             background-color: lightgreen !important;
-            color: darkgreen !important; /* 글자색 변경 */
+            color: darkgreen !important;
         }
 
         .top-right-dropdown {
             position: absolute;
             top: 50px;
             right: 10px;
-            display: flex; /* flexbox 사용 */
-            align-items: center; /* 수직 가운데 정렬 */
+            display: flex;
+            align-items: center;
         }
 
         .calendar-container {
-            margin-right: 10px; /* 달력 오른쪽 여백 조절 */
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -95,7 +95,9 @@
             <tbody>
                 <c:forEach items="${list}" var="vo">
                     <tr>
-                        <td>${vo.studentNo}</td>
+                        <td>
+                            <a href="personalAttendance.jsp?studentNo=${vo.studentNo}">${vo.studentNo}</a>
+                        </td>
                         <td>${vo.studentName}</td>
                         <td>${vo.teacherNo} - ${vo.teacherName}</td>
                         <td><button class="btn btn-success btn-sm attendance-btn" data-status="출석"
