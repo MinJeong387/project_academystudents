@@ -10,6 +10,11 @@ public interface StudentsDao {
 	public int delete(Integer no);
 	public StudentsVo selectOne(Integer no);
 	public List<StudentsVo> selectAll();
-	
 	public int countByStudentCellphone(String studentCellphone); // 추가
+	
+	// 전체 학생 수 조회 메소드 추가
+    public int getTotalStudents();
+
+    // 전체 선생님 수 조회 메소드 추가
+    public int getTotalTeachers();
 } 

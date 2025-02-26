@@ -83,5 +83,13 @@
     <select id="countByStudentCellphone" parameterType="String" resultType="int">
         SELECT COUNT(*) FROM students WHERE student_cellphone = #{studentCellphone}
     </select>
+    
+    <select id="getTotalStudents" resultType="int">
+        SELECT COUNT(*) FROM students
+    </select>
+
+    <select id="getTotalTeachers" resultType="int">
+        SELECT COUNT(*) FROM users
+    </select>
 
 </mapper>

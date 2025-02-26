@@ -58,4 +58,15 @@ public class StudentsDaoImpl implements StudentsDao {
         return studentsMapper.countByStudentCellphone(studentCellphone);
     }
 
+	// 전체 학생 수 조회 메소드 구현
+    @Override
+    public int getTotalStudents() {
+        return studentsMapper.getTotalStudents();
+    }
+
+    // 전체 선생님 수 조회 메소드 구현
+    @Override
+    public int getTotalTeachers() {
+        return studentsMapper.getTotalTeachers();
+    }
 }

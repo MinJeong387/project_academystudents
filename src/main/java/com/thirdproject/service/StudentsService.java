@@ -14,4 +14,7 @@ public interface StudentsService {
 	public boolean isStudentCellphoneDuplicate(String studentCellphone); // 추가
 	boolean isStudentCellphoneDuplicateForUpdate(String studentCellphone, Integer no);
 	
+	public int getTotalStudents();
+    public int getTotalTeachers();
+	
 }

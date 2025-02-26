@@ -53,5 +53,18 @@ public class StudentsServiceImpl implements StudentsService {
         }
         return studentsDaoImpl.countByStudentCellphone(studentCellphone) > 0;
     }
+	
+
+	// 전체 학생 수 조회 메소드 추가
+    @Override
+    public int getTotalStudents() {
+        return studentsDaoImpl.getTotalStudents();
+    }
+
+    // 전체 선생님 수 조회 메소드 추가
+    @Override
+    public int getTotalTeachers() {
+        return studentsDaoImpl.getTotalTeachers();
+    }
 
 }

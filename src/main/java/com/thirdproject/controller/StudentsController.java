@@ -53,6 +53,14 @@ public class StudentsController {
         // 등록된 사용자 정보 조회
         List<UserVo> list3 = userServiceImpl.selectUserList();
         model.addAttribute("list3", list3);       
+        
+        // 전체 학생 수와 전체 선생님 수 가져오기
+        int totalStudents = studentsServiceImpl.getTotalStudents();
+        int totalTeachers = studentsServiceImpl.getTotalTeachers();
+
+        // 모델에 데이터 추가
+        model.addAttribute("totalStudents", totalStudents);
+        model.addAttribute("totalTeachers", totalTeachers);
     	
         return "students/firstPage";
     }

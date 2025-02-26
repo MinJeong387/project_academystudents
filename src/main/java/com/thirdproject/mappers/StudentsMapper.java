@@ -30,4 +30,10 @@ public interface StudentsMapper {
 	
 	int countByStudentCellphone(String studentCellphone); // 추가
 	
+	// 전체 학생 수 조회 메소드 추가
+    int getTotalStudents();
+
+    // 전체 선생님 수 조회 메소드 추가
+    int getTotalTeachers();
+	
 }
