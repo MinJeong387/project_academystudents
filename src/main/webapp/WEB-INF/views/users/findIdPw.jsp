@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <title>로그인</title>
+    <title>아이디/비밀번호 찾기</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -47,40 +47,35 @@
             margin: auto;
             width: 500px;
         }
-
-        .find-link {
-            color: red;
-            text-decoration: underline;
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-        }
     </style>
 </head>
 
 <body>
     <div class="container">
         <br />
-        <h1 class="text-center my-4">최고다! 컴퓨터학원</h1>
+        <h1 class="text-center my-4">아이디/비밀번호 찾기</h1>
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <form id="login-form" name="loginform" method="POST" action="<c:url value="/users/login" />">
+                <form id="find-form" name="findform" method="POST" action="<c:url value="/users/findIdPwAction" />">
                     <div class="mb-3">
-                        <br /><br />
-                        <label for="id" class="form-label">아이디</label>
-                        <input type="text" class="form-control" id="id" name="id" value="">
+                        <label for="name" class="form-label">이름</label>
+                        <input type="text" class="form-control" id="name" name="name" value="${param.name}">
                     </div>
                     <div class="mb-3">
-                        <label for="pw" class="form-label">패스워드</label>
-                        <input type="password" class="form-control" id="pw" name="pw">
+                        <label for="cellPhone" class="form-label">연락처</label>
+                        <input type="text" class="form-control" id="cellPhone" name="cellPhone" value="${param.cellPhone}">
                     </div>
-                    <c:if test="${not empty loginError}">
-                        <p class="text-danger text-center">${loginError}</p>
-                    </c:if>
-                    <button type="submit" class="btn btn-custom">로그인</button>
+                    <button type="submit" class="btn btn-custom">찾기</button>
+                   
                 </form>
-                <a href="<c:url value="/users/join" />" class="btn btn-custom">회원가입</a>
-                <a href="<c:url value="/users/findIdPw" />" class="find-link">아이디/비밀번호 찾기</a>
+                <c:if test="${not empty findError}">
+                    <p class="text-danger text-center">${findError}</p>
+                </c:if>
+                <c:if test="${not empty foundUser}">
+                    <p class="text-success text-center">아이디: ${foundUser.id}, 비밀번호: ${foundUser.pw.substring(0, 1)}${'*'.repeat(foundUser.pw.length() - 1)}</p>
+                    <p class="text-center" style="color: green;">전체 비밀번호는 해당 연락처로 문자 보내드렸습니다. </p>
+                    <a href="<c:url value="/users/" />" class="btn btn-custom">로그인하러 가기</a>
+                </c:if>
             </div>
         </div>
     </div>

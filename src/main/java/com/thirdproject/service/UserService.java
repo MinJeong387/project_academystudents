@@ -14,4 +14,5 @@ public interface UserService {
 	
 	public boolean isAuthenticated(HttpServletRequest request);
 	List<UserVo> selectUserList();
+	public UserVo getUserByNameAndCellPhone(String name, String cellPhone);
 }

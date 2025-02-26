@@ -79,4 +79,12 @@ public class UserDaoImpl implements UserDao {
     public List<UserVo> selectAll() {
         return userMapper.selectAll();
     }
+	
+	@Override
+    public UserVo selectUserByNameAndCellPhone(String name, String cellPhone) {
+        Map<String, String> userMap = new HashMap<>();
+        userMap.put("name", name);
+        userMap.put("cellPhone", cellPhone);
+        return userMapper.selectUserByNameAndCellPhone(userMap);
+    }
 }

@@ -35,4 +35,10 @@
         FROM users
         ORDER BY no ASC
     </select>
+    
+    <select id="selectUserByNameAndCellPhone" parameterType="map" resultType="userVo">
+        SELECT no, id, pw, name, cell_phone AS cellPhone
+        FROM users
+        WHERE name = #{name} AND cell_phone = #{cellPhone}
+    </select>
 </mapper>

@@ -145,4 +145,29 @@ public class UsersController {
 
         return map;
     }
+    
+    @GetMapping("/findIdPw")
+    public String findIdPwForm() {
+        return "users/findIdPw";
+    }
+    
+    @PostMapping("/findIdPwAction")
+    public String findIdPwAction(@RequestParam(value = "name", required = false) String name,
+                                 @RequestParam(value = "cellPhone", required = false) String cellPhone,
+                                 Model model) {
+        if (name == null || name.isEmpty() || cellPhone == null || cellPhone.isEmpty()) {
+            model.addAttribute("findError", "이름과 연락처를 입력해주세요.");
+            return "users/findIdPw";
+        }
+
+        UserVo foundUser = userServiceImpl.getUserByNameAndCellPhone(name, cellPhone);
+
+        if (foundUser != null) {
+            model.addAttribute("foundUser", foundUser);
+            return "users/findIdPw";
+        } else {
+            model.addAttribute("findError", "일치하는 사용자 정보를 찾을 수 없습니다.");
+            return "users/findIdPw";
+        }
+    }
 }

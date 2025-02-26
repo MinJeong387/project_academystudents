@@ -22,4 +22,6 @@ public interface UserMapper {
 	UserVo selectUserByIdAndPw(Map<String, String> map);
 
 	List<UserVo> selectAll();
+	
+	UserVo selectUserByNameAndCellPhone(Map<String, String> map);
 }

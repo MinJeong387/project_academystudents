@@ -48,13 +48,16 @@ public class UserServiceImpl implements UserService {
 			return authUser != null;
 		}
 		return false;
-	}
-	
-	
+	}	
 	
 	@Override
     public List<UserVo> selectUserList() {
         return userDaoImpl.selectAll();
+    }
+	
+	@Override
+    public UserVo getUserByNameAndCellPhone(String name, String cellPhone) {
+        return userDaoImpl.selectUserByNameAndCellPhone(name, cellPhone);
     }
 
 }

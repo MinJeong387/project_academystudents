@@ -12,4 +12,5 @@ public interface UserDao {
 	public UserVo selectUserByCellPhone(String cellPhone);
 	
 	List<UserVo> selectAll();
+	public UserVo selectUserByNameAndCellPhone(String name, String cellPhone);
 }
