@@ -13,8 +13,13 @@
         crossorigin="anonymous"></script>
     <title>상담일지 목록</title>
     <style>
+        .list-container {
+            height: calc(100vh - 80px); /* 화면 높이에서 헤더 높이(80px)를 뺀 값 */
+            overflow-y: auto;
+        }
+
         table {
-            width: calc(100% - 250px);
+            width: 100%;
             table-layout: auto;
         }
 
@@ -42,7 +47,7 @@
         <jsp:include page="../students/main.jsp" />
     </div>
 
-    <div style="flex-grow: 1; padding: 20px;">
+    <div class="flex-grow-1 p-3 list-container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mt-4 mb-0">상담일지 목록</h1>
             <div class="dropdown">
@@ -87,6 +92,35 @@
                 </c:forEach>
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/counseling/list?page=${currentPage - 1}" />"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                        <a class="page-link" href="<c:url value="/counseling/list?page=${i}" />">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <c:if test="${currentPage < totalPages}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/counseling/list?page=${currentPage + 1}" />"
+                            aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+
         <a href="<c:url value="/counseling/write" />" class="btn btn-success">상담일지 등록</a>
     </div>
 

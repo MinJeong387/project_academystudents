@@ -13,18 +13,27 @@
         crossorigin="anonymous"></script>
     <title>학생 리스트</title>
     <style>
+        .list-container {
+            height: calc(100vh - 80px); /* 화면 높이에서 헤더 높이(80px)를 뺀 값 */
+            overflow-y: auto;
+        }
+
         table {
-            width: calc(100% - 250px);
+            width: 100%;
             table-layout: auto;
         }
-        th, td {
+
+        th,
+        td {
             white-space: nowrap;
         }
+
         th:nth-child(1),
         th:nth-child(4),
         th:nth-child(8) {
             min-width: 80px;
         }
+
         .comments-cell {
             width: 100%;
             word-wrap: break-word;
@@ -38,7 +47,7 @@
         <jsp:include page="main.jsp" />
     </div>
 
-    <div style="flex-grow: 1; padding: 20px;">
+    <div class="flex-grow-1 p-3 list-container">
         <h1 class="mt-4 mb-4">학생 리스트</h1>
         <p class="mb-4">등록된 학생들 리스트입니다.</p>
         <table class="table table-bordered table-striped table-hover mb-4">

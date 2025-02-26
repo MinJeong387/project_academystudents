@@ -13,8 +13,13 @@
         crossorigin="anonymous"></script>
     <title>수업일지 목록</title>
     <style>
+        .list-container {
+            height: calc(100vh - 80px); /* 화면 높이에서 헤더 높이(80px)를 뺀 값 */
+            overflow-y: auto;
+        }
+
         table {
-            width: calc(100% - 250px);
+            width: 100%;
             table-layout: auto;
         }
 
@@ -42,7 +47,7 @@
         <jsp:include page="../students/main.jsp" />
     </div>
 
-    <div style="flex-grow: 1; padding: 20px;">
+    <div class="flex-grow-1 p-3 list-container">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mt-4 mb-0">수업일지 목록</h1>
             <div class="dropdown">
