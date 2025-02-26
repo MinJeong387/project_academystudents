@@ -97,33 +97,33 @@
     </div>
 
     <script>
-        function toggleDropdown() {
-            var dropdownMenu = document.getElementById("dropdownMenu");
-            if (dropdownMenu.style.display === "none") {
-                dropdownMenu.style.display = "block";
-            } else {
-                dropdownMenu.style.display = "none";
-            }
+    function toggleDropdown() {
+        var dropdownMenu = document.getElementById("dropdownMenu");
+        if (dropdownMenu.style.display === "block") {
+            dropdownMenu.style.display = "none";
+        } else {
+            dropdownMenu.style.display = "block";
         }
+    }
 
-        window.onclick = function (event) {
-            if (!event.target.matches('.dropdown-toggle')) {
-                var dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropdown-toggle')) {
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
                 }
             }
         }
+    }
 
-        function confirmDelete(lessonNo) {
-            if (confirm("정말 삭제하시겠습니까?")) {
-                window.location.href = "/lesson/delete/" + lessonNo;
-            }
+    function confirmDelete(lessonNo) {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            window.location.href = "/lesson/delete/" + lessonNo;
         }
-    </script>
+    }
+	</script>
 </body>
 
 </html>

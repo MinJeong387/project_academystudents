@@ -117,76 +117,76 @@
     </div>
 
     <script>
-        function toggleDropdown() {
-            var dropdownMenu = document.getElementById("dropdownMenu");
-            if (dropdownMenu.style.display === "none") {
-                dropdownMenu.style.display = "block";
+    function toggleDropdown() {
+        var dropdownMenu = document.getElementById("dropdownMenu");
+        if (dropdownMenu.style.display === "block") {
+            dropdownMenu.style.display = "none";
+        } else {
+            dropdownMenu.style.display = "block";
+        }
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropdown-toggle')) {
+            var dropdowns = document.getElementsByClassName("dropdown-menu");
+            for (var i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.style.display === "block") {
+                    openDropdown.style.display = "none";
+                }
+            }
+        }
+    }
+
+    function changeStatus(button) {
+        let row = button.parentNode.parentNode;
+        let buttons = row.querySelectorAll('.attendance-btn');
+
+        buttons.forEach(btn => {
+            btn.classList.remove('selected');
+        });
+
+        button.classList.add('selected');
+    }
+
+    function saveAttendance(studentNo, status, button) {
+        let attendanceDate = document.getElementById('attendanceDate').value;
+        if (!attendanceDate) {
+            alert('날짜를 선택해주세요.');
+            return;
+        }
+
+        if (!studentNo) {
+            alert('학생 번호가 없습니다.');
+            return;
+        }
+
+        const params = new URLSearchParams();
+        params.append('studentNo', studentNo);
+        params.append('attendanceDate', attendanceDate);
+        params.append('attendanceStatus', status);
+
+        fetch('/attendance/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: params.toString()
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('출석 정보가 저장되었습니다.');
+                changeStatus(button);
             } else {
-                dropdownMenu.style.display = "none";
+                alert('출석 정보 저장에 실패했습니다.');
             }
-        }
-
-        window.onclick = function (event) {
-            if (!event.target.matches('.dropdown-toggle')) {
-                var dropdowns = document.getElementsByClassName("dropdown-menu");
-                for (var i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    if (openDropdown.style.display === "block") {
-                        openDropdown.style.display = "none";
-                    }
-                }
-            }
-        }
-
-        function changeStatus(button) {
-            let row = button.parentNode.parentNode;
-            let buttons = row.querySelectorAll('.attendance-btn');
-
-            buttons.forEach(btn => {
-                btn.classList.remove('selected');
-            });
-
-            button.classList.add('selected');
-        }
-
-        function saveAttendance(studentNo, status, button) {
-            let attendanceDate = document.getElementById('attendanceDate').value;
-            if (!attendanceDate) {
-                alert('날짜를 선택해주세요.');
-                return;
-            }
-
-            if (!studentNo) {
-                alert('학생 번호가 없습니다.');
-                return;
-            }
-
-            const params = new URLSearchParams();
-            params.append('studentNo', studentNo);
-            params.append('attendanceDate', attendanceDate);
-            params.append('attendanceStatus', status);
-
-            fetch('/attendance/save', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: params.toString()
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('출석 정보가 저장되었습니다.');
-                    changeStatus(button);
-                } else {
-                    alert('출석 정보 저장에 실패했습니다.');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('오류가 발생했습니다.');
-            });
-        }
-    </script>
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('오류가 발생했습니다.');
+        });
+    }
+	</script>
 </body>
 
 </html>
