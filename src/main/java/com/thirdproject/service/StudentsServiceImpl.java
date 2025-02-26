@@ -39,5 +39,19 @@ public class StudentsServiceImpl implements StudentsService {
 		return studentsDaoImpl.selectAll();
 	}
 	
+	@Override
+    public boolean isStudentCellphoneDuplicate(String studentCellphone) {
+        return studentsDaoImpl.countByStudentCellphone(studentCellphone) > 0;
+    }
+	
+	@Override
+    public boolean isStudentCellphoneDuplicateForUpdate(String studentCellphone, Integer no) {
+        // 수정 시에는 자기 자신의 연락처는 중복 검사에서 제외해야 합니다.
+        StudentsVo existingStudent = studentsDaoImpl.selectOne(no);
+        if (existingStudent != null && existingStudent.getStudentCellphone().equals(studentCellphone)) {
+            return false; // 자기 자신의 연락처는 중복 아님
+        }
+        return studentsDaoImpl.countByStudentCellphone(studentCellphone) > 0;
+    }
 
 }

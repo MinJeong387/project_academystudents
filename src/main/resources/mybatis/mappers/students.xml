@@ -79,5 +79,9 @@
         ORDER BY s.no DESC
         LIMIT 3
     </select>
+    
+    <select id="countByStudentCellphone" parameterType="String" resultType="int">
+        SELECT COUNT(*) FROM students WHERE student_cellphone = #{studentCellphone}
+    </select>
 
 </mapper>

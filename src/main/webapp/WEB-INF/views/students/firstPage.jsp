@@ -15,26 +15,50 @@
     <style>
         .split-container {
             display: flex;
-            height: 100vh; /* 화면 전체 높이 */
+            height: 100vh;
         }
 
         .left-content {
-            flex: 2; /* 왼쪽 영역은 2/3 차지 */
+            flex: 2;
             padding: 20px;
-            overflow-y: auto; /* 내용이 많을 경우 스크롤 */
+            overflow-y: auto;
         }
 
         .right-content {
-            flex: 1; /* 오른쪽 영역은 1/3 차지 */
+            flex: 1;
             padding: 20px;
-            background-color: #f8f9fa; /* 선택적으로 배경색 추가 */
-            overflow-y: auto; /* 내용이 많을 경우 스크롤 */
+            background-color: #f8f9fa;
+            overflow-y: auto;
+        }
+
+        table {
+            width: 100%;
+            table-layout: auto;
+        }
+
+        th,
+        td {
+            white-space: nowrap;
+        }
+
+        th:nth-child(1),
+        th:nth-child(4),
+        th:nth-child(5) {
+            min-width: 80px;
+        }
+
+        .contents-cell {
+            width: 100%;
+            word-wrap: break-word;
+            white-space: normal;
         }
     </style>
 </head>
 
 <body class="d-flex">
-    <jsp:include page="main.jsp" />
+    <div style="width: 250px; flex-shrink: 0;">
+        <jsp:include page="main.jsp" />
+    </div>
 
     <div class="split-container flex-grow-1">
         <div class="left-content">
@@ -79,7 +103,7 @@
                         <tr>
                             <td>${vo2.no}</td>
                             <td>${vo2.date}</td>
-                            <td>${vo2.contents}</td>
+                            <td class="contents-cell">${vo2.contents}</td>
                             <td>${vo2.sno} - ${vo2.studentName}</td>
                         </tr>
                     </c:forEach>
@@ -88,8 +112,8 @@
         </div>
 
         <div class="right-content">
-            <h1 class="mt-4 mb-4">사용자 목록</h1>
-            <p class="mb-4">등록된 사용자 리스트입니다.</p>
+            <h1 class="mt-4 mb-4">선생님 목록</h1>
+            <p class="mb-4">등록된 선생님 리스트입니다.</p>
             <table class="table table-bordered table-striped table-hover mb-4">
                 <thead>
                     <tr>

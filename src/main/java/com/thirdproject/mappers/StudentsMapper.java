@@ -28,4 +28,6 @@ public interface StudentsMapper {
 //	<delete id="delete" parameterType="int">
 	int delete(Integer no);
 	
+	int countByStudentCellphone(String studentCellphone); // 추가
+	
 }

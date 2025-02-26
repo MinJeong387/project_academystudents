@@ -74,14 +74,25 @@ public class StudentsController {
     }
 
     @PostMapping("/write")
-    public String writeAction(@ModelAttribute StudentsVo studentsVo) {
+    public String writeAction(@ModelAttribute StudentsVo studentsVo, Model model) {
         logger.debug("STUDENTS WRITE:" + studentsVo);
+
+     // 학생 연락처 중복 검증
+        if (studentsServiceImpl.isStudentCellphoneDuplicate(studentsVo.getStudentCellphone())) {
+            model.addAttribute("errorMessage", "중복된 학생 연락처입니다!");
+            
+            List<UserVo> users = userServiceImpl.selectUserList();
+            model.addAttribute("users", users);
+            model.addAttribute("studentsVo", studentsVo); // 입력 데이터 모델에 추가
+            return "students/writeForm"; // 중복 시 등록 폼으로 다시 이동
+        }
+
         boolean success = studentsServiceImpl.insertStudents(studentsVo);
 
         if (success) {
-            return "redirect:/students/list"; 
+            return "redirect:/students/list";
         } else {
-            return "redirect:/students/write"; 
+            return "redirect:/students/write";
         }
     }
 
@@ -99,8 +110,18 @@ public class StudentsController {
 
     // 리스트 수정
     @PostMapping("/modify")
-    public String modifyAction(@ModelAttribute StudentsVo studentsVo) {
+    public String modifyAction(@ModelAttribute StudentsVo studentsVo, Model model) {
         logger.debug("STUDENTS MODIFY:" + studentsVo);
+
+        // 학생 연락처 중복 검증
+        if (studentsServiceImpl.isStudentCellphoneDuplicateForUpdate(studentsVo.getStudentCellphone(), studentsVo.getNo())) {
+            model.addAttribute("errorMessage", "중복된 학생 연락처입니다!");
+            model.addAttribute("vo", studentsVo); // 수정 폼에 기존 데이터 유지
+            List<UserVo> users = userServiceImpl.selectUserList();
+            model.addAttribute("users", users);
+            return "students/modifyForm"; // 중복 시 수정 폼으로 다시 이동
+        }
+
         boolean success = studentsServiceImpl.updateStudents(studentsVo);
 
         if (success) {
@@ -110,14 +131,12 @@ public class StudentsController {
         }
     }
 
-    // 리스트 삭제
+ // 리스트 삭제
     @GetMapping("/delete/{no}")
     public String deleteAction(@PathVariable("no") Integer no) {
         logger.debug("STUDENTS DELETE:" + no);
         studentsServiceImpl.deleteStudents(no);
         return "redirect:/students/list";
-    }
-    
-   
+    }   
     
 }

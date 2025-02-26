@@ -21,6 +21,12 @@
     <div class="col-md-9 p-3">
         <h1 class="mb-4">학생 정보 수정</h1>
 
+        <c:if test="${not empty errorMessage}">
+            <div class="alert alert-danger" role="alert">
+                ${errorMessage}
+            </div>
+        </c:if>
+
         <form id="modifyForm" action="/students/modify" method="POST" class="row g-3">
             <input type="hidden" name="no" value="${vo.no}" />
 

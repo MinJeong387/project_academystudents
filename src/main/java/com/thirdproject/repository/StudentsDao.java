@@ -11,4 +11,5 @@ public interface StudentsDao {
 	public StudentsVo selectOne(Integer no);
 	public List<StudentsVo> selectAll();
 	
+	public int countByStudentCellphone(String studentCellphone); // 추가
 } 

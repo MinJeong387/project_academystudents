@@ -81,6 +81,14 @@
         </table>
         <a href="<c:url value="/students/write" />" class="btn btn-success">추가 학생 등록</a>
     </div>
+
+    <script>
+        function confirmDelete(no) {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                window.location.href = "/students/delete/" + no;
+            }
+        }
+    </script>
 </body>
 
 </html>

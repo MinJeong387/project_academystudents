@@ -53,5 +53,9 @@ public class StudentsDaoImpl implements StudentsDao {
 		return list;
 	}
 	
+	@Override
+    public int countByStudentCellphone(String studentCellphone) {
+        return studentsMapper.countByStudentCellphone(studentCellphone);
+    }
 
 }

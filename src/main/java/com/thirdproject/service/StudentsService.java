@@ -11,4 +11,7 @@ public interface StudentsService {
 	public StudentsVo selectStudents(Integer no);
 	public List<StudentsVo> selectStudentsList();
 	
+	public boolean isStudentCellphoneDuplicate(String studentCellphone); // 추가
+	boolean isStudentCellphoneDuplicateForUpdate(String studentCellphone, Integer no);
+	
 }
