@@ -21,27 +21,30 @@
     <div class="col-md-9 p-3">
         <h1 class="mb-4">상담일지 수정</h1>
 
-        <form id="modifyForm" action="/counseling/modify" method="POST" class="row g-3">
+        <form id="modifyForm" action="/counseling/modify" method="POST" class="row g-3" onsubmit="return validateForm()">
 
             <div class="col-md-6">
                 <label for="no" class="form-label">순서</label>
-                <input type="text" class="form-control" id="no" name="no" value="${vo.no}" readonly> <!-- 순서는 수정 불가능하도록 readonly 입력 -->
+                <input type="text" class="form-control" id="no" name="no" value="${vo.no}" readonly>
             </div>
-
-            <div class="col-md-6">
-                <label for="sno" class="form-label">학생 번호</label>
-                <input type="number" class="form-control" id="sno" name="sno" value="${vo.sno}">
-            </div>
-
-            <div class="col-md-6">
-                <label for="studentName" class="form-label">학생 이름</label>
-                <input type="text" class="form-control" id="studentName" name="studentName" value="${vo.studentName}">
-            </div>
-
+            
             <div class="col-md-6">
                 <label for="date" class="form-label">상담 날짜 (YYYY-MM-DD)</label>
                 <input type="date" class="form-control" id="date" name="date" value="${vo.date}">
             </div>
+            
+            <div class="col-md-6">
+                <label for="studentName" class="form-label">학생 이름</label>
+                <input type="text" class="form-control" id="studentName" name="studentName" value="${vo.studentName}" oninput="getStudentNumbers()">
+            </div>
+
+            <div class="col-md-6">
+                <label for="sno" class="form-label">학생 번호</label>
+                <input type="number" class="form-control" id="sno" name="sno" readonly value="${vo.sno}">
+                <select class="form-select" id="snoDropdown" style="display: none;" onchange="selectStudentNumber()">
+                    <option value="">학생 번호 선택</option>
+                </select>
+            </div>            
 
             <div class="col-md-12">
                 <label for="contents" class="form-label">상담 내용</label>
@@ -53,6 +56,57 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function getStudentNumbers() {
+            let studentName = document.getElementById('studentName').value;
+            if (studentName) {
+                fetch('/counseling/getStudentNumbersByName?studentName=' + studentName)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.length === 1) {
+                            // 학생 번호가 하나인 경우
+                            document.getElementById('sno').value = data[0].no;
+                            document.getElementById('snoDropdown').style.display = 'none';
+                        } else if (data.length > 1) {
+                            // 학생 번호가 여러 개인 경우
+                            let dropdown = document.getElementById('snoDropdown');
+                            dropdown.innerHTML = '<option value="">학생 번호 선택</option>';
+                            data.forEach(student => {
+                                let option = document.createElement('option');
+                                option.value = student.no;
+                                option.text = student.no + ' - ' + student.name;
+                                dropdown.appendChild(option);
+                            });
+                            dropdown.style.display = 'block';
+                        } else {
+                            // 학생 번호가 없는 경우
+                            document.getElementById('sno').value = '';
+                            document.getElementById('snoDropdown').style.display = 'none';
+                        }
+                    });
+            } else {
+                document.getElementById('sno').value = '';
+                document.getElementById('snoDropdown').style.display = 'none';
+            }
+        }
+
+        function selectStudentNumber() {
+            document.getElementById('sno').value = document.getElementById('snoDropdown').value;
+            document.getElementById('snoDropdown').style.display = 'none';
+        }
+
+        function validateForm() {
+            let studentName = document.getElementById('studentName').value;
+            let sno = document.getElementById('sno').value;
+
+            if (!studentName || !sno) {
+                alert('이름과 번호를 입력해주세요.');
+                return false; // 폼 제출 방지
+            }
+            return true; // 폼 제출 허용
+        }
+    </script>
 </body>
 
 </html>

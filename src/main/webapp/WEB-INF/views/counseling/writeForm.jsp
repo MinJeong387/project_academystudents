@@ -21,7 +21,7 @@
     <div class="col-md-9 p-3">
         <h1 class="mb-4">상담일지 등록</h1>
 
-        <form id="writeForm" action="/counseling/write" method="POST" class="row g-3">
+        <form id="writeForm" action="/counseling/write" method="POST" class="row g-3" onsubmit="return validateForm()">
             <div class="col-md-6">
                 <label for="studentName" class="form-label">학생 이름</label>
                 <input type="text" class="form-control" id="studentName" name="studentName" oninput="getStudentNumbers()">
@@ -95,6 +95,17 @@
         function selectStudentNumber() {
             document.getElementById('sno').value = document.getElementById('snoDropdown').value;
             document.getElementById('snoDropdown').style.display = 'none';
+        }
+
+        function validateForm() {
+            let studentName = document.getElementById('studentName').value;
+            let sno = document.getElementById('sno').value;
+
+            if (!studentName || !sno) {
+                alert('이름과 번호를 입력해주세요.');
+                return false; // 폼 제출 방지
+            }
+            return true; // 폼 제출 허용
         }
     </script>
 </body>
