@@ -39,6 +39,11 @@
             word-wrap: break-word;
             white-space: normal;
         }
+
+        #dropdownMenu {
+            max-height: 200px; /* 4개 항목 높이 제한 (약 50px * 4) */
+            overflow-y: auto;
+        }
     </style>
 </head>
 

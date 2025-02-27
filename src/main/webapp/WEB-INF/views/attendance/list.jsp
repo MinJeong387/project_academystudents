@@ -56,6 +56,11 @@
             height: calc(100vh - 80px); /* 화면 높이에서 헤더 높이(80px)를 뺀 값 */
             overflow-y: auto;
         }
+
+        #dropdownMenu {
+            max-height: 200px; /* 4개 항목 높이 제한 (약 50px * 4) */
+            overflow-y: auto;
+        }
     </style>
 </head>
 
