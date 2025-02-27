@@ -15,9 +15,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #E6B41B;
+            background-image: url('/images/yellowComputer.jpg'); /* 배경 이미지 설정 */
+            background-size: 192px 192px; /* 이미지 크기 조절 (바둑판 크기) */
+            background-repeat: repeat; /* 바둑판 패턴으로 반복 */
+            background-attachment: fixed; /* 배경 이미지 고정 */
             font-family: 'Noto Sans KR', sans-serif;
             font-weight: bold;
+            display: flex; /* 화면 중앙 정렬을 위한 flexbox 설정 */
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh; /* 최소 높이를 100vh로 설정 */
+            margin: 0; /* 기본 margin 제거 */
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* 컨테이너 배경에 반투명 흰색 적용 */
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+            width: 600px; /* 컨테이너 너비 조정 */
         }
 
         .btn-custom {
@@ -39,13 +55,13 @@
         .form-control {
             border-radius: 20px;
             padding: 10px 20px;
-            width: 500px;
-            margin: 10px auto;
+            width: 100%; /* 입력 필드 너비를 컨테이너에 맞게 조정 */
+            margin: 10px 0; /* 상하 마진 조정 */
+            border: 2px solid #E6B41B; /* 테두리 색상 및 두께 추가 */
         }
 
         .mb-3 {
-            margin: auto;
-            width: 500px;
+            margin: 10px 0; /* 상하 마진 조정 */
         }
 
         .find-link {
@@ -60,29 +76,23 @@
 
 <body>
     <div class="container">
-        <br />
         <h1 class="text-center my-4">최고다! 컴퓨터학원</h1>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <form id="login-form" name="loginform" method="POST" action="<c:url value="/users/login" />">
-                    <div class="mb-3">
-                        <br /><br />
-                        <label for="id" class="form-label">아이디</label>
-                        <input type="text" class="form-control" id="id" name="id" value="${param.id}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="pw" class="form-label">패스워드</label>
-                        <input type="password" class="form-control" id="pw" name="pw" value="${param.pw}">
-                    </div>
-                    <c:if test="${not empty loginError}">
-                        <p class="text-danger text-center">${loginError}</p>
-                    </c:if>
-                    <button type="submit" class="btn btn-custom">로그인</button>
-                </form>
-                <a href="<c:url value="/users/join" />" class="btn btn-custom">회원가입</a>
-                <a href="<c:url value="/users/findIdPw" />" class="find-link">아이디/비밀번호 찾기</a>
+        <form id="login-form" name="loginform" method="POST" action="<c:url value="/users/login" />">
+            <div class="mb-3">
+                <label for="id" class="form-label">아이디</label>
+                <input type="text" class="form-control" id="id" name="id" value="${param.id}">
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="pw" class="form-label">패스워드</label>
+                <input type="password" class="form-control" id="pw" name="pw" value="${param.pw}">
+            </div>
+            <c:if test="${not empty loginError}">
+                <p class="text-danger text-center">${loginError}</p>
+            </c:if>
+            <button type="submit" class="btn btn-custom">로그인</button>
+        </form>
+        <a href="<c:url value="/users/join" />" class="btn btn-custom">회원가입</a>
+        <a href="<c:url value="/users/findIdPw" />" class="find-link">아이디/비밀번호 찾기</a>
     </div>
 </body>
 

@@ -14,7 +14,7 @@
     <title>학생 리스트</title>
     <style>
         .list-container {
-            height: calc(100vh - 80px); /* 화면 높이에서 헤더 높이(80px)를 뺀 값 */
+            height: calc(100vh - 80px);
             overflow-y: auto;
         }
 
@@ -53,8 +53,8 @@
 
         <div class="d-flex justify-content-between align-items-center mb-3">
             <form action="/students/list" method="get" class="flex-grow-1">
-                <div class="input-group" style="max-width: 500px;"> <input type="text" name="searchKeyword" class="form-control" placeholder="학생 이름 또는 학생 연락처 검색"
-                        value="${searchKeyword}">
+                <div class="input-group" style="max-width: 500px;">
+                    <input type="text" name="searchKeyword" class="form-control" placeholder="학생 이름 또는 연락처 검색" value="${searchKeyword}">
                     <button type="submit" class="btn btn-primary">검색</button>
                 </div>
             </form>
@@ -104,7 +104,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${currentPage > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="<c:url value="/students/list?page=${currentPage - 1}${searchKeyword != null ? '&searchKeyword=' += searchKeyword : ''}" />"
+                        <a class="page-link" href="<c:url value="/students/list?page=${currentPage - 1}${searchKeyword != null ? '&searchKeyword=${searchKeyword}' : ''}" />"
                             aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
@@ -113,13 +113,13 @@
 
                 <c:forEach var="i" begin="1" end="${totalPages}">
                     <li class="page-item ${currentPage == i ? 'active' : ''}">
-                        <a class="page-link" href="<c:url value="/students/list?page=${i}${searchKeyword != null ? '&searchKeyword=' += searchKeyword : ''}" />">${i}</a>
+                        <a class="page-link" href="<c:url value="/students/list?page=${i}${searchKeyword != null ? '&searchKeyword=${searchKeyword}' : ''}" />">${i}</a>
                     </li>
                 </c:forEach>
 
                 <c:if test="${currentPage < totalPages}">
                     <li class="page-item">
-                        <a class="page-link" href="<c:url value="/students/list?page=${currentPage + 1}${searchKeyword != null ? '&searchKeyword=' += searchKeyword : ''}" />"
+                        <a class="page-link" href="<c:url value="/students/list?page=${currentPage + 1}${searchKeyword != null ? '&searchKeyword=${searchKeyword}' : ''}" />"
                             aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>

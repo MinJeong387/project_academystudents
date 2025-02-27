@@ -15,9 +15,25 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background-color: #E6B41B;
+            background-image: url('/images/yellowComputer.jpg');
+            background-size: 192px 192px;
+            background-repeat: repeat;
+            background-attachment: fixed;
             font-family: 'Noto Sans KR', sans-serif;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 600px;
         }
 
         .btn-custom {
@@ -39,23 +55,30 @@
         .form-control {
             border-radius: 20px;
             padding: 10px 20px;
-            width: 500px;
-            margin: 10px auto;
+            width: 100%;
+            margin: 10px 0;
+            border: 2px solid #E6B41B;
         }
 
         .mb-3 {
-            margin: auto;
-            width: 500px;
+            margin: 10px 0;
+        }
+
+        .find-link {
+            color: red;
+            text-decoration: underline;
+            display: block;
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <br />
         <h1 class="text-center my-4">아이디/비밀번호 찾기</h1>
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <form id="find-form" name="findform" method="POST" action="<c:url value="/users/findIdPwAction" />">
                     <div class="mb-3">
                         <label for="name" class="form-label">이름</label>
@@ -66,7 +89,6 @@
                         <input type="text" class="form-control" id="cellPhone" name="cellPhone" value="${param.cellPhone}">
                     </div>
                     <button type="submit" class="btn btn-custom">찾기</button>
-                   
                 </form>
                 <c:if test="${not empty findError}">
                     <p class="text-danger text-center">${findError}</p>
