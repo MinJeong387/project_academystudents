@@ -102,7 +102,7 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${currentPage > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="<c:url value="/counseling/list?page=${currentPage - 1}" />"
+                        <a class="page-link" href="<c:url value="/counseling/list?page=${currentPage - 1}${param.studentNo != null ? '&studentNo=' += param.studentNo : ''}" />"
                             aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
@@ -111,13 +111,13 @@
 
                 <c:forEach var="i" begin="1" end="${totalPages}">
                     <li class="page-item ${currentPage == i ? 'active' : ''}">
-                        <a class="page-link" href="<c:url value="/counseling/list?page=${i}" />">${i}</a>
+                        <a class="page-link" href="<c:url value="/counseling/list?page=${i}${param.studentNo != null ? '&studentNo=' += param.studentNo : ''}" />">${i}</a>
                     </li>
                 </c:forEach>
 
                 <c:if test="${currentPage < totalPages}">
                     <li class="page-item">
-                        <a class="page-link" href="<c:url value="/counseling/list?page=${currentPage + 1}" />"
+                        <a class="page-link" href="<c:url value="/counseling/list?page=${currentPage + 1}${param.studentNo != null ? '&studentNo=' += param.studentNo : ''}" />"
                             aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
@@ -156,7 +156,7 @@
             window.location.href = "/counseling/delete/" + counselingNo;
         }
     }
-	</script>
+    </script>
 </body>
 
 </html>

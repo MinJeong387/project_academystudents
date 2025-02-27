@@ -39,7 +39,7 @@ public class CounselingLogServiceImpl implements CounselingLogService {
     public List<CounselingLogVo> selectCounselingLogList() {
         return counselingLogDaoImpl.selectAll();
     }
-    
+
     @Override
     public List<CounselingLogVo> selectCounselingLogListByStudent(Integer studentNo) {
         return counselingLogDaoImpl.selectByStudent(studentNo);
@@ -54,5 +54,25 @@ public class CounselingLogServiceImpl implements CounselingLogService {
     public List<StudentsVo> getStudentNumbersByName(String studentName) {
         return counselingLogDaoImpl.selectStudentsByName(studentName);
     }
-    
+
+    // 페이지네이션 추가
+    @Override
+    public List<CounselingLogVo> selectCounselingLogListPaged(int startRow, int itemsPerPage) {
+        return counselingLogDaoImpl.selectAllPaged(startRow, itemsPerPage);
+    }
+
+    @Override
+    public List<CounselingLogVo> selectCounselingLogListByStudentPaged(Integer studentNo, int startRow, int itemsPerPage) {
+        return counselingLogDaoImpl.selectByStudentPaged(studentNo, startRow, itemsPerPage);
+    }
+
+    @Override
+    public int getTotalCounselingLogs() {
+        return counselingLogDaoImpl.getTotalCounselingLogs();
+    }
+
+    @Override
+    public int getTotalCounselingLogsByStudent(Integer studentNo) {
+        return counselingLogDaoImpl.getTotalCounselingLogsByStudent(studentNo);
+    }
 }

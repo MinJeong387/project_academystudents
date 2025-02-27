@@ -33,18 +33,31 @@ public class CounselingLogController {
     }
 
     @GetMapping("/list")
-    public String list(@RequestParam(value = "studentNo", required = false) Integer studentNo, Model model) {
+    public String list(
+            @RequestParam(name = "page", defaultValue = "1") int currentPage,
+            @RequestParam(value = "studentNo", required = false) Integer studentNo,
+            Model model) {
+
+        int itemsPerPage = 6; // 페이지당 항목 수
+        int totalItems = (studentNo == null) ? counselingLogServiceImpl.getTotalCounselingLogs() : counselingLogServiceImpl.getTotalCounselingLogsByStudent(studentNo);
+        int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+
+        int startRow = (currentPage - 1) * itemsPerPage;
         List<CounselingLogVo> list;
+
         if (studentNo != null) {
-            list = counselingLogServiceImpl.selectCounselingLogListByStudent(studentNo);
+            list = counselingLogServiceImpl.selectCounselingLogListByStudentPaged(studentNo, startRow, itemsPerPage);
         } else {
-            list = counselingLogServiceImpl.selectCounselingLogList();
+            list = counselingLogServiceImpl.selectCounselingLogListPaged(startRow, itemsPerPage);
         }
+
         logger.debug("COUNSELINGLOG LIST:" + list);
         model.addAttribute("list", list);
 
         List<StudentsVo> studentList = counselingLogServiceImpl.getAllStudents();
         model.addAttribute("studentList", studentList);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
 
         return "counseling/loglist";
     }
@@ -67,7 +80,7 @@ public class CounselingLogController {
         }
     }
 
-    // 리스트 수정 폼
+    // 리스트 수정 폼 
     @GetMapping("/modify/{no}")
     public String modifyForm(@PathVariable("no") Integer no, Model model) {
         CounselingLogVo counselingLogVo = counselingLogServiceImpl.selectCounselingLog(no);
@@ -87,18 +100,17 @@ public class CounselingLogController {
         }
     }
 
-    // 리스트 삭제
+    // 리스트 삭제 
     @GetMapping("/delete/{no}")
     public String deleteAction(@PathVariable("no") Integer no) {
         logger.debug("COUNSELINGLOG DELETE:" + no);
         counselingLogServiceImpl.deleteCounselingLog(no);
         return "redirect:/counseling/list";
     }
-    
+
     @GetMapping("/getStudentNumbersByName")
     @ResponseBody
     public List<StudentsVo> getStudentNumbersByName(@RequestParam("studentName") String studentName) {
         return counselingLogServiceImpl.getStudentNumbersByName(studentName);
     }
-    
 }

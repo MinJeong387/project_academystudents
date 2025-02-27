@@ -22,7 +22,8 @@
             s.name AS studentName
         FROM counseling_log cl
         JOIN students s ON cl.student_no = s.no
-        WHERE cl.no = #{no} </select>
+        WHERE cl.no = #{no}
+    </select>
 
     <insert id="insert" parameterType="counselingLogVo">
         INSERT INTO counseling_log (student_no, counseling_date, counseling_contents)
@@ -40,7 +41,7 @@
         DELETE FROM counseling_log
         WHERE no = #{no}
     </delete>
-    
+
     <select id="selectByStudent" parameterType="int" resultType="counselingLogVo">
         SELECT cl.no,
             cl.student_no AS sno,
@@ -58,14 +59,47 @@
         FROM students
         ORDER BY no ASC
     </select>
-    
+
     <select id="selectStudentsByName" parameterType="string" resultType="studentsVo">
         SELECT no, name
         FROM students
         WHERE name LIKE CONCAT('%', #{studentName}, '%')
         ORDER BY no ASC
     </select>
-    
-    
 
+    <select id="selectAllPaged" resultType="counselingLogVo">
+        SELECT cl.no,
+            cl.student_no AS sno,
+            cl.counseling_date AS date,
+            cl.counseling_contents AS contents,
+            s.name AS studentName
+        FROM counseling_log cl
+        JOIN students s ON cl.student_no = s.no
+        ORDER BY cl.counseling_date DESC
+        LIMIT #{startRow}, #{itemsPerPage}
+    </select>
+
+    <select id="selectByStudentPaged" parameterType="map" resultType="counselingLogVo">
+        SELECT cl.no,
+            cl.student_no AS sno,
+            cl.counseling_date AS date,
+            cl.counseling_contents AS contents,
+            s.name AS studentName
+        FROM counseling_log cl
+        JOIN students s ON cl.student_no = s.no
+        WHERE cl.student_no = #{studentNo}
+        ORDER BY cl.counseling_date DESC
+        LIMIT #{startRow}, #{itemsPerPage}
+    </select>
+
+    <select id="getTotalCounselingLogs" resultType="int">
+        SELECT COUNT(*)
+        FROM counseling_log
+    </select>
+
+    <select id="getTotalCounselingLogsByStudent" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM counseling_log
+        WHERE student_no = #{studentNo}
+    </select>
 </mapper>
