@@ -37,7 +37,7 @@ public class LessonLogController {
             @RequestParam(value = "userNo", required = false) Integer userNo,
             Model model) {
 
-        int itemsPerPage = 6; // 페이지당 항목 수
+        int itemsPerPage = 5; // 페이지당 항목 수
         int totalItems = (userNo == null) ? lessonLogServiceImpl.getTotalLessonLogs() : lessonLogServiceImpl.getTotalLessonLogsByUser(userNo);
         int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
 

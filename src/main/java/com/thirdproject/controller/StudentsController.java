@@ -72,7 +72,7 @@ public class StudentsController {
             @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
             Model model) {
 
-        int itemsPerPage = 6; // 페이지당 항목 수
+        int itemsPerPage = 5; // 페이지당 항목 수
         int totalItems = (searchKeyword == null || searchKeyword.isEmpty()) ? studentsServiceImpl.getTotalStudents() : studentsServiceImpl.getTotalSearchStudents(searchKeyword);
         int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
 

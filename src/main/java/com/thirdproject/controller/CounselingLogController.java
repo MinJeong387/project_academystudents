@@ -38,7 +38,7 @@ public class CounselingLogController {
             @RequestParam(value = "studentNo", required = false) Integer studentNo,
             Model model) {
 
-        int itemsPerPage = 6; // 페이지당 항목 수
+        int itemsPerPage = 5; // 페이지당 항목 수
         int totalItems = (studentNo == null) ? counselingLogServiceImpl.getTotalCounselingLogs() : counselingLogServiceImpl.getTotalCounselingLogsByStudent(studentNo);
         int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
 
