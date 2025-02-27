@@ -52,6 +52,20 @@
             word-wrap: break-word;
             white-space: normal;
         }
+
+        .total-box {
+            background-color: #1D809F;
+            color: white;
+            font-size: 20px;
+            
+            padding-top: 15px;
+            border-radius: 5px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -130,9 +144,11 @@
                     </c:forEach>
                 </tbody>
             </table>
-            <br/>
-            <p style="color: red;" ><strong>전체 학생 수 : ${totalStudents}명</strong></p>
-            <p style="color: red;"><strong>전체 선생님 수 : ${totalTeachers}명</strong></p>
+            <br />
+            <div class="total-box">
+                <p><strong>전체 학생 수 : ${totalStudents}명</strong></p>
+                <p><strong>전체 선생님 수 : ${totalTeachers}명</strong></p>
+            </div>
         </div>
     </div>
 </body>
