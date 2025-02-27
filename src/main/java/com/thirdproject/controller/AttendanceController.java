@@ -3,18 +3,17 @@ package com.thirdproject.controller;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.thirdproject.repository.vo.AttendanceVo;
 import com.thirdproject.repository.vo.UserVo;
@@ -95,6 +94,20 @@ public class AttendanceController {
             model.addAttribute("teacherNo", studentInfo.getTeacherNo());
             model.addAttribute("teacherName", studentInfo.getTeacherName());
         }
+        
+     // 출석 상태별 횟수 계산
+        Map<String, Integer> attendanceCounts = new HashMap<>();
+        attendanceCounts.put("출석", 0);
+        attendanceCounts.put("결석", 0);
+        attendanceCounts.put("지각", 0);
+        attendanceCounts.put("조퇴", 0);
+        attendanceCounts.put("보강", 0);
+
+        for (AttendanceVo attendance : attendanceList) {
+            String status = attendance.getAttendanceStatus();
+            attendanceCounts.put(status, attendanceCounts.get(status) + 1);
+        }
+        model.addAttribute("attendanceCounts", attendanceCounts);
 
         System.out.println("studentNo: " + studentNo);
         System.out.println("attendanceList: " + attendanceList);

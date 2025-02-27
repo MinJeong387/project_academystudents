@@ -23,9 +23,13 @@
             margin-bottom: 1rem;
             border-radius: 5px; /* 둥근 테두리 */
         }
-
+        
         .blue-text {
             color: blue;
+        }
+
+        .red-text {
+            color: red;
         }
     </style>
 </head>
@@ -42,7 +46,13 @@
         <div class="student-info">
             학생 번호&nbsp <span class="blue-text">${studentNo}</span>
             &nbsp &nbsp &nbsp&nbsp&nbsp 학생 이름&nbsp <span class="blue-text">${studentName}</span>
-            &nbsp &nbsp &nbsp 담당 선생님&nbsp <span class="blue-text">${teacherNo} - ${teacherName}</span>
+            &nbsp &nbsp &nbsp 담당 선생님&nbsp <span class="blue-text">${teacherNo} - ${teacherName} &nbsp &nbsp</span>
+           
+            ( 출석: <span class="red-text">${attendanceCounts.get("출석")}</span>회,
+			결석: <span class="red-text">${attendanceCounts.get("결석")}</span>회,
+			지각: <span class="red-text">${attendanceCounts.get("지각")}</span>회,
+			조퇴: <span class="red-text">${attendanceCounts.get("조퇴")}</span>회,
+			보강: <span class="red-text">${attendanceCounts.get("보강")}</span>회 )
         </div>
         <table class="table table-bordered table-striped table-hover">
             <thead>
