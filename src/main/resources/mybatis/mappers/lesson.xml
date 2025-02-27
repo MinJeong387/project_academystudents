@@ -27,7 +27,6 @@
         JOIN users u ON ll.user_no = u.no
         JOIN users u2 ON ll.user_no = u2.no
         WHERE ll.no = #{no}
-
     </select>
 
     <insert id="insert" parameterType="lessonLogVo">
@@ -74,4 +73,43 @@
         ORDER BY no ASC
     </select>
 
+    <select id="selectAllPaged" resultType="lessonLogVo">
+        SELECT ll.no,
+               ll.user_no AS uno,
+               ll.lesson_date AS date,
+               ll.lesson_contents AS contents,
+               u.name AS studentName,
+               u2.name AS userName
+        FROM lesson_log ll
+        JOIN users u ON ll.user_no = u.no
+        JOIN users u2 ON ll.user_no = u2.no
+        ORDER BY ll.lesson_date DESC
+        LIMIT #{startRow}, #{itemsPerPage}
+    </select>
+
+    <select id="selectByUserPaged" parameterType="map" resultType="lessonLogVo">
+        SELECT ll.no,
+               ll.user_no AS uno,
+               ll.lesson_date AS date,
+               ll.lesson_contents AS contents,
+               u.name AS studentName,
+               u2.name AS userName
+        FROM lesson_log ll
+        JOIN users u ON ll.user_no = u.no
+        JOIN users u2 ON ll.user_no = u2.no
+        WHERE ll.user_no = #{userNo}
+        ORDER BY ll.lesson_date DESC
+        LIMIT #{startRow}, #{itemsPerPage}
+    </select>
+
+    <select id="getTotalLessonLogs" resultType="int">
+        SELECT COUNT(*)
+        FROM lesson_log
+    </select>
+
+    <select id="getTotalLessonLogsByUser" parameterType="int" resultType="int">
+        SELECT COUNT(*)
+        FROM lesson_log
+        WHERE user_no = #{userNo}
+    </select>
 </mapper>

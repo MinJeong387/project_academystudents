@@ -53,7 +53,7 @@ public class LessonLogDaoImpl implements LessonLogDao {
         List<LessonLogVo> list = lessonLogMapper.selectAll();
         return list;
     }
-    
+
     @Override
     public List<LessonLogVo> selectByUser(Integer userNo) {
         return lessonLogMapper.selectByUser(userNo);
@@ -63,9 +63,30 @@ public class LessonLogDaoImpl implements LessonLogDao {
     public List<Integer> selectAllUserNos() {
         return lessonLogMapper.selectAllUserNos();
     }
-    
+
     @Override
     public List<UserVo> selectAllUsers() {
         return lessonLogMapper.selectAllUsers();
+    }
+
+    // 페이지네이션 추가
+    @Override
+    public List<LessonLogVo> selectAllPaged(int startRow, int itemsPerPage) {
+        return lessonLogMapper.selectAllPaged(startRow, itemsPerPage);
+    }
+
+    @Override
+    public List<LessonLogVo> selectByUserPaged(Integer userNo, int startRow, int itemsPerPage) {
+        return lessonLogMapper.selectByUserPaged(userNo, startRow, itemsPerPage);
+    }
+
+    @Override
+    public int getTotalLessonLogs() {
+        return lessonLogMapper.getTotalLessonLogs();
+    }
+
+    @Override
+    public int getTotalLessonLogsByUser(Integer userNo) {
+        return lessonLogMapper.getTotalLessonLogsByUser(userNo);
     }
 }

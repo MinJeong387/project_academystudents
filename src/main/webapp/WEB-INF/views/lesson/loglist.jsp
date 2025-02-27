@@ -98,6 +98,35 @@
                 </c:forEach>
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/lesson/list?page=${currentPage - 1}${param.userNo != null ? '&userNo=' += param.userNo : ''}" />"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                        <a class="page-link" href="<c:url value="/lesson/list?page=${i}${param.userNo != null ? '&userNo=' += param.userNo : ''}" />">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <c:if test="${currentPage < totalPages}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/lesson/list?page=${currentPage + 1}${param.userNo != null ? '&userNo=' += param.userNo : ''}" />"
+                            aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
+
         <a href="<c:url value="/lesson/write" />" class="btn btn-success">수업일지 등록</a>
     </div>
 
@@ -128,7 +157,7 @@
             window.location.href = "/lesson/delete/" + lessonNo;
         }
     }
-	</script>
+    </script>
 </body>
 
 </html>

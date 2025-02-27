@@ -32,18 +32,31 @@ public class LessonLogController {
     }
 
     @GetMapping("/list")
-    public String list(@RequestParam(value = "userNo", required = false) Integer userNo, Model model) {
+    public String list(
+            @RequestParam(name = "page", defaultValue = "1") int currentPage,
+            @RequestParam(value = "userNo", required = false) Integer userNo,
+            Model model) {
+
+        int itemsPerPage = 6; // 페이지당 항목 수
+        int totalItems = (userNo == null) ? lessonLogServiceImpl.getTotalLessonLogs() : lessonLogServiceImpl.getTotalLessonLogsByUser(userNo);
+        int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+
+        int startRow = (currentPage - 1) * itemsPerPage;
         List<LessonLogVo> list;
+
         if (userNo != null) {
-            list = lessonLogServiceImpl.selectLessonLogListByUser(userNo);
+            list = lessonLogServiceImpl.selectLessonLogListByUserPaged(userNo, startRow, itemsPerPage);
         } else {
-            list = lessonLogServiceImpl.selectLessonLogList();
+            list = lessonLogServiceImpl.selectLessonLogListPaged(startRow, itemsPerPage);
         }
+
         logger.debug("LESSONLOG LIST:" + list);
         model.addAttribute("list", list);
 
         List<UserVo> userList = lessonLogServiceImpl.getAllUsers();
         model.addAttribute("userList", userList);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
 
         return "lesson/loglist";
     }

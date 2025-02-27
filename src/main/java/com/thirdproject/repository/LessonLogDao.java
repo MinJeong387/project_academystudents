@@ -11,8 +11,14 @@ public interface LessonLogDao {
     public int delete(Integer no);
     public LessonLogVo selectOne(Integer no);
     public List<LessonLogVo> selectAll();
-    
+
     public List<LessonLogVo> selectByUser(Integer userNo);
     public List<Integer> selectAllUserNos();
     public List<UserVo> selectAllUsers();
+
+    // 페이지네이션 추가
+    public List<LessonLogVo> selectAllPaged(int startRow, int itemsPerPage);
+    public List<LessonLogVo> selectByUserPaged(Integer userNo, int startRow, int itemsPerPage);
+    public int getTotalLessonLogs();
+    public int getTotalLessonLogsByUser(Integer userNo);
 }

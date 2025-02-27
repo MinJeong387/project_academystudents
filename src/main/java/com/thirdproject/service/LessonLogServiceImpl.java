@@ -39,7 +39,7 @@ public class LessonLogServiceImpl implements LessonLogService {
     public List<LessonLogVo> selectLessonLogList() {
         return lessonLogDaoImpl.selectAll();
     }
-    
+
     @Override
     public List<LessonLogVo> selectLessonLogListByUser(Integer userNo) {
         return lessonLogDaoImpl.selectByUser(userNo);
@@ -49,9 +49,30 @@ public class LessonLogServiceImpl implements LessonLogService {
     public List<Integer> getAllUserNos() {
         return lessonLogDaoImpl.selectAllUserNos();
     }
-    
+
     @Override
     public List<UserVo> getAllUsers() {
         return lessonLogDaoImpl.selectAllUsers();
+    }
+
+    // 페이지네이션 추가
+    @Override
+    public List<LessonLogVo> selectLessonLogListPaged(int startRow, int itemsPerPage) {
+        return lessonLogDaoImpl.selectAllPaged(startRow, itemsPerPage);
+    }
+
+    @Override
+    public List<LessonLogVo> selectLessonLogListByUserPaged(Integer userNo, int startRow, int itemsPerPage) {
+        return lessonLogDaoImpl.selectByUserPaged(userNo, startRow, itemsPerPage);
+    }
+
+    @Override
+    public int getTotalLessonLogs() {
+        return lessonLogDaoImpl.getTotalLessonLogs();
+    }
+
+    @Override
+    public int getTotalLessonLogsByUser(Integer userNo) {
+        return lessonLogDaoImpl.getTotalLessonLogsByUser(userNo);
     }
 }
