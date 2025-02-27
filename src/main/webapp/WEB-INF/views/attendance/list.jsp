@@ -51,13 +51,18 @@
         .calendar-container {
             margin-right: 10px;
         }
+
+        .list-container {
+            height: calc(100vh - 80px); /* 화면 높이에서 헤더 높이(80px)를 뺀 값 */
+            overflow-y: auto;
+        }
     </style>
 </head>
 
 <body class="d-flex">
     <jsp:include page="../students/main.jsp" />
 
-    <div class="flex-grow-1 p-3" style="position: relative;">
+    <div class="flex-grow-1 p-3 list-container" style="position: relative;">
         <div class="top-right-dropdown">
             <div class="calendar-container">
                 <input type="date" id="attendanceDate">
