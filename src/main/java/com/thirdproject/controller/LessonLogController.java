@@ -75,14 +75,17 @@ public class LessonLogController {
     }
 
     @PostMapping("/modify")
-    public String modifyAction(@ModelAttribute LessonLogVo lessonLogVo) {
+    public String modifyAction(@ModelAttribute LessonLogVo lessonLogVo, Model model) {
         logger.debug("LESSONLOG MODIFY:" + lessonLogVo);
         boolean success = lessonLogServiceImpl.updateLessonLog(lessonLogVo);
 
         if (success) {
+            // 수정 성공 시, 전체 수업일지 목록을 다시 조회하여 모델에 추가
+            List<LessonLogVo> list = lessonLogServiceImpl.selectLessonLogList();
+            model.addAttribute("list", list);
             return "redirect:/lesson/list";
         } else {
-            return "redirect:/lesson/modify/" + lessonLogVo.getNo(); // 수정된 부분
+            return "redirect:/lesson/modify/" + lessonLogVo.getNo();
         }
     }
 

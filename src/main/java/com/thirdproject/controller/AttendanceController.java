@@ -88,6 +88,9 @@ public class AttendanceController {
         List<AttendanceVo> attendanceList = attendanceService.getAttendanceDetails(studentNo);
         model.addAttribute("attendanceList", attendanceList);
         model.addAttribute("studentNo", studentNo); // 학생 번호 추가
+        
+        System.out.println("studentNo: " + studentNo);
+        System.out.println("attendanceList: " + attendanceList);
         return "attendance/personalAttendance";
     }
 }

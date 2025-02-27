@@ -30,7 +30,8 @@
 
             <div class="col-md-6">
                 <label for="uno" class="form-label">선생님 번호</label>
-                <input type="number" class="form-control" id="uno" name="uno" value="${vo.uno}" readonly>
+                <input type="number" class="form-control" id="unoDisplay" value="${sessionScope.userNo}" readonly>
+                <input type="hidden" id="uno" name="uno" value="${sessionScope.userNo}">
             </div>
 
             <div class="col-md-6">
