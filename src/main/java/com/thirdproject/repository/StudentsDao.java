@@ -17,4 +17,6 @@ public interface StudentsDao {
 
     // 전체 선생님 수 조회 메소드 추가
     public int getTotalTeachers();
+    
+    List<StudentsVo> searchStudents(String searchKeyword);
 } 

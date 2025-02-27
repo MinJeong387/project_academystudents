@@ -50,6 +50,19 @@
     <div class="flex-grow-1 p-3 list-container">
         <h1 class="mt-4 mb-4">전체 학생 리스트</h1>
         <p class="mb-4">등록된 전체 학생들 리스트입니다.</p>
+
+        <form action="/students/list" method="get" class="mb-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <input type="text" name="searchKeyword" class="form-control" placeholder="학생 이름 또는 학생 연락처 검색"
+                            value="${searchKeyword}">
+                        <button type="submit" class="btn btn-primary">검색</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
         <table class="table table-bordered table-striped table-hover mb-4">
             <thead>
                 <tr>

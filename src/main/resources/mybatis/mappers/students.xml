@@ -91,5 +91,24 @@
     <select id="getTotalTeachers" resultType="int">
         SELECT COUNT(*) FROM users
     </select>
+    
+    <select id="searchStudents" parameterType="String" resultType="studentsVo">
+        SELECT s.no,
+               s.name,
+               s.school_name AS schoolName,
+               s.school_grade AS schoolGrade,
+               s.birthdate,
+               s.gender,
+               s.student_cellphone AS studentCellphone,
+               s.parent_cellphone AS parentCellphone,
+               s.comments,
+               s.teacher_no AS teacherNo,
+               u.name AS teacherName
+        FROM students s
+        LEFT JOIN users u ON s.teacher_no = u.no
+        WHERE s.name LIKE CONCAT('%', #{searchKeyword}, '%')
+           OR s.student_cellphone LIKE CONCAT('%', #{searchKeyword}, '%')
+        ORDER BY s.no DESC
+    </select>
 
 </mapper>

@@ -69,4 +69,9 @@ public class StudentsDaoImpl implements StudentsDao {
     public int getTotalTeachers() {
         return studentsMapper.getTotalTeachers();
     }
+    
+    @Override
+    public List<StudentsVo> searchStudents(String searchKeyword) {
+        return studentsMapper.searchStudents(searchKeyword);
+    }
 }

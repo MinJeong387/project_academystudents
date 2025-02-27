@@ -10,11 +10,11 @@ public interface StudentsService {
 	public boolean deleteStudents(Integer no);
 	public StudentsVo selectStudents(Integer no);
 	public List<StudentsVo> selectStudentsList();
-	
 	public boolean isStudentCellphoneDuplicate(String studentCellphone); // 추가
 	boolean isStudentCellphoneDuplicateForUpdate(String studentCellphone, Integer no);
-	
 	public int getTotalStudents();
     public int getTotalTeachers();
+    
+    List<StudentsVo> searchStudents(String searchKeyword);
 	
 }

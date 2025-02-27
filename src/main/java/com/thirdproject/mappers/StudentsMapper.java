@@ -35,5 +35,7 @@ public interface StudentsMapper {
 
     // 전체 선생님 수 조회 메소드 추가
     int getTotalTeachers();
+    
+    List<StudentsVo> searchStudents(String searchKeyword);
 	
 }

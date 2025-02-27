@@ -66,5 +66,10 @@ public class StudentsServiceImpl implements StudentsService {
     public int getTotalTeachers() {
         return studentsDaoImpl.getTotalTeachers();
     }
+    
+    @Override
+    public List<StudentsVo> searchStudents(String searchKeyword) {
+        return studentsDaoImpl.searchStudents(searchKeyword);
+    }
 
 }

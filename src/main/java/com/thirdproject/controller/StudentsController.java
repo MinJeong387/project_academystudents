@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.thirdproject.repository.vo.CounselingLogVo;
 import com.thirdproject.repository.vo.StudentsVo;
@@ -66,10 +67,17 @@ public class StudentsController {
     }
 
     @GetMapping("/list")
-    public String list(Model model) {
-        List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
+    public String list(@RequestParam(value = "searchKeyword", required = false) String searchKeyword, Model model) {
+        List<StudentsVo> list;
+        if (searchKeyword != null && !searchKeyword.isEmpty()) {
+            list = studentsServiceImpl.searchStudents(searchKeyword);
+        } else {
+            list = studentsServiceImpl.selectStudentsList();
+        }
         logger.debug("STUDENTS LIST:" + list);
+        
         model.addAttribute("list", list);
+        model.addAttribute("searchKeyword", searchKeyword); // 검색 키워드 유지
         return "students/list";
     }
 
