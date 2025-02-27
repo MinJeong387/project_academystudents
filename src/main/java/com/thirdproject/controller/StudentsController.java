@@ -28,33 +28,33 @@ public class StudentsController {
 
     @Autowired
     private StudentsService studentsServiceImpl;
-    
+
     @Autowired
     private UserService userServiceImpl; // UserService 주입
-    
+
     @Autowired
     private CounselingLogService counselingLogServiceImpl; // CounselingLogService 주입
 
     @GetMapping({"/", ""})
     public String mainPage(Model model) {
-    	// 최근 등록 학생 3명 조회
-    	List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
+        // 최근 등록 학생 3명 조회
+        List<StudentsVo> list = studentsServiceImpl.selectStudentsList();
         if (list.size() > 3) {
             list = list.subList(0, 3); // 최근 3개의 데이터만 선택
         }
         model.addAttribute("list", list);
-        
+
         // 최근 등록 상담 로그 3개 조회
         List<CounselingLogVo> list2 = counselingLogServiceImpl.selectCounselingLogList();
         if (list2.size() > 3) {
             list2 = list2.subList(0, 3); // 최근 3개의 데이터만 선택
         }
         model.addAttribute("list2", list2);
-        
+
         // 등록된 사용자 정보 조회
         List<UserVo> list3 = userServiceImpl.selectUserList();
-        model.addAttribute("list3", list3);       
-        
+        model.addAttribute("list3", list3);
+
         // 전체 학생 수와 전체 선생님 수 가져오기
         int totalStudents = studentsServiceImpl.getTotalStudents();
         int totalTeachers = studentsServiceImpl.getTotalTeachers();
@@ -62,22 +62,36 @@ public class StudentsController {
         // 모델에 데이터 추가
         model.addAttribute("totalStudents", totalStudents);
         model.addAttribute("totalTeachers", totalTeachers);
-    	
+
         return "students/firstPage";
     }
 
     @GetMapping("/list")
-    public String list(@RequestParam(value = "searchKeyword", required = false) String searchKeyword, Model model) {
+    public String list(
+            @RequestParam(name = "page", defaultValue = "1") int currentPage,
+            @RequestParam(value = "searchKeyword", required = false) String searchKeyword,
+            Model model) {
+
+        int itemsPerPage = 6; // 페이지당 항목 수
+        int totalItems = (searchKeyword == null || searchKeyword.isEmpty()) ? studentsServiceImpl.getTotalStudents() : studentsServiceImpl.getTotalSearchStudents(searchKeyword);
+        int totalPages = (int) Math.ceil((double) totalItems / itemsPerPage);
+
+        int startRow = (currentPage - 1) * itemsPerPage;
         List<StudentsVo> list;
+
         if (searchKeyword != null && !searchKeyword.isEmpty()) {
-            list = studentsServiceImpl.searchStudents(searchKeyword);
+            list = studentsServiceImpl.searchStudentsPaged(searchKeyword, startRow, itemsPerPage);
         } else {
-            list = studentsServiceImpl.selectStudentsList();
+            list = studentsServiceImpl.selectStudentsListPaged(startRow, itemsPerPage);
         }
+
         logger.debug("STUDENTS LIST:" + list);
-        
+
         model.addAttribute("list", list);
         model.addAttribute("searchKeyword", searchKeyword); // 검색 키워드 유지
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+
         return "students/list";
     }
 
@@ -93,10 +107,10 @@ public class StudentsController {
     public String writeAction(@ModelAttribute StudentsVo studentsVo, Model model) {
         logger.debug("STUDENTS WRITE:" + studentsVo);
 
-     // 학생 연락처 중복 검증
+        // 학생 연락처 중복 검증
         if (studentsServiceImpl.isStudentCellphoneDuplicate(studentsVo.getStudentCellphone())) {
             model.addAttribute("errorMessage", "중복된 학생 연락처입니다!");
-            
+
             List<UserVo> users = userServiceImpl.selectUserList();
             model.addAttribute("users", users);
             model.addAttribute("studentsVo", studentsVo); // 입력 데이터 모델에 추가
@@ -147,12 +161,11 @@ public class StudentsController {
         }
     }
 
- // 리스트 삭제
+    // 리스트 삭제
     @GetMapping("/delete/{no}")
     public String deleteAction(@PathVariable("no") Integer no) {
         logger.debug("STUDENTS DELETE:" + no);
         studentsServiceImpl.deleteStudents(no);
         return "redirect:/students/list";
-    }   
-    
+    }
 }

@@ -51,17 +51,15 @@
         <h1 class="mt-4 mb-4">전체 학생 리스트</h1>
         <p class="mb-4">등록된 전체 학생들 리스트입니다.</p>
 
-        <form action="/students/list" method="get" class="mb-3">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="input-group">
-                        <input type="text" name="searchKeyword" class="form-control" placeholder="학생 이름 또는 학생 연락처 검색"
-                            value="${searchKeyword}">
-                        <button type="submit" class="btn btn-primary">검색</button>
-                    </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <form action="/students/list" method="get" class="flex-grow-1">
+                <div class="input-group" style="max-width: 500px;"> <input type="text" name="searchKeyword" class="form-control" placeholder="학생 이름 또는 학생 연락처 검색"
+                        value="${searchKeyword}">
+                    <button type="submit" class="btn btn-primary">검색</button>
                 </div>
-            </div>
-        </form>
+            </form>
+            <a href="<c:url value="/students/write" />" class="btn btn-success ml-2">추가 학생 등록</a>
+        </div>
 
         <table class="table table-bordered table-striped table-hover mb-4">
             <thead>
@@ -101,7 +99,34 @@
                 </c:forEach>
             </tbody>
         </table>
-        <a href="<c:url value="/students/write" />" class="btn btn-success">추가 학생 등록</a>
+
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <c:if test="${currentPage > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/students/list?page=${currentPage - 1}${searchKeyword != null ? '&searchKeyword=' += searchKeyword : ''}" />"
+                            aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+
+                <c:forEach var="i" begin="1" end="${totalPages}">
+                    <li class="page-item ${currentPage == i ? 'active' : ''}">
+                        <a class="page-link" href="<c:url value="/students/list?page=${i}${searchKeyword != null ? '&searchKeyword=' += searchKeyword : ''}" />">${i}</a>
+                    </li>
+                </c:forEach>
+
+                <c:if test="${currentPage < totalPages}">
+                    <li class="page-item">
+                        <a class="page-link" href="<c:url value="/students/list?page=${currentPage + 1}${searchKeyword != null ? '&searchKeyword=' += searchKeyword : ''}" />"
+                            aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </c:if>
+            </ul>
+        </nav>
     </div>
 
     <script>

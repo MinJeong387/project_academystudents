@@ -61,7 +61,7 @@
         DELETE FROM students
         WHERE no=#{no}
     </delete>
-    
+
     <select id="selectRecentStudents" parameterType="int" resultType="studentsVo">
         SELECT s.no,
                s.name,
@@ -79,11 +79,11 @@
         ORDER BY s.no DESC
         LIMIT 3
     </select>
-    
+
     <select id="countByStudentCellphone" parameterType="String" resultType="int">
         SELECT COUNT(*) FROM students WHERE student_cellphone = #{studentCellphone}
     </select>
-    
+
     <select id="getTotalStudents" resultType="int">
         SELECT COUNT(*) FROM students
     </select>
@@ -91,7 +91,7 @@
     <select id="getTotalTeachers" resultType="int">
         SELECT COUNT(*) FROM users
     </select>
-    
+
     <select id="searchStudents" parameterType="String" resultType="studentsVo">
         SELECT s.no,
                s.name,
@@ -111,4 +111,48 @@
         ORDER BY s.no DESC
     </select>
 
+    <select id="selectAllPaged" resultType="studentsVo">
+        SELECT s.no,
+               s.name,
+               s.school_name AS schoolName,
+               s.school_grade AS schoolGrade,
+               s.birthdate,
+               s.gender,
+               s.student_cellphone AS studentCellphone,
+               s.parent_cellphone AS parentCellphone,
+               s.comments,
+               s.teacher_no AS teacherNo,
+               u.name AS teacherName
+        FROM students s
+        LEFT JOIN users u ON s.teacher_no = u.no
+        ORDER BY s.no DESC
+        LIMIT #{startRow}, #{itemsPerPage}
+    </select>
+
+    <select id="searchStudentsPaged" parameterType="map" resultType="studentsVo">
+        SELECT s.no,
+               s.name,
+               s.school_name AS schoolName,
+               s.school_grade AS schoolGrade,
+               s.birthdate,
+               s.gender,
+               s.student_cellphone AS studentCellphone,
+               s.parent_cellphone AS parentCellphone,
+               s.comments,
+               s.teacher_no AS teacherNo,
+               u.name AS teacherName
+        FROM students s
+        LEFT JOIN users u ON s.teacher_no = u.no
+        WHERE (s.name LIKE CONCAT('%', #{searchKeyword}, '%')
+           OR s.student_cellphone LIKE CONCAT('%', #{searchKeyword}, '%'))
+        ORDER BY s.no DESC
+        LIMIT #{startRow}, #{itemsPerPage}
+    </select>
+
+    <select id="getTotalSearchStudents" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM students
+        WHERE s.name LIKE CONCAT('%', #{searchKeyword}, '%')
+           OR s.student_cellphone LIKE CONCAT('%', #{searchKeyword}, '%')
+    </select>
 </mapper>
