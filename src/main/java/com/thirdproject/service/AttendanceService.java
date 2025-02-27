@@ -16,4 +16,5 @@ public interface AttendanceService {
     AttendanceVo getAttendance(Integer studentNo, Date attendanceDate);
     
     List<AttendanceVo> getAttendanceDetails(Integer studentNo);
+    AttendanceVo getStudentInfo(Integer studentNo); // 학생 정보 조회
 }

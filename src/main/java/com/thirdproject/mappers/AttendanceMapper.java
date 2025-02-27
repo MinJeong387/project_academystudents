@@ -18,4 +18,6 @@ public interface AttendanceMapper {
     AttendanceVo selectAttendance(Integer studentNo, Date attendanceDate);
     
     List<AttendanceVo> selectAttendanceDetails(Integer studentNo);
+    
+    AttendanceVo selectStudentInfo(Integer studentNo); // 학생 정보 조회
 }

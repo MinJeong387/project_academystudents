@@ -57,5 +57,14 @@
     	WHERE student_no = #{studentNo}
     	ORDER BY attendance_date DESC
 	</select>
+	
+	<select id="selectStudentInfo" parameterType="int" resultType="attendanceVo">
+        SELECT s.name AS studentName,
+               s.teacher_no AS teacherNo,
+               u.name AS teacherName
+        FROM students s
+        JOIN users u ON s.teacher_no = u.no
+        WHERE s.no = #{studentNo}
+    </select>
     
 </mapper>

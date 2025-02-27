@@ -51,4 +51,8 @@ public class AttendanceServiceImpl implements AttendanceService {
         return attendanceDao.selectAttendanceDetails(studentNo);
     }
     
+    @Override
+    public AttendanceVo getStudentInfo(Integer studentNo) {
+        return attendanceDao.selectStudentInfo(studentNo);
+    }
 }

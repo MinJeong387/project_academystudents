@@ -86,9 +86,16 @@ public class AttendanceController {
     @GetMapping("/personalAttendance")
     public String personalAttendance(@RequestParam("studentNo") Integer studentNo, Model model) {
         List<AttendanceVo> attendanceList = attendanceService.getAttendanceDetails(studentNo);
+        AttendanceVo studentInfo = attendanceService.getStudentInfo(studentNo); // 학생 정보 조회
+
         model.addAttribute("attendanceList", attendanceList);
-        model.addAttribute("studentNo", studentNo); // 학생 번호 추가
-        
+        model.addAttribute("studentNo", studentNo);
+        if (studentInfo != null) {
+            model.addAttribute("studentName", studentInfo.getStudentName());
+            model.addAttribute("teacherNo", studentInfo.getTeacherNo());
+            model.addAttribute("teacherName", studentInfo.getTeacherName());
+        }
+
         System.out.println("studentNo: " + studentNo);
         System.out.println("attendanceList: " + attendanceList);
         return "attendance/personalAttendance";
