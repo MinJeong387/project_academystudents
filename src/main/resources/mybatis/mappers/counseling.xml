@@ -33,7 +33,8 @@
     <update id="update" parameterType="counselingLogVo">
         UPDATE counseling_log
         SET counseling_date = #{date},
-            counseling_contents = #{contents}
+            counseling_contents = #{contents},
+            student_no = #{sno}
         WHERE no = #{no}
     </update>
 
